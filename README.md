@@ -4,7 +4,9 @@
 
 Phylax is a working design for a coerced-payment signalling and incident-coordination layer for financial institutions. It gives a person a discreet way to indicate that a payment is being made under duress, and gives participating institutions a bounded, auditable process for responding — without granting anyone new authority over anyone else's account.
 
-This repository is a **design record in public**, not a product. Nothing here is deployed, approved, endorsed by a bank or a regulator, or proven to work.
+This repository is a **design record in public**, plus a working incident console running against synthetic records. The protocol is not deployed, approved, endorsed by a bank or a regulator, or proven to work. The console is real software — real authentication, tenant scoping, signed event ingress and an audit chain — but it is not a live institution integration.
+
+Published at [`github.com/trinnode/coerced-payment-protocol`](https://github.com/trinnode/coerced-payment-protocol). The website and console live in [`web/`](web/README.md); the design and type rationale is in [`docs/design.md`](docs/design.md).
 
 ---
 
