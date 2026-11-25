@@ -81,7 +81,7 @@ function Opening() {
         <div className="border-l border-line pl-6 lg:mb-2">
           <p className="mono-label mb-5">One sentence</p>
           <p className="font-display text-[1.35rem] leading-snug text-ink">
-            We can tell the receiving bank a PIN was given under threat. We cannot tell them who was at fault.
+            The design aims to tell the receiving bank that a PIN may have been given under threat. It cannot say who was at fault — and no institution has implemented it yet.
           </p>
           <p className="mt-5 text-sm leading-relaxed text-faint">
             The platform cannot hold money, freeze an account, start a transfer,
@@ -274,7 +274,7 @@ const LOOPS = [
     speed: "seconds",
     title: "Signal",
     where: "inside the sending institution",
-    body: "A second PIN entry, inside a value band where no step-up exists at all. Duress and ordinary transfers produce the same request, the same alert, the same statement line. There is no bypass flag to log and no extra channel to miss — because nothing extra ever happens on the money path.",
+    body: "A second PIN entry, inside a value band where no step-up exists at all. The design requires duress and ordinary transfers to produce the same request, the same alert, the same statement line — no bypass flag and no extra channel. Whether a real bank can achieve that is the Gate 0 experiment; it may fail.",
     no: "It does not hide the transfer. The victim sees the debit like any other debit. Concealing the money is both impossible and wrong.",
   },
   {
@@ -282,7 +282,7 @@ const LOOPS = [
     speed: "minutes",
     title: "Preservation",
     where: "sending institution → receiving institution",
-    body: "A signed, minimal event crosses to the receiving side: institution, episode, a bank-authenticated confidence, the value band. No name, no account number, no location, no free text. The receiving institution decides what to do under its own standing rules — a lien, a positive pay directive, an injunction — each named before the case, not improvised during it.",
+    body: "A signed, minimal event crosses to the receiving side: institution, episode, a bank-authenticated confidence, the value band. No name, no account number, no location, no free text. The receiving institution decides what to do under its own standing rules — a lien, a positive pay directive, an injunction — each to be named and approved before any case, not improvised during one.",
     no: "It does not freeze anything. Our first pilot proves fast human referral, not a hold. The hold rule comes later, after there is evidence to negotiate with.",
   },
   {
@@ -409,7 +409,7 @@ function HardCases() {
           </div>
         </div>
 
-        <div className="mt-16 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
+        <div className="mt-16 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
           <div>
             <p className="mono-label mb-5">Things we will not build</p>
             <ol className="border-t border-line">
@@ -432,7 +432,7 @@ function HardCases() {
               value band. It does not protect everyone, and the people it does
               not protect are often the most exposed.
             </p>
-            <div className="overflow-x-auto">
+            <div className="max-w-full overflow-x-auto">
               <table className="w-full min-w-[30rem] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-line-strong">

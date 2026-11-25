@@ -41,6 +41,27 @@ async function rateLimited(key: string): Promise<boolean> {
   return minute > RATE || burst > BURST;
 }
 
+/** Count bytes while reading. A chunked request has no Content-Length and must
+ *  not be able to bypass the body cap. */
+async function readLimitedBody(request: Request, limit: number): Promise<string | null> {
+  if (!request.body) return null;
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let total = 0;
+  let text = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > limit) {
+      await reader.cancel();
+      return null;
+    }
+    text += decoder.decode(value, { stream: true });
+  }
+  return text + decoder.decode();
+}
+
 function error(code: string, message: string, details?: unknown, extra?: Record<string, string>) {
   return NextResponse.json(
     { error: { code, message, ...(details ? { details } : {}) } },
@@ -63,12 +84,17 @@ function verifyEd25519(publicKeyPem: string, payload: string, signatureBase64: s
 }
 
 export async function POST(request: Request) {
-  const len = Number(request.headers.get("content-length") ?? 0);
-  if (len > BODY_LIMIT) return error("E_RATE_LIMITED", "Body too large");
+  // One fixed pre-auth bucket: bounded cardinality, no attacker-controlled key.
+  if ((await hitBucket("preauth", WINDOW_MS)) > 200) {
+    return error("E_RATE_LIMITED", "Request quota exceeded", undefined, { "Retry-After": "60" });
+  }
+
+  const raw = await readLimitedBody(request, BODY_LIMIT);
+  if (raw === null) return error("E_RATE_LIMITED", "Body too large");
 
   let body: unknown;
   try {
-    body = await request.json();
+    body = JSON.parse(raw);
   } catch {
     return error("E_SCHEMA", "Body is not valid JSON");
   }
@@ -78,14 +104,6 @@ export async function POST(request: Request) {
   const envelope = validated.envelope;
 
   const institutionId = envelope.institution_id;
-  if (await rateLimited(institutionId)) {
-    return error(
-      "E_RATE_LIMITED",
-      "Institution event quota exceeded",
-      undefined,
-      { "Retry-After": "60" },
-    );
-  }
 
   const inst = await db
     .select({ id: institutions.id, status: institutions.status })
@@ -116,6 +134,16 @@ export async function POST(request: Request) {
 
   if (!verifyEd25519(key.publicKeyPem, signedBytes, envelope.signature.value)) {
     return error("E_BAD_SIGNATURE", "Signature does not verify");
+  }
+
+  // Only authenticated tenants create per-institution buckets.
+  if (await rateLimited(institutionId)) {
+    return error(
+      "E_RATE_LIMITED",
+      "Institution event quota exceeded",
+      undefined,
+      { "Retry-After": "60" },
+    );
   }
 
   const payloadHash = `sha256:${createHash("sha256").update(signedBytes).digest("hex")}`;

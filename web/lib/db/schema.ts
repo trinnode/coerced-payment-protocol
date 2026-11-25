@@ -121,6 +121,9 @@ export const users = pgTable(
     role: userRole("role").notNull().default("analyst"),
     passwordHash: text("password_hash").notNull(),
     active: boolean("active").notNull().default(true),
+    // Bumped on logout, demotion, deactivation and password change. A signed
+    // cookie alone is not enough to revoke access.
+    sessionVersion: integer("session_version").notNull().default(0),
     lastSeenAt: timestamp("last_seen_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   },
@@ -225,7 +228,7 @@ export const rawEvents = pgTable(
     signatureValid: boolean("signature_valid").notNull().default(false),
     receivedAt: timestamp("received_at", { withTimezone: true }).defaultNow().notNull(),
   },
-  (t) => [index("raw_events_event_idx").on(t.institutionId, t.eventId)],
+  (t) => [uniqueIndex("raw_events_event_uq").on(t.institutionId, t.eventId)],
 );
 
 export const actions = pgTable(
@@ -245,7 +248,10 @@ export const actions = pgTable(
     standingRuleId: text("standing_rule_id"),
     rationale: text("rationale"),
   },
-  (t) => [index("actions_incident_idx").on(t.incidentId)],
+  (t) => [
+    index("actions_incident_idx").on(t.incidentId),
+    uniqueIndex("actions_incident_type_uq").on(t.incidentId, t.type),
+  ],
 );
 
 export const challenges = pgTable(

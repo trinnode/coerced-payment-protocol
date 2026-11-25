@@ -51,6 +51,17 @@ test("an analyst is blocked from recording an action", async ({ page }) => {
   }
 });
 
+test("logout revokes the session cookie immediately", async ({ page }) => {
+  await signIn(page, "zainab.compliance@kite.example.ng");
+  const before = await page.context().cookies();
+  const cookie = before.map((c) => `${c.name}=${c.value}`).join("; ");
+  expect((await page.request.get("/console", { headers: { cookie } })).status()).toBe(200);
+
+  await page.request.post("/api/auth/logout");
+  const replay = await page.request.get("/console", { headers: { cookie }, maxRedirects: 0 });
+  expect([302, 303, 307, 401]).toContain(replay.status());
+});
+
 test("unsigned events are rejected and forbidden fields are named", async ({ request }) => {
   const bad = await request.post("/api/v1/events", {
     data: {

@@ -42,9 +42,10 @@ const TONE: Record<string, string> = {
 
 export function QueueTable({ rows }: { rows: QueueRow[] }) {
   const [filter, setFilter] = useState<"all" | "open" | "unknown">("all");
-  const [now, setNow] = useState(() => Date.now());
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
+    setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 30_000);
     return () => clearInterval(id);
   }, []);
@@ -65,7 +66,7 @@ export function QueueTable({ rows }: { rows: QueueRow[] }) {
             className={`rounded-full border px-3 py-1.5 font-mono text-[0.6875rem] uppercase tracking-wider transition-colors ${
               filter === f
                 ? "border-guard/50 bg-guard-deep/40 text-guard"
-                : "border-line text-faint hover:border-line-strong hover:text-ink"
+                : "border-line text-faint hover:border-line-strong hover:text-ink focus-visible:border-guard focus-visible:text-guard"
             }`}
           >
             {f} {f !== "all" && `· ${rows.filter((r) => (f === "open" ? !["CLOSED", "REJECTED", "RESOLVED"].includes(r.state) : r.state === "UNKNOWN" || r.correlation === "UNKNOWN")).length}`}
@@ -123,7 +124,9 @@ export function QueueTable({ rows }: { rows: QueueRow[] }) {
                   </span>
                 </td>
                 <td className="px-4 py-3.5 font-mono text-[0.6875rem] text-faint">
-                  {relativeTime(r.occurredAt, new Date(now))}
+                  {now === null
+                    ? r.occurredAt.slice(0, 16).replace("T", " ")
+                    : relativeTime(r.occurredAt, new Date(now))}
                 </td>
               </tr>
             ))}

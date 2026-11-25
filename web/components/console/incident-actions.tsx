@@ -58,12 +58,19 @@ export function IncidentActions({
 
   return (
     <div className="space-y-6">
-      {message && (
-        <p
-          role="status"
-          className={`border-l-2 pl-3 text-xs ${message.bad ? "border-critical text-critical" : "border-guard text-guard"}`}
-        >
+      <div aria-live="polite" aria-atomic="true" className="min-h-4 text-xs">
+        {message && !message.bad && <span className="text-guard">{message.text}</span>}
+      </div>
+      {message?.bad && (
+        <p role="alert" className="border-l-2 border-critical pl-3 text-xs text-critical">
           {message.text}
+        </p>
+      )}
+
+      {role === "analyst" && (
+        <p className="border-l-2 border-signal/50 pl-4 text-xs leading-relaxed text-faint">
+          Your role is read-only for case decisions. A supervisor or compliance
+          officer must record actions, correlations, notifications and closure.
         </p>
       )}
 
@@ -92,7 +99,7 @@ export function IncidentActions({
             </label>
           </div>
           <button
-            disabled={busy !== null || (corrStatus === "CORRELATED" && (!txnRef || !txnAmount))}
+            disabled={role === "analyst" || busy !== null || (corrStatus === "CORRELATED" && (!txnRef || !txnAmount))}
             onClick={() =>
               send(
                 "correlate",
@@ -131,7 +138,7 @@ export function IncidentActions({
             </select>
           </label>
           <button
-            disabled={busy !== null || !receiving}
+            disabled={role === "analyst" || busy !== null || !receiving}
             onClick={() => send("notify", { receivingInstitutionId: receiving }, "Notification")}
             className={btn(busy)}
           >
@@ -169,7 +176,7 @@ export function IncidentActions({
                 {(["ACCEPTED", "DECLINED", "NOT_PERMITTED"] as const).map((d) => (
                   <button
                     key={d}
-                    disabled={busy !== null || !authority.trim() || !rationale.trim()}
+                    disabled={role === "analyst" || busy !== null || !authority.trim() || !rationale.trim()}
                     onClick={() =>
                       send(
                         "action",
@@ -206,7 +213,7 @@ export function IncidentActions({
       {["ACTION_ACCEPTED", "ACTION_DECLINED", "ACTION_NOT_PERMITTED", "INVESTIGATION"].includes(state) && (
         <Block n="04" title="Open a recipient challenge">
           <button
-            disabled={busy !== null}
+            disabled={role === "analyst" || busy !== null}
             onClick={() =>
               send(
                 "challenge",
@@ -232,7 +239,7 @@ export function IncidentActions({
             <input value={closeReason} onChange={(e) => setCloseReason(e.target.value)} className={field} placeholder="Customer confirmed safe" />
           </label>
           <button
-            disabled={busy !== null || !closeReason.trim()}
+            disabled={role === "analyst" || busy !== null || !closeReason.trim()}
             onClick={() => send("close", { reason: closeReason }, "Closure")}
             className={btn(busy)}
           >
@@ -257,7 +264,7 @@ export function IncidentActions({
           </select>
         </label>
         <button
-          disabled={busy !== null || !assignee}
+          disabled={role === "analyst" || busy !== null || !assignee}
           onClick={() => send("assign", { assigneeId: assignee }, "Assignment")}
           className={btn(busy)}
         >

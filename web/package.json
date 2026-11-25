@@ -14,9 +14,10 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "tsx scripts/migrate.ts",
-    "db:seed": "tsx scripts/seed.ts",
-    "analytics:prune": "tsx scripts/prune-analytics.ts"
+    "db:migrate": "tsx --env-file-if-exists=.env scripts/migrate.ts",
+    "db:seed": "tsx --env-file-if-exists=.env scripts/seed.ts",
+    "analytics:prune": "tsx --env-file-if-exists=.env scripts/prune-analytics.ts",
+    "audit:verify": "tsx --env-file-if-exists=.env scripts/verify-audit.ts"
   },
   "dependencies": {
     "@radix-ui/react-tabs": "^1.2.1",

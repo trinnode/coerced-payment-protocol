@@ -18,10 +18,17 @@ export function fail(e: unknown): NextResponse {
       { status: ERROR_HTTP[e.code] ?? 400 },
     );
   }
-  const message = e instanceof Error ? e.message : "Unexpected error";
-  const code = message === "E_FORBIDDEN" ? "E_FORBIDDEN" : "E_UNAVAILABLE";
+  // Never disclose driver errors, SQL or bound parameters to a caller.
+  const correlationId = crypto.randomUUID();
+  console.error(`[api-error] ${correlationId}`, e instanceof Error ? e.message : "unknown");
   return NextResponse.json(
-    { error: { code, message } },
-    { status: ERROR_HTTP[code] ?? 500 },
+    {
+      error: {
+        code: "E_UNAVAILABLE",
+        message: "The request could not be completed.",
+        correlation_id: correlationId,
+      },
+    },
+    { status: 500 },
   );
 }

@@ -7,6 +7,7 @@ import type { Session } from "@/lib/auth/session";
 
 const asSession = (institutionId: string, role: Session["role"] = "analyst"): Session => ({
   userId: "00000000-0000-0000-0000-000000000000",
+  version: 0,
   institutionId,
   institutionName: institutionId,
   name: "Test",

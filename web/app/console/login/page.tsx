@@ -16,6 +16,8 @@ export default async function LoginPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const { error } = await searchParams;
+  const showSeed =
+    process.env.NODE_ENV !== "production" && process.env.SEED_DEMO_ACCOUNTS !== "false";
 
   return (
     <main id="main" className="mx-auto grid min-h-[calc(100dvh-3.5rem)] max-w-6xl gap-16 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-center">
@@ -77,7 +79,7 @@ export default async function LoginPage({
           </button>
         </form>
 
-        <SeedAccounts accounts={DEMO} password="phylax-demo-2026" />
+        {showSeed && <SeedAccounts accounts={DEMO} password="phylax-demo-2026" />}
       </div>
     </main>
   );

@@ -12,7 +12,7 @@ import {
   MobileNavToggle,
   NavbarButton,
 } from "@/components/ui/resizable-navbar";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const LINKS = [
   { name: "The problem", link: "/#problem" },
@@ -25,6 +25,18 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const onConsole = pathname?.startsWith("/console");
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const first = menuRef.current?.querySelector<HTMLAnchorElement>("a");
+    first?.focus();
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <header>
@@ -57,6 +69,7 @@ export function SiteNav() {
         </div>
       </NavBody>
 
+      <div ref={menuRef} className="contents">
       <MobileNav>
         <MobileNavHeader>
           <Link href="/" className="font-display text-xl text-ink">
@@ -85,6 +98,7 @@ export function SiteNav() {
           </NavbarButton>
         </MobileNavMenu>
       </MobileNav>
+      </div>
       </Navbar>
     </header>
   );

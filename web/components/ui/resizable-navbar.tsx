@@ -7,6 +7,7 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
+  useReducedMotion,
 } from "motion/react";
 
 import React, { useRef, useState } from "react";
@@ -73,7 +74,8 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
     >
       {React.Children.map(children, (child) =>
-        React.isValidElement(child)
+        React.isValidElement(child) &&
+        (child.type === NavBody || child.type === MobileNav)
           ? React.cloneElement(
               child as React.ReactElement<{ visible?: boolean }>,
               { visible },
@@ -85,9 +87,10 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 };
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
+  const reduced = useReducedMotion();
   return (
     <motion.div
-      animate={{
+      animate={reduced ? { backdropFilter: "none", boxShadow: "none", width: "100%", y: 0 } : {
         backdropFilter: visible ? "blur(10px)" : "none",
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
@@ -95,7 +98,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         width: visible ? "40%" : "100%",
         y: visible ? 20 : 0,
       }}
-      transition={{
+      transition={reduced ? { duration: 0 } : {
         type: "spring",
         stiffness: 200,
         damping: 50,
@@ -147,9 +150,10 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
 };
 
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
+  const reduced = useReducedMotion();
   return (
     <motion.div
-      animate={{
+      animate={reduced ? { backdropFilter: "none", boxShadow: "none", width: "100%", y: 0 } : {
         backdropFilter: visible ? "blur(10px)" : "none",
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
@@ -160,7 +164,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         borderRadius: visible ? "4px" : "2rem",
         y: visible ? 20 : 0,
       }}
-      transition={{
+      transition={reduced ? { duration: 0 } : {
         type: "spring",
         stiffness: 200,
         damping: 50,
@@ -205,6 +209,7 @@ export const MobileNavMenu = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          id="mobile-nav"
           className={cn(
             "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg border border-line-strong bg-raised px-4 py-8",
             className,
@@ -224,10 +229,17 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => {
-  return isOpen ? (
-    <IconX className="text-ink" onClick={onClick} />
-  ) : (
-    <IconMenu2 className="text-ink" onClick={onClick} />
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+      aria-controls="mobile-nav"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-guard"
+    >
+      {isOpen ? <IconX className="text-ink" /> : <IconMenu2 className="text-ink" />}
+    </button>
   );
 };
 

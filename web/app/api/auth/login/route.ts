@@ -56,6 +56,7 @@ export async function POST(request: Request) {
     name: row.user.name,
     email: row.user.email,
     role: row.user.role,
+    version: row.user.sessionVersion,
   });
 
   await db

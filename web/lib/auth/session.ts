@@ -1,5 +1,8 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
+import { eq, sql } from "drizzle-orm";
+import { db } from "../db/client";
+import { users } from "../db/schema";
 
 export const SESSION_COOKIE = "phylax_session";
 const MAX_AGE_SECONDS = 60 * 60 * 8;
@@ -8,6 +11,7 @@ export type Role = "analyst" | "supervisor" | "compliance";
 
 export type Session = {
   userId: string;
+  version: number;
   institutionId: string;
   institutionName: string;
   name: string;
@@ -33,6 +37,7 @@ export function signSession(session: Session): string {
   return `${body}.${mac}`;
 }
 
+/** Signature and expiry only. Never trust the claims without `getSession`. */
 export function verifySession(token: string | undefined): Session | null {
   if (!token) return null;
   const [body, mac] = token.split(".");
@@ -43,16 +48,19 @@ export function verifySession(token: string | undefined): Session | null {
   try {
     const parsed = JSON.parse(fromB64url(body).toString("utf8")) as Session;
     if (!parsed.exp || parsed.exp < Math.floor(Date.now() / 1000)) return null;
+    if (typeof parsed.version !== "number" || !parsed.userId) return null;
     return parsed;
   } catch {
     return null;
   }
 }
 
-export async function createSession(session: Omit<Session, "exp">): Promise<void> {
+export async function createSession(
+  session: Omit<Session, "exp" | "version"> & { version?: number },
+): Promise<void> {
   const exp = Math.floor(Date.now() / 1000) + MAX_AGE_SECONDS;
   const jar = await cookies();
-  jar.set(SESSION_COOKIE, signSession({ ...session, exp }), {
+  jar.set(SESSION_COOKIE, signSession({ ...session, version: session.version ?? 0, exp }), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -61,14 +69,60 @@ export async function createSession(session: Omit<Session, "exp">): Promise<void
   });
 }
 
+/** Invalidate every session for a user. Called on logout and on role changes. */
+export async function revokeUserSessions(userId: string): Promise<void> {
+  await db
+    .update(users)
+    .set({ sessionVersion: sql`${users.sessionVersion} + 1` })
+    .where(eq(users.id, userId));
+}
+
 export async function destroySession(): Promise<void> {
   const jar = await cookies();
+  const signed = jar.get(SESSION_COOKIE)?.value;
+  const parsed = verifySession(signed);
+  if (parsed) await revokeUserSessions(parsed.userId);
   jar.delete(SESSION_COOKIE);
 }
 
+/**
+ * The authoritative session check. Roles, tenant and identity are read from
+ * the database on every request, so logout, demotion and deactivation take
+ * effect immediately instead of waiting for cookie expiry.
+ */
 export async function getSession(): Promise<Session | null> {
   const jar = await cookies();
-  return verifySession(jar.get(SESSION_COOKIE)?.value);
+  const signed = verifySession(jar.get(SESSION_COOKIE)?.value);
+  if (!signed) return null;
+
+  const rows = await db
+    .select({
+      id: users.id,
+      institutionId: users.institutionId,
+      name: users.name,
+      email: users.email,
+      role: users.role,
+      active: users.active,
+      sessionVersion: users.sessionVersion,
+    })
+    .from(users)
+    .where(eq(users.id, signed.userId))
+    .limit(1);
+
+  const row = rows[0];
+  if (!row || !row.active || row.sessionVersion !== signed.version) return null;
+
+  // Re-read from the DB so a stale or forged cookie claim cannot elevate a role.
+  return {
+    userId: row.id,
+    version: row.sessionVersion,
+    institutionId: row.institutionId,
+    institutionName: signed.institutionName,
+    name: row.name,
+    email: row.email,
+    role: row.role as Role,
+    exp: signed.exp,
+  };
 }
 
 const RANK: Record<Role, number> = { analyst: 1, supervisor: 2, compliance: 3 };

@@ -12,6 +12,10 @@ export const runtime = "nodejs";
  * there is no client-side gate between a person and their case queue.
  */
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin");
+  if (origin && origin !== new URL(request.url).origin) {
+    return new NextResponse("Forbidden", { status: 403 });
+  }
   const form = await request.formData();
   const email = String(form.get("email") ?? "").trim().toLowerCase();
   const password = String(form.get("password") ?? "");
@@ -44,6 +48,7 @@ export async function POST(request: Request) {
     name: row.user.name,
     email: row.user.email,
     role: row.user.role,
+    version: row.user.sessionVersion,
   });
 
   await db.update(users).set({ lastSeenAt: new Date() }).where(eq(users.id, row.user.id));

@@ -14,6 +14,8 @@ then move on. Do not start Phase D with an open Phase A/B/C finding.
 
 ## Phase A — Robustness and test depth
 
+**CLOSED.** All findings fixed; evidence in `docs/evidence/robustness.md`.
+
 - [ ] Exhaustive state-machine test: every state × every illegal transition rejected
 - [ ] Concurrency test: two simultaneous actions on one incident produce one outcome
 - [ ] Duplicate event storm: same signed event posted 100× concurrently → one incident
@@ -29,6 +31,8 @@ then move on. Do not start Phase D with an open Phase A/B/C finding.
 
 ## Phase B — Security
 
+**CLOSED.** All findings fixed; evidence in `docs/evidence/security.md`.
+
 - [ ] Dependency audit (`pnpm audit`) triaged; no known high/critical left unrecorded
 - [ ] Session cookie tampering, expiry, and logout invalidation tested
 - [ ] CSRF posture reviewed for every mutating route; decision recorded
@@ -43,6 +47,8 @@ then move on. Do not start Phase D with an open Phase A/B/C finding.
 - [ ] `SECURITY.md` disclosure path tested (can a reporter reach a human?)
 
 ## Phase C — Access, performance, and fidelity
+
+**CLOSED.** All findings fixed; evidence in `docs/evidence/experience.md`.
 
 - [ ] WCAG 2.2 AA pass: keyboard-only path, focus order, labels, live regions, errors
 - [ ] Screen-reader pass on queue and incident detail (landmarks, table headers, status text)

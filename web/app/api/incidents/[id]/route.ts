@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { fail, withSession } from "@/lib/api";
+import { requireRole } from "@/lib/auth/session";
 import { DomainError } from "@/lib/domain/incidents";
 import {
   assignIncident,
@@ -22,6 +23,14 @@ async function parse(request: Request): Promise<Body> {
   }
 }
 
+const amountMinor = (v: unknown): number => {
+  const n = typeof v === "number" ? v : Number(v);
+  if (!Number.isSafeInteger(n) || n <= 0 || n > 100_000_000_000) {
+    throw new DomainError("E_SCHEMA", "amountMinor must be a positive integer");
+  }
+  return n;
+};
+
 const str = (v: unknown, field: string): string => {
   if (typeof v !== "string" || !v.trim()) throw new DomainError("E_SCHEMA", `${field} is required`);
   return v.trim();
@@ -38,6 +47,9 @@ export async function POST(
       const { id } = await ctx.params;
       const body = await parse(request);
       const intent = str(body.intent, "intent");
+      // Hiding controls in the UI is not access control. Every case mutation
+      // requires a supervisor-level role at the API boundary.
+      await requireRole("supervisor");
       const actorLabel = `${session.role}:${session.email}`;
       const base = {
         incidentId: id,
@@ -62,7 +74,7 @@ export async function POST(
                 ? {
                     ref: str(txn.ref, "transaction.ref"),
                     status: str(txn.status, "transaction.status") as never,
-                    amountMinor: Number(txn.amountMinor),
+                    amountMinor: amountMinor(txn.amountMinor),
                     beneficiaryInstitutionId:
                       typeof txn.beneficiaryInstitutionId === "string"
                         ? txn.beneficiaryInstitutionId
@@ -76,45 +88,42 @@ export async function POST(
         }
 
         case "notify":
-          return NextResponse.json(
-            await notifyReceiving({
-              ...base,
-              receivingInstitutionId: str(body.receivingInstitutionId, "receivingInstitutionId"),
-              note: typeof body.note === "string" ? body.note : undefined,
-            }),
-          );
+          await notifyReceiving({
+            ...base,
+            receivingInstitutionId: str(body.receivingInstitutionId, "receivingInstitutionId"),
+            note: typeof body.note === "string" ? body.note : undefined,
+          });
+          return NextResponse.json({ ok: true });
 
         case "action": {
           if (session.role === "analyst") return fail(new Error("E_FORBIDDEN"));
-          return NextResponse.json(
-            await decideAction({
-              ...base,
-              type: str(body.type, "type") as never,
-              decision: str(body.decision, "decision") as never,
-              authorityRef: str(body.authorityRef, "authorityRef"),
-              rationale: str(body.rationale, "rationale"),
-              standingRuleId:
-                typeof body.standingRuleId === "string" ? body.standingRuleId : null,
-            }),
-          );
+          await decideAction({
+            ...base,
+            type: str(body.type, "type") as never,
+            decision: str(body.decision, "decision") as never,
+            authorityRef: str(body.authorityRef, "authorityRef"),
+            rationale: str(body.rationale, "rationale"),
+            standingRuleId:
+              typeof body.standingRuleId === "string" ? body.standingRuleId : null,
+          });
+          return NextResponse.json({ ok: true });
         }
 
         case "challenge":
-          return NextResponse.json(
-            await openChallenge({
-              ...base,
-              note: typeof body.note === "string" ? body.note : undefined,
-              deferHours: typeof body.deferHours === "number" ? body.deferHours : undefined,
-            }),
-          );
+          await openChallenge({
+            ...base,
+            note: typeof body.note === "string" ? body.note : undefined,
+            deferHours: typeof body.deferHours === "number" ? body.deferHours : undefined,
+          });
+          return NextResponse.json({ ok: true });
 
         case "close":
-          return NextResponse.json(await closeIncident({ ...base, reason: str(body.reason, "reason") }));
+          await closeIncident({ ...base, reason: str(body.reason, "reason") });
+          return NextResponse.json({ ok: true });
 
         case "assign":
-          return NextResponse.json(
-            await assignIncident({ ...base, assigneeId: str(body.assigneeId, "assigneeId") }),
-          );
+          await assignIncident({ ...base, assigneeId: str(body.assigneeId, "assigneeId") });
+          return NextResponse.json({ ok: true });
 
         default:
           return NextResponse.json(

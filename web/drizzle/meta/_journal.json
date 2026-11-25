@@ -15,6 +15,20 @@
       "when": 1795575844082,
       "tag": "0001_amazing_angel",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795577658240,
+      "tag": "0002_late_darkstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795578178161,
+      "tag": "0003_spicy_silvermane",
+      "breakpoints": true
     }
   ]
 }

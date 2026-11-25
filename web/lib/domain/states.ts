@@ -1,3 +1,5 @@
+import { StateTransitionError } from "./errors";
+export { StateTransitionError } from "./errors";
 export const STATES = [
   "RECEIVED",
   "AUTHENTICATED",
@@ -57,16 +59,6 @@ export function canTransition(from: State, to: State): boolean {
 export function assertTransition(from: State, to: State): void {
   if (!canTransition(from, to)) {
     throw new StateTransitionError(from, to);
-  }
-}
-
-export class StateTransitionError extends Error {
-  code = "E_INVALID_TRANSITION" as const;
-  constructor(
-    readonly from: State,
-    readonly to: State,
-  ) {
-    super(`Illegal transition ${from} → ${to}`);
   }
 }
 

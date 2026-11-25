@@ -6,14 +6,17 @@
  * receiving institution declined because no standing rule existed. A demo that
  * only contains happy paths teaches the wrong lesson.
  */
+import { config } from "dotenv";
 import { randomUUID } from "node:crypto";
+
+config();
 import { generateKeyPairSync } from "node:crypto";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { hashPassword } from "../lib/auth/password";
+import { recordAudit } from "../lib/audit";
 import {
   actions,
-  auditEvents,
   challenges,
   episodes,
   incidents,
@@ -394,16 +397,14 @@ async function main() {
     ["action.hold_request.declined", "bank_kite", 185],
     ["challenge.opened", "bank_kite", 120],
   ] as const;
-  for (const [action, inst, ago] of auditSeed) {
-    await db.insert(auditEvents).values({
+  for (const [action, inst, _ago] of auditSeed) {
+    await recordAudit({
       institutionId: inst,
       actorLabel: "analyst:ada.nwachukwu",
       action,
       objectType: "incident",
       objectId: randomUUID(),
       reasonCode: action.includes("declined") ? "NO_LIVE_POWER" : null,
-      hash: randomUUID().replace(/-/g, ""),
-      createdAt: mins(ago),
     });
   }
 
