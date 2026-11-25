@@ -23,11 +23,44 @@
   --color-critical-deep: #3d1a14;
 
   --font-sans: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Zodiak", ui-serif, Georgia, serif;
+  --font-display: "Gloock", ui-serif, Georgia, serif;
   --font-mono: "Azeret Mono", ui-monospace, monospace;
 
-  --radius-card: 14px;
+  /* One type ladder: 11 / 12 / 14 / 16 / 18 / 24 / 32 / 48 / 72 px.
+     Tailwind's default xs / sm / base / lg already land on 12 / 14 / 16 / 18,
+     so those are left alone and the ladder is extended with named steps. */
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.5;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.5;
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.65;
+  --text-copy: 1rem;
+  --text-copy--line-height: 1.75;
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.6;
+  --text-title: 1.5rem;
+  --text-title--line-height: 1.25;
+  --text-heading: 2rem;
+  --text-heading--line-height: 1.15;
+  --text-display: 3rem;
+  --text-display--line-height: 1.05;
+  --text-hero: 4.5rem;
+  --text-hero--line-height: 0.98;
 
+  /* Rhythm — one page measure, one copy measure, one spacing cadence. */
+  --measure-page: 78rem;
+  --measure-copy: 68ch;
+  --space-gutter: 2rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 1.75rem;
+  --space-xl: 2.5rem;
+  --space-section: 7rem;
+  --space-section-wide: 9rem;
+
+  --radius-card: 14px;
   --ease-guard: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -50,6 +83,18 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Placeholders are text. The console login used placeholder:text-faint/60,
+     which composites below AA on the base surface; muted token measures 7.7:1. */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-muted) !important;
+    opacity: 1 !important;
+  }
+
   ::selection {
     background: var(--color-guard);
     color: #04120d;
@@ -61,7 +106,9 @@
     border-radius: 2px;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     letter-spacing: -0.02em;
   }
 
@@ -75,10 +122,10 @@
 @utility container-page {
   width: 100%;
   margin-inline: auto;
-  max-width: 78rem;
+  max-width: var(--measure-page);
   padding-inline: 1.25rem;
   @media (min-width: 768px) {
-    padding-inline: 2rem;
+    padding-inline: var(--space-gutter);
   }
 }
 
@@ -92,20 +139,27 @@
 
 @utility mono-label {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
+  font-size: var(--text-label);
+  font-weight: 500;
+  line-height: var(--text-label--line-height);
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--color-faint);
 }
 
 @utility hairline {
-  background-image: linear-gradient(
-    to right,
-    transparent,
-    var(--color-line-strong),
-    transparent
-  );
   height: 1px;
+  background: var(--color-line);
+}
+
+/* The one brand glyph: a guard-coloured hairline used before every wordmark. */
+@utility brand-rule {
+  display: inline-block;
+  flex: none;
+  width: 2px;
+  height: 0.875rem;
+  border-radius: 999px;
+  background: var(--color-guard);
 }
 
 /* A subtle paper grain that keeps large dark areas from looking like vinyl */
@@ -122,47 +176,82 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
 }
 
+/* ── Navigation state ───────────────────────────────────────────────────────── */
+/* SiteNav sets aria-current on the anchors owned by the vendored NavItems,
+   so the current section is styled from that attribute rather than a class. */
+header[data-nav-active] a {
+  transition: color 160ms var(--ease-guard),
+    border-color 160ms var(--ease-guard),
+    background-color 160ms var(--ease-guard);
+}
+header[data-nav-active] [data-nav-items] a[aria-current],
+header[data-nav-active] [data-nav-mobile] a[aria-current] {
+  color: var(--color-guard);
+}
+header[data-nav-active] [data-nav-items] a[aria-current]::after {
+  content: "";
+  position: absolute;
+  bottom: 0.25rem;
+  left: 50%;
+  width: 0.875rem;
+  height: 2px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: var(--color-guard);
+}
+header[data-nav-active] [data-nav-mobile] a[aria-current]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 3px;
+  height: 1rem;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: var(--color-guard);
+}
+
 /* ── Document typography ──────────────────────────────────────────────────── */
 /* These are the actual repository documents, not marketing copy. They should
    look like a document: generous measure, visible structure, quiet tables. */
 .doc-prose {
   color: var(--color-muted);
-  font-size: 0.9375rem;
+  font-size: var(--text-copy);
   line-height: 1.78;
 }
 .doc-prose > :first-child {
   margin-top: 0;
 }
 .doc-prose h1 {
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--space-md);
   color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(var(--text-heading), 5vw, var(--text-display));
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
 .doc-prose h2 {
-  margin-top: 3.5rem;
-  margin-bottom: 1rem;
+  margin-top: var(--space-section);
+  margin-bottom: var(--space-md);
   border-top: 1px solid var(--color-line);
-  padding-top: 1.25rem;
+  padding-top: var(--space-md);
   color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(var(--text-title), 3vw, var(--text-heading));
   font-weight: 400;
   line-height: 1.2;
 }
 .doc-prose h3 {
-  margin-top: 2.25rem;
-  margin-bottom: 0.75rem;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
   color: var(--color-ink);
-  font-size: 1.0625rem;
+  font-size: var(--text-lead);
   font-weight: 600;
 }
 .doc-prose p {
   margin-block: 1.1rem;
-  max-width: 68ch;
+  max-width: var(--measure-copy);
 }
 .doc-prose a {
   color: var(--color-guard);
@@ -178,7 +267,7 @@
 .doc-prose ol {
   margin-block: 1.1rem;
   padding-left: 1.4rem;
-  max-width: 68ch;
+  max-width: var(--measure-copy);
 }
 .doc-prose li {
   margin-block: 0.35rem;
@@ -194,12 +283,12 @@
   color: var(--color-faint);
 }
 .doc-prose blockquote {
-  margin-block: 1.75rem;
+  margin-block: var(--space-lg);
   border-left: 2px solid var(--color-guard);
-  padding: 0.15rem 0 0.15rem 1.25rem;
+  padding: 0.15rem 0 0.15rem var(--space-md);
   color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: var(--text-lead);
   line-height: 1.5;
 }
 .doc-prose code {
@@ -214,13 +303,13 @@
   background: var(--color-surface);
 }
 .doc-prose pre {
-  margin-block: 1.5rem;
+  margin-block: var(--space-lg);
   overflow-x: auto;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
   background: var(--color-surface);
-  padding: 1.1rem 1.25rem;
-  font-size: 0.78rem;
+  padding: 1.1rem var(--space-md);
+  font-size: var(--text-label);
   line-height: 1.65;
 }
 .doc-prose pre code {
@@ -230,9 +319,9 @@
   display: block;
   width: 100%;
   overflow-x: auto;
-  margin-block: 1.75rem;
+  margin-block: var(--space-lg);
   border-collapse: collapse;
-  font-size: 0.84rem;
+  font-size: var(--text-body);
 }
 .doc-prose th {
   border-bottom: 1px solid var(--color-line-strong);
@@ -240,7 +329,7 @@
   text-align: left;
   color: var(--color-ink);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--text-label);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -252,7 +341,7 @@
   vertical-align: top;
 }
 .doc-prose hr {
-  margin-block: 3rem;
+  margin-block: var(--space-section);
   border: 0;
   height: 1px;
   background: var(--color-line);

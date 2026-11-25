@@ -9,6 +9,9 @@ import {
   decideAction,
   notifyReceiving,
   openChallenge,
+  releaseChallenge,
+  addCaseNote,
+  setContactState,
 } from "@/lib/domain/incidents";
 
 export const runtime = "nodejs";
@@ -49,7 +52,11 @@ export async function POST(
       const intent = str(body.intent, "intent");
       // Hiding controls in the UI is not access control. Every case mutation
       // requires a supervisor-level role at the API boundary.
-      await requireRole("supervisor");
+      try {
+        await requireRole("supervisor");
+      } catch {
+        throw new DomainError("E_FORBIDDEN", "Supervisor or compliance role required");
+      }
       const actorLabel = `${session.role}:${session.email}`;
       const base = {
         incidentId: id,
@@ -95,6 +102,32 @@ export async function POST(
           });
           return NextResponse.json({ ok: true });
 
+        case "set_contact": {
+          const state = str(body.state, "state") as "SAFE" | "UNSAFE" | "UNKNOWN";
+          if (!["SAFE", "UNSAFE", "UNKNOWN"].includes(state)) {
+            throw new DomainError("E_SCHEMA", "Invalid contact state");
+          }
+          return NextResponse.json(
+            await setContactState({
+              ...base,
+              actorRole: session.role,
+              state,
+              reason: str(body.reason, "reason"),
+              override: body.override === true,
+            }),
+          );
+        }
+
+        case "add_note":
+          return NextResponse.json(
+            await addCaseNote({
+              ...base,
+              body: str(body.body, "body"),
+              reasonCode: str(body.reasonCode, "reasonCode"),
+              type: typeof body.type === "string" ? body.type : undefined,
+            }),
+          );
+
         case "action": {
           if (session.role === "analyst") return fail(new Error("E_FORBIDDEN"));
           await decideAction({
@@ -109,11 +142,28 @@ export async function POST(
           return NextResponse.json({ ok: true });
         }
 
-        case "challenge":
+        case "challenge": {
+          if (
+            typeof body.deferHours !== "number" ||
+            !Number.isInteger(body.deferHours) ||
+            body.deferHours < 0 ||
+            body.deferHours > 72
+          ) {
+            throw new DomainError("E_SCHEMA", "deferHours must be an integer from 0 to 72");
+          }
           await openChallenge({
             ...base,
             note: typeof body.note === "string" ? body.note : undefined,
-            deferHours: typeof body.deferHours === "number" ? body.deferHours : undefined,
+            deferHours: body.deferHours,
+          });
+          return NextResponse.json({ ok: true });
+        }
+
+        case "release":
+          await releaseChallenge({
+            ...base,
+            reason: str(body.reason, "reason"),
+            earlyRelease: body.earlyRelease === true,
           });
           return NextResponse.json({ ok: true });
 

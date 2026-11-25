@@ -1,0 +1,303 @@
+- generic [active] [ref=f20e1]:
+  - link "Skip to content" [ref=f20e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f20e3]:
+    - navigation "Primary" [ref=f20e4]:
+      - generic [ref=f20e7]:
+        - link "Phylax" [ref=f20e8] [cursor=pointer]:
+          - /url: /
+        - button "Open menu" [ref=f20e9]
+  - main [ref=f20e11]:
+    - generic [ref=f20e13]:
+      - generic [ref=f20e14]:
+        - paragraph [ref=f20e15]: Open design record · v0.1 · 25 Nov 2026
+        - heading "Somebody is standing over the phone." [level=1] [ref=f20e16]
+        - generic [ref=f20e17]:
+          - paragraph [ref=f20e18]: "Not a hacker. A person in the room — at a checkpoint, in a parked car, in a family house. The transfer is made with the victim's own PIN, on their own device. Every control the bank ran passed, because the bank asked the right question of the wrong fact: did this person authorise it? They did. Were they free to refuse? Nobody asked."
+          - paragraph [ref=f20e19]: This is the gap we are working on. Not better authentication — authentication already works. A way to say, in the few seconds that matter, that the PIN was given under threat. And a way for the receiving institution to learn it while there may still be time to act.
+        - generic [ref=f20e20]:
+          - link "Read the assessment →" [ref=f20e21] [cursor=pointer]:
+            - /url: /assessment
+            - text: Read the assessment
+            - generic [ref=f20e22]: →
+          - link "Open the working console" [ref=f20e23] [cursor=pointer]:
+            - /url: /console/login
+      - generic [ref=f20e24]:
+        - paragraph [ref=f20e25]: One sentence
+        - paragraph [ref=f20e26]: The design aims to tell the receiving bank that a PIN may have been given under threat. It cannot say who was at fault — and no institution has implemented it yet.
+        - paragraph [ref=f20e27]: The platform cannot hold money, freeze an account, start a transfer, or refer anyone to the police. That is not a limitation we will fix later. It is the design.
+    - generic [ref=f20e29]:
+      - generic [ref=f20e30]:
+        - paragraph [ref=f20e31]: Where this actually is
+        - paragraph [ref=f20e32]: Six lines. Five are empty.
+      - generic [ref=f20e33]:
+        - generic [ref=f20e34]:
+          - term [ref=f20e35]: Assessment
+          - definition [ref=f20e36]: v2 · survived three reviews
+        - generic [ref=f20e37]:
+          - term [ref=f20e38]: Protocol
+          - definition [ref=f20e39]: v0.1 · draft, no implementation
+        - generic [ref=f20e40]:
+          - term [ref=f20e41]: Institutional partner
+          - definition [ref=f20e42]: none signed
+        - generic [ref=f20e43]:
+          - term [ref=f20e44]: Willingness to pay
+          - definition [ref=f20e45]: untested
+        - generic [ref=f20e46]:
+          - term [ref=f20e47]: Legal review
+          - definition [ref=f20e48]: not commissioned
+        - generic [ref=f20e49]:
+          - term [ref=f20e50]: Pilot
+          - definition [ref=f20e51]: none
+      - paragraph [ref=f20e52]: "We publish this rather than a traction slide. The next milestone is not code. It is ten meetings with one question: would you sign six months, and at what number?"
+    - generic [ref=f20e54]:
+      - generic [ref=f20e55]:
+        - paragraph [ref=f20e56]: § 01 · What crosses
+        - heading "The signal is smaller than you think." [level=2] [ref=f20e57]
+        - paragraph [ref=f20e58]: No name. No account number. No location. No note about what happened — that note could be read by someone standing over the phone.
+        - paragraph [ref=f20e59]: What crosses is an institution, an episode, an event type, a bank-authenticated confidence, a value band, and a signature. Six fields, one of which is proof that the others came from a bank. Everything else stays where the victim is.
+        - paragraph [ref=f20e60]: Specimen only. Events posted to /api/v1/events are signature-verified.
+      - generic [ref=f20e64]:
+        - generic [ref=f20e65]:
+          - generic [ref=f20e66]: Signed envelope
+          - generic [ref=f20e67]: v0.1
+        - generic [ref=f20e68]:
+          - generic [ref=f20e69]:
+            - term [ref=f20e70]: "\"institution_id\""
+            - definition [ref=f20e71]: "\"bank_kite\""
+          - generic [ref=f20e72]:
+            - term [ref=f20e73]: "\"episode_id\""
+            - definition [ref=f20e74]: "\"…4f2a\""
+          - generic [ref=f20e75]:
+            - term [ref=f20e76]: "\"event_type\""
+            - definition [ref=f20e77]: "\"SUSPECTED_DURESS\""
+          - generic [ref=f20e78]:
+            - term [ref=f20e79]: "\"activation.confidence\""
+            - definition [ref=f20e80]: "\"BANK_AUTHENTICATED\""
+          - generic [ref=f20e81]:
+            - term [ref=f20e82]: "\"activation.band\""
+            - definition [ref=f20e83]: "\"PIN_ONLY_TIER_1\""
+          - generic [ref=f20e84]:
+            - term [ref=f20e85]: "\"signature\""
+            - definition [ref=f20e86]: "\"Ed25519 · key_id …\""
+        - paragraph [ref=f20e88]: Canonical bytes, signed with the institution's key. No free text.
+    - generic [ref=f20e90]:
+      - generic [ref=f20e91]:
+        - paragraph [ref=f20e92]: § 02 · The problem
+        - heading "The money moves in seconds. The process moves in weeks." [level=2] [ref=f20e93]
+        - generic [ref=f20e94]:
+          - paragraph [ref=f20e95]: NIP transfers settle in seconds. When a person is forced to make one, the victim's complaint, the bank's investigation, and the dispute process all begin after the fact. By then the receiving account has usually emptied.
+          - paragraph [ref=f20e96]: The obvious answer — build a better dispute rail — runs into an uncomfortable fact. NIBSS's existing dispute system, IDRS, is built around issuers, acquirers and cards. It handles representment, arbitration and acquirer-initiated refunds. There is no equivalent account-to-account path for a transfer that was technically authorised and substantively forced.
+          - paragraph [ref=f20e97]: "So the work is not to invent a new rail. It is to make the first sixty seconds count: get a minimal, signed signal from the sending institution to the receiving one, and give a human there something they could act on — if a lawful power exists. That power is not yet agreed with any institution."
+      - complementary [ref=f20e98]:
+        - paragraph [ref=f20e99]: What exists today
+        - list [ref=f20e100]:
+          - listitem [ref=f20e101]:
+            - paragraph [ref=f20e102]: NIP
+            - paragraph [ref=f20e103]: instant account-to-account, no duress state
+          - listitem [ref=f20e104]:
+            - paragraph [ref=f20e105]: IDRS
+            - paragraph [ref=f20e106]: issuer/acquirer disputes — card and POS-centric
+          - listitem [ref=f20e107]:
+            - paragraph [ref=f20e108]: Step-up
+            - paragraph [ref=f20e109]: proves possession, not willingness
+          - listitem [ref=f20e110]:
+            - paragraph [ref=f20e111]: Alerts
+            - paragraph [ref=f20e112]: fire below the app; cannot be suppressed safely
+        - link "See the source register →" [ref=f20e113] [cursor=pointer]:
+          - /url: /sources
+    - generic [ref=f20e115]:
+      - paragraph [ref=f20e116]: § 03 · The design
+      - heading "Three loops, at three speeds." [level=2] [ref=f20e117]
+      - paragraph [ref=f20e118]: The original playbook built the third loop and called it the product. A complaint system that works in a week is not useful to someone whose money left in four seconds. The order matters.
+      - generic [ref=f20e127]:
+        - article [ref=f20e128]:
+          - generic [ref=f20e129]:
+            - paragraph [ref=f20e130]: "01"
+            - paragraph [ref=f20e131]: seconds
+          - generic [ref=f20e132]:
+            - heading "Signal" [level=3] [ref=f20e133]
+            - paragraph [ref=f20e134]: inside the sending institution
+            - paragraph [ref=f20e135]: A second PIN entry, inside a value band where no step-up exists at all. The design requires duress and ordinary transfers to produce the same request, the same alert, the same statement line — no bypass flag and no extra channel. Whether a real bank can achieve that is the Gate 0 experiment; it may fail.
+            - paragraph [ref=f20e136]: Does not. It does not hide the transfer. The victim sees the debit like any other debit. Concealing the money is both impossible and wrong.
+        - article [ref=f20e137]:
+          - generic [ref=f20e138]:
+            - paragraph [ref=f20e139]: "02"
+            - paragraph [ref=f20e140]: minutes
+          - generic [ref=f20e141]:
+            - heading "Preservation" [level=3] [ref=f20e142]
+            - paragraph [ref=f20e143]: sending institution → receiving institution
+            - paragraph [ref=f20e144]: "A signed, minimal event crosses to the receiving side: institution, episode, a bank-authenticated confidence, the value band. No name, no account number, no location, no free text. The receiving institution decides what to do under its own standing rules — a lien, a positive pay directive, an injunction — each to be named and approved before any case, not improvised during one."
+            - paragraph [ref=f20e145]: Does not. It does not freeze anything. Our first pilot proves fast human referral, not a hold. The hold rule comes later, after there is evidence to negotiate with.
+        - article [ref=f20e146]:
+          - generic [ref=f20e147]:
+            - paragraph [ref=f20e148]: "03"
+            - paragraph [ref=f20e149]: hours to weeks
+          - generic [ref=f20e150]:
+            - heading "Accountability" [level=3] [ref=f20e151]
+            - paragraph [ref=f20e152]: inside each institution, then between them
+            - paragraph [ref=f20e153]: One coercion can produce several transfers. We group them in one episode, attach each signed event, and write the authority reference beside every decision. Recipients can challenge without the notification endangering the sender. The record is destroyed at closure unless a named statute requires retention — a history of ‘this person was coerced’ is a standing target, not an asset.
+            - paragraph [ref=f20e154]: Does not. It does not decide who was at fault. The platform holds facts and states; it never holds a verdict.
+    - generic [ref=f20e156]:
+      - generic [ref=f20e157]:
+        - generic [ref=f20e158]:
+          - paragraph [ref=f20e159]: § 04 · Hard cases
+          - heading "A safety feature that protects the least exposed is a marketing artefact." [level=2] [ref=f20e160]
+          - paragraph [ref=f20e161]: Every refusal below was proposed, taken seriously, and removed after an independent review. Every exclusion below is someone we do not reach. Both are printed before any invitation to work with us.
+        - generic [ref=f20e162]:
+          - paragraph [ref=f20e163]: In the record
+          - paragraph [ref=f20e164]: The review log is public. If you think one of these refusals is wrong, that is exactly the argument we want to have.
+          - link "Read the review log →" [ref=f20e165] [cursor=pointer]:
+            - /url: /review
+      - generic [ref=f20e166]:
+        - generic [ref=f20e167]:
+          - paragraph [ref=f20e168]: Things we will not build
+          - list [ref=f20e169]:
+            - listitem [ref=f20e170]:
+              - generic [ref=f20e171]: "01"
+              - generic [ref=f20e172]:
+                - heading "We will not fake a receipt or a balance." [level=3] [ref=f20e173]
+                - paragraph [ref=f20e174]: SMS and push alerts are generated below the app. Suppress one and the absence is louder than the message. Falsify a balance and the bank has falsified its own books. The transfer stays visible. We conceal the signal, never the money.
+            - listitem [ref=f20e175]:
+              - generic [ref=f20e176]: "02"
+              - generic [ref=f20e177]:
+                - heading "We will not freeze an account on a signal." [level=3] [ref=f20e178]
+                - paragraph [ref=f20e179]: A signal is not proof and proof is not a verdict. A hold needs a named legal power, a value cap, a time cap, and someone accountable. Those are negotiated before a case exists, not during one.
+            - listitem [ref=f20e180]:
+              - generic [ref=f20e181]: "03"
+              - generic [ref=f20e182]:
+                - heading "We will not make a discretionary police referral." [level=3] [ref=f20e183]
+                - paragraph [ref=f20e184]: The modal reported case involves a person with perceived authority — sometimes an agent. An automatic referral can expose the victim to the very person holding them. Statutory reporting to the NFIU under MLPPA 2022 is a separate, disclosed duty of the institution. It is not our feature.
+            - listitem [ref=f20e185]:
+              - generic [ref=f20e186]: "04"
+              - generic [ref=f20e187]:
+                - heading "We will not score a person as guilty." [level=3] [ref=f20e188]
+                - paragraph [ref=f20e189]: No labels on recipients, no corridor scoring, no ethnicity proxies hiding inside a column called ‘risk’. A falsely restricted recipient is a real person with a real complaint.
+            - listitem [ref=f20e190]:
+              - generic [ref=f20e191]: "05"
+              - generic [ref=f20e192]:
+                - heading "We will not claim it works before it has been tried." [level=3] [ref=f20e193]
+                - paragraph [ref=f20e194]: The decisive test is not a simulator. It is one bank's staging replica, paired normal and duress trials, and people paid to tell the difference. If more than one in five can, the claim dies.
+        - generic [ref=f20e195]:
+          - paragraph [ref=f20e196]: Known exclusions
+          - paragraph [ref=f20e197]: This is a feature for smartphone banking customers in a defined value band. It does not protect everyone, and the people it does not protect are often the most exposed.
+          - table [ref=f20e199]:
+            - rowgroup [ref=f20e200]:
+              - row [ref=f20e201]:
+                - columnheader "Excluded" [ref=f20e202]
+                - columnheader "Consequence" [ref=f20e203]
+            - rowgroup [ref=f20e204]:
+              - row [ref=f20e205]:
+                - cell "USSD users" [ref=f20e206]
+                - cell "A large share of the people most exposed to checkpoint and agent coercion cannot use this at all." [ref=f20e207]
+              - row [ref=f20e208]:
+                - cell "ATM · POS · agent cash-out" [ref=f20e209]
+                - cell "The fastest loss path is untouched." [ref=f20e210]
+              - row [ref=f20e211]:
+                - cell "Feature phones" [ref=f20e212]
+                - cell "No coverage." [ref=f20e213]
+              - row [ref=f20e214]:
+                - cell "Above the PIN band" [ref=f20e215]
+                - cell "Step-up exists; a bypass flag or a missing OTP is the tell. High-value transfers are out of scope." [ref=f20e216]
+              - row [ref=f20e217]:
+                - cell "Minors · adults lacking capacity" [ref=f20e218]
+                - cell "Safeguarding and guardianship unresolved. Excluded rather than improvised." [ref=f20e219]
+              - row [ref=f20e220]:
+                - cell "Disability · low literacy" [ref=f20e221]
+                - cell "No tested alternative interaction; the PIN band may be inaccessible." [ref=f20e222]
+              - row [ref=f20e223]:
+                - cell "Shared devices" [ref=f20e224]
+                - cell "Mitigated at enrolment. Not solved." [ref=f20e225]
+    - generic [ref=f20e226]:
+      - paragraph [ref=f20e227]: § 06 · The sequence
+      - heading "Four gates. The default at each one is no." [level=2] [ref=f20e228]
+      - paragraph [ref=f20e229]: "Each gate has criteria fixed before the work starts. The cheapest falsifiable claim goes first: whether anyone will pay, before whether it can be built."
+      - generic [ref=f20e232]:
+        - generic [ref=f20e236]:
+          - heading "Gate −1 · Will anyone pay?" [level=3] [ref=f20e237]
+          - generic [ref=f20e238]:
+            - paragraph [ref=f20e239]: 30 days · ~£2.5k · not started
+            - paragraph [ref=f20e240]: "Ten meetings: four tier-1 banks, four MMOs and PSPs, two insurers. One ask — sign six months, or name the number and the budget cycle. Pass at two signatures or three named figures from named budget holders. Zero is an answer, and it costs £2,500 rather than a year."
+        - generic [ref=f20e244]:
+          - heading "Gate 0 · Buildable and lawful?" [level=3] [ref=f20e245]
+          - generic [ref=f20e246]:
+            - paragraph [ref=f20e247]: 90 days · ~£6k
+            - paragraph [ref=f20e248]: "A scoped counsel memo on licensing, lawful basis, hold powers and duty of care. A bank mobile-auth and notification engineer confirming the band-scoped path in writing. And the staging-replica paired trial — pre-registered kill at 20% detection. Any one fails: stop, or pivot to the accountability-only product."
+        - generic [ref=f20e252]:
+          - heading "Pilot · One institution" [level=3] [ref=f20e253]
+          - generic [ref=f20e254]:
+            - paragraph [ref=f20e255]: 6 months · £150–300k
+            - paragraph [ref=f20e256]: One corridor, capped value, staff-supervised. Measured in minutes to notice and unsafe-contact incidents — not alerts sent. The first version proves fast referral, because a hold rule needs evidence to negotiate with and does not exist yet. Any unsafe contact pauses the pilot and triggers independent review.
+        - generic [ref=f20e260]:
+          - heading "Phase 2 · Second institution" [level=3] [ref=f20e261]
+          - generic [ref=f20e262]:
+            - paragraph [ref=f20e263]: months 10–18
+            - paragraph [ref=f20e264]: A different core and auth stack, so the protocol is not one bank's internal API. Then — and only then — the standing hold rule, with a named power, a value cap, a duration cap, and a route for the recipient to challenge.
+    - generic [ref=f20e266]:
+      - paragraph [ref=f20e267]: § 07 · An invitation
+      - paragraph [ref=f20e268]: Nothing here is proven. Tell us where it is wrong.
+      - paragraph [ref=f20e269]: If you run fraud operations, if you have sat in a compliance meeting about this, or if you have been through it yourself — the useful thing is the objection. We publish every review that changed the design, including the ones that killed parts of it. That log is the reason to trust anything on this page, not the page itself.
+      - generic [ref=f20e270]:
+        - link "What reviewers found →" [ref=f20e271] [cursor=pointer]:
+          - /url: /review
+        - link "The protocol, open for criticism" [ref=f20e272] [cursor=pointer]:
+          - /url: /protocol
+        - link "Status ledger" [ref=f20e273] [cursor=pointer]:
+          - /url: /status
+  - contentinfo [ref=f20e274]:
+    - generic [ref=f20e275]:
+      - generic [ref=f20e276]:
+        - generic [ref=f20e277]:
+          - paragraph [ref=f20e278]: A safer signalwhen consentis taken away.
+          - paragraph [ref=f20e279]: An open design record for coerced-payment signalling. Published so it can be argued with, not so it can be bought.
+        - generic [ref=f20e280]:
+          - paragraph [ref=f20e281]: Record
+          - list [ref=f20e282]:
+            - listitem [ref=f20e283]:
+              - link "Assessment" [ref=f20e284] [cursor=pointer]:
+                - /url: /assessment
+            - listitem [ref=f20e285]:
+              - link "Master flow" [ref=f20e286] [cursor=pointer]:
+                - /url: /flow
+            - listitem [ref=f20e287]:
+              - link "Master plan" [ref=f20e288] [cursor=pointer]:
+                - /url: /plan
+            - listitem [ref=f20e289]:
+              - link "Threat model" [ref=f20e290] [cursor=pointer]:
+                - /url: /safety
+        - generic [ref=f20e291]:
+          - paragraph [ref=f20e292]: Protocol
+          - list [ref=f20e293]:
+            - listitem [ref=f20e294]:
+              - link "Specification v0.1" [ref=f20e295] [cursor=pointer]:
+                - /url: /protocol
+            - listitem [ref=f20e296]:
+              - link "Status ledger" [ref=f20e297] [cursor=pointer]:
+                - /url: /status
+            - listitem [ref=f20e298]:
+              - link "Review log" [ref=f20e299] [cursor=pointer]:
+                - /url: /review
+            - listitem [ref=f20e300]:
+              - link "Sources" [ref=f20e301] [cursor=pointer]:
+                - /url: /sources
+        - generic [ref=f20e302]:
+          - paragraph [ref=f20e303]: Working
+          - list [ref=f20e304]:
+            - listitem [ref=f20e305]:
+              - link "Console" [ref=f20e306] [cursor=pointer]:
+                - /url: /console/login
+            - listitem [ref=f20e307]:
+              - link "Governance" [ref=f20e308] [cursor=pointer]:
+                - /url: /governance
+            - listitem [ref=f20e309]:
+              - link "Contributing" [ref=f20e310] [cursor=pointer]:
+                - /url: /contributing
+            - listitem [ref=f20e311]:
+              - link "Security" [ref=f20e312] [cursor=pointer]:
+                - /url: /security
+      - generic [ref=f20e313]:
+        - paragraph [aria-hidden] [ref=f20e314]: Phylax
+        - generic [ref=f20e315]:
+          - paragraph [ref=f20e316]: Lagos · London · the internet
+          - paragraph [ref=f20e317]: Text © the contributors, CC BY 4.0. Code Apache-2.0. Not a regulated financial service.
+  - button "Open Next.js Dev Tools" [ref=f20e323] [cursor=pointer]

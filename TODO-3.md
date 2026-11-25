@@ -1,9 +1,9 @@
 # TODO 3 — Second wave: stress, judgement, redesign, and resolution
 
-TODO 2 Phase A/B/C returned FAIL. Every finding is now fixed and covered by a
-test: audit chain HMAC + atomic writes, session revocation, sealed credentials,
+TODO 2 Phase A/B/C returned FAIL. Every finding was fixed and covered by a
+test; the second wave returned PASS WITH FIXES and those were resolved too: audit chain HMAC + atomic writes, session revocation, sealed credentials,
 concurrency locks, replay detection, role gates, constraints, body caps, and
-accessibility blockers. 32 unit tests, 18 browser tests, verified audit chain.
+accessibility blockers. 49 unit tests, 32 browser tests, verified audit chain.
 
 This book of work is about **judgement**, not more bug hunting alone. Five
 independent agents assess different lenses. The maintainer resolves every

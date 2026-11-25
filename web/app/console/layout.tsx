@@ -18,7 +18,13 @@ export default async function ConsoleLayout({ children }: { children: React.Reac
             <span className="mono-label hidden sm:block">Incident console</span>
           </div>
           <span className="font-mono text-[0.6875rem] text-faint">
-            {process.env.NODE_ENV === "production" ? "LIVE DATA" : "LOCAL · SEEDED DATA"}
+            {process.env.NEXT_PUBLIC_DEPLOY_ENV === "production"
+              ? "LIVE DATA"
+              : process.env.NEXT_PUBLIC_DEPLOY_ENV === "staging"
+                ? "STAGING · SEEDED DATA"
+                : process.env.NODE_ENV === "production"
+                  ? "UNLABELLED · SEEDED DATA"
+                  : "LOCAL · SEEDED DATA"}
           </span>
         </div>
       </header>

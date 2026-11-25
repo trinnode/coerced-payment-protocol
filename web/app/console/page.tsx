@@ -4,8 +4,11 @@ import { getSession } from "@/lib/auth/session";
 import { queueFor, queueStats } from "@/lib/queries";
 import { QueueTable } from "@/components/console/queue-table";
 import { LogoutButton } from "@/components/console/logout-button";
+import { slaFor } from "@/lib/domain/incidents";
 
 export const dynamic = "force-dynamic";
+
+const TERMINAL = ["CLOSED", "REJECTED", "RESOLVED"];
 
 export default async function ConsolePage() {
   const session = await getSession();
@@ -25,39 +28,38 @@ export default async function ConsolePage() {
         <LogoutButton name={session.name} role={session.role} />
       </div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label="Total cases" value={stats.total} />
-        <Stat label="Still open" value={stats.open} tone="signal" />
-        <Stat label="Median to notice" value={`${stats.medianMinutes} min`} tone="guard" />
-        <Stat
-          label="Unsafe contact"
-          value={rows.filter((r) => r.contact === "UNSAFE").length}
-          tone="critical"
-        />
-      </div>
+      <p className="mt-8 border-l-2 border-signal/50 pl-4 text-xs leading-relaxed text-faint">
+        Synthetic records. These figures illustrate the workflow; they are not
+        evidence of operational performance or safety.
+      </p>
 
-      <div className="mt-10 flex flex-wrap items-baseline justify-between gap-3">
-        <h2 className="text-sm text-ink">Incidents</h2>
-        <p className="text-xs text-faint">
-          Scoped to {session.institutionName}. Every open is audit-logged.
-        </p>
-      </div>
-
-      <div className="mt-5">
+      <div className="mt-6">
         <QueueTable
-          rows={rows.map((r) => ({
-            id: r.id,
-            state: r.state,
-            band: r.band,
-            occurredAt: r.occurredAt.toISOString(),
-            correlation: r.correlation,
-            actionStatus: r.actionStatus,
-            amount: Number(r.amount),
-            beneficiary: r.beneficiary ?? null,
-            episode: r.episode,
-            customer: r.customer,
-            contact: r.contact,
-          }))}
+          rows={rows.map((r) => {
+            const sla = slaFor(r.occurredAt, r.notifiedAt);
+            return {
+              id: r.id,
+              state: r.state,
+              band: r.band,
+              occurredAt: r.occurredAt.toISOString(),
+              notifiedAt: r.notifiedAt?.toISOString() ?? null,
+              correlation: r.correlation,
+              actionStatus: r.actionStatus,
+              amount: Number(r.amount),
+              beneficiary: r.beneficiary ?? null,
+              episode: r.episode,
+              customer: r.customer,
+              contact: r.contact,
+              // A closed case is not an escalating case.
+              sla: { ...sla, atRisk: sla.atRisk && !TERMINAL.includes(r.state) },
+            };
+          })}
+          stats={{
+            total: stats.total,
+            open: stats.open,
+            medianMinutes: stats.medianMinutes,
+            unsafe: rows.filter((r) => r.contact === "UNSAFE").length,
+          }}
         />
       </div>
 
@@ -76,28 +78,5 @@ export default async function ConsolePage() {
         </Link>
       </div>
     </main>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  tone = "plain",
-}: {
-  label: string;
-  value: string | number;
-  tone?: "plain" | "signal" | "guard" | "critical";
-}) {
-  const colour = {
-    plain: "text-ink",
-    signal: "text-signal",
-    guard: "text-guard",
-    critical: "text-critical",
-  }[tone];
-  return (
-    <div className="border-t border-line-strong pt-4">
-      <p className="mono-label">{label}</p>
-      <p className={`mt-2 font-display text-3xl ${colour}`}>{value}</p>
-    </div>
   );
 }

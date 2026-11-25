@@ -25,10 +25,10 @@ Seeded accounts (password `phylax-demo-2026`):
 
 | Role | Email | Can do |
 |---|---|---|
-| Analyst | `ada.analyst@kite.example.ng` | Read, correlate, notify, challenge, close |
-| Supervisor | `tunde.supervisor@kite.example.ng` | All of the above + action decisions |
-| Compliance | `zainab.compliance@kite.example.ng` | All of the above |
-| MMO supervisor | `emeka.ops@adaeze.example.ng` | A different tenant — cannot see Kite cases |
+| Analyst | `ada.analyst@kite.example.ng` | Read-only — every case mutation requires a supervisor or compliance officer |
+| Supervisor | `tunde.supervisor@kite.example.ng` | Correlate, notify, record an action decision, open a recipient challenge, close and assign Kite cases |
+| Compliance | `zainab.compliance@kite.example.ng` | Same permissions as supervisor — correlate, notify, action, challenge, close and assign |
+| MMO supervisor | `emeka.ops@adaeze.example.ng` | Supervisor in a different tenant — cannot read or mutate Kite cases (404) |
 
 ## Verify
 
@@ -56,7 +56,7 @@ pnpm analytics:prune  # hard-delete telemetry older than 90 days
 ## Design decisions
 
 Typefaces are locally hosted `.woff2` files, downloaded by
-`scripts/fetch-fonts.mjs` (re-runnable). Zodiak is the display face, Familjen
+`scripts/fetch-fonts.mjs` (re-runnable). Gloock is the display face, Familjen
 Grotesk the interface face, Azeret Mono for protocol data and labels. None are
 the default startup fonts. See `docs/design.md` for the rationale.
 

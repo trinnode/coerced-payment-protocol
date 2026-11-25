@@ -1,9 +1,9 @@
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
+import { authenticate } from "@/lib/auth/authenticate";
 import { createSession } from "@/lib/auth/session";
-import { verifyPassword } from "@/lib/auth/password";
 import { db } from "@/lib/db/client";
-import { institutions, users } from "@/lib/db/schema";
+import { users } from "@/lib/db/schema";
 
 export const runtime = "nodejs";
 
@@ -12,37 +12,14 @@ export async function POST(request: Request) {
   let password = "";
   try {
     const body = (await request.json()) as { email?: string; password?: string };
-    email = (body.email ?? "").trim().toLowerCase();
+    email = body.email ?? "";
     password = body.password ?? "";
   } catch {
     return NextResponse.json({ error: { code: "E_SCHEMA", message: "Invalid JSON" } }, { status: 400 });
   }
 
-  if (!email || !password) {
-    return NextResponse.json(
-      { error: { code: "E_SCHEMA", message: "Email and password required" } },
-      { status: 400 },
-    );
-  }
-
-  const rows = await db
-    .select({
-      user: users,
-      institution: { id: institutions.id, name: institutions.shortName },
-    })
-    .from(users)
-    .innerJoin(institutions, eq(users.institutionId, institutions.id))
-    .where(eq(users.email, email))
-    .limit(1);
-
-  const row = rows[0];
-  // Verify against a fixed dummy hash when the user does not exist, so the
-  // response time does not disclose which addresses are enrolled.
-  const valid = row
-    ? await verifyPassword(password, row.user.passwordHash)
-    : await verifyPassword(password, "$scrypt$00$00");
-
-  if (!row || !valid || !row.user.active) {
+  const found = await authenticate(email, password);
+  if (!found) {
     return NextResponse.json(
       { error: { code: "E_UNAUTHENTICATED", message: "Invalid credentials" } },
       { status: 401 },
@@ -50,19 +27,15 @@ export async function POST(request: Request) {
   }
 
   await createSession({
-    userId: row.user.id,
-    institutionId: row.user.institutionId,
-    institutionName: row.institution.name,
-    name: row.user.name,
-    email: row.user.email,
-    role: row.user.role,
-    version: row.user.sessionVersion,
+    userId: found.user.id,
+    institutionId: found.user.institutionId,
+    institutionName: found.institutionName,
+    name: found.user.name,
+    email: found.user.email,
+    role: found.user.role,
+    version: found.user.sessionVersion,
   });
-
-  await db
-    .update(users)
-    .set({ lastSeenAt: new Date() })
-    .where(eq(users.id, row.user.id));
+  await db.update(users).set({ lastSeenAt: new Date() }).where(eq(users.id, found.user.id));
 
   return NextResponse.json({ ok: true, redirect: "/console" });
 }

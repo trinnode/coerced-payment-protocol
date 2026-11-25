@@ -1,5 +1,5 @@
 import { createHmac } from "node:crypto";
-import { desc, eq, isNull, sql as dsql } from "drizzle-orm";
+import { and, desc, eq, isNull, sql as dsql } from "drizzle-orm";
 import { db } from "./db/client";
 import { auditEvents } from "./db/schema";
 import { canonicalize } from "./domain/canonical";
@@ -102,31 +102,47 @@ export async function recordAudit(entry: AuditInput, callerTx?: Tx): Promise<str
 }
 
 /** Verify that a page of audit rows has not been altered or reordered. */
-export async function verifyAuditChain(institutionId: string, limit = 500) {
-  const rows = await db
-    .select()
-    .from(auditEvents)
-    .where(eq(auditEvents.institutionId, institutionId))
-    .orderBy(auditEvents.id)
-    .limit(limit);
-
+export async function verifyAuditChain(institutionId: string, pageSize = 500) {
   let prev: string | null = null;
-  for (const row of rows) {
-    if (row.prevHash !== prev) return { ok: false as const, brokenAt: row.id };
-    const expected = hashEntry({
-      prevHash: row.prevHash,
-      at: row.createdAt.toISOString(),
-      institutionId: row.institutionId,
-      actorId: row.actorId,
-      actorLabel: row.actorLabel,
-      action: row.action,
-      objectType: row.objectType,
-      objectId: row.objectId,
-      reasonCode: row.reasonCode,
-      metadata: row.metadata as Record<string, unknown> | null,
-    });
-    if (expected !== row.hash) return { ok: false as const, brokenAt: row.id };
-    prev = row.hash;
+  let checked = 0;
+  let after = 0;
+
+  // Cursor pagination: a single capped query would make tampering past row
+  // 500 invisible while still reporting success.
+  while (true) {
+    const rows = await db
+      .select()
+      .from(auditEvents)
+      .where(
+        and(
+          eq(auditEvents.institutionId, institutionId),
+          dsql`${auditEvents.id} > ${after}`,
+        ),
+      )
+      .orderBy(auditEvents.id)
+      .limit(pageSize);
+    if (rows.length === 0) break;
+
+    for (const row of rows) {
+      if (row.prevHash !== prev) return { ok: false as const, brokenAt: row.id };
+      const expected = hashEntry({
+        prevHash: row.prevHash,
+        at: row.createdAt.toISOString(),
+        institutionId: row.institutionId,
+        actorId: row.actorId,
+        actorLabel: row.actorLabel,
+        action: row.action,
+        objectType: row.objectType,
+        objectId: row.objectId,
+        reasonCode: row.reasonCode,
+        metadata: row.metadata as Record<string, unknown> | null,
+      });
+      if (expected !== row.hash) return { ok: false as const, brokenAt: row.id };
+      prev = row.hash;
+      after = row.id;
+      checked++;
+    }
   }
-  return { ok: true as const, checked: rows.length };
+
+  return { ok: true as const, checked };
 }

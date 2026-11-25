@@ -1,0 +1,105 @@
+- generic [active] [ref=f7e1]:
+  - link "Skip to content" [ref=f7e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f7e3]:
+    - navigation "Primary" [ref=f7e4]:
+      - generic [ref=f7e7]:
+        - link "Phylax" [ref=f7e8] [cursor=pointer]:
+          - /url: /
+        - button "Open menu" [ref=f7e9]
+  - main [ref=f7e11]:
+    - paragraph [ref=f7e12]: Status ledger
+    - heading "What exists, and what does not." [level=1] [ref=f7e13]
+    - paragraph [ref=f7e14]: A safety project that cannot state its own status is asking for trust it has not earned. This page is generated from the running database where it can be, and says ‘not started’ everywhere it must.
+    - generic [ref=f7e15]:
+      - generic [ref=f7e16]:
+        - term [ref=f7e17]: Design record
+        - definition [ref=f7e18]: Published — v2 after three independent reviews
+      - generic [ref=f7e19]:
+        - term [ref=f7e20]: Protocol
+        - definition [ref=f7e21]: v0.1 draft — no production implementation
+      - generic [ref=f7e22]:
+        - term [ref=f7e23]: Console
+        - definition [ref=f7e24]: Working against seeded records; real auth, guards and audit chain
+      - generic [ref=f7e25]:
+        - term [ref=f7e26]: Database
+        - definition [ref=f7e27]: up · 29 incidents · 28 episodes · 3 institutions
+      - generic [ref=f7e28]:
+        - term [ref=f7e29]: Gate −1 · willingness to pay
+        - definition [ref=f7e30]: Untested — ten meetings not yet held
+      - generic [ref=f7e31]:
+        - term [ref=f7e32]: Gate 0 · buildable and lawful
+        - definition [ref=f7e33]: Not started — counsel memo and staging replica trial outstanding
+      - generic [ref=f7e34]:
+        - term [ref=f7e35]: Institutional partner
+        - definition [ref=f7e36]: None signed
+      - generic [ref=f7e37]:
+        - term [ref=f7e38]: Legal review
+        - definition [ref=f7e39]: Not commissioned
+      - generic [ref=f7e40]:
+        - term [ref=f7e41]: Pilot
+        - definition [ref=f7e42]: None
+    - generic [ref=f7e43]:
+      - link "Gates and kill criteria →" [ref=f7e44] [cursor=pointer]:
+        - /url: /plan
+      - link "Review log" [ref=f7e45] [cursor=pointer]:
+        - /url: /review
+      - link "Health endpoint" [ref=f7e46] [cursor=pointer]:
+        - /url: /api/health
+  - contentinfo [ref=f7e47]:
+    - generic [ref=f7e48]:
+      - generic [ref=f7e49]:
+        - generic [ref=f7e50]:
+          - paragraph [ref=f7e51]: A safer signalwhen consentis taken away.
+          - paragraph [ref=f7e52]: An open design record for coerced-payment signalling. Published so it can be argued with, not so it can be bought.
+        - generic [ref=f7e53]:
+          - paragraph [ref=f7e54]: Record
+          - list [ref=f7e55]:
+            - listitem [ref=f7e56]:
+              - link "Assessment" [ref=f7e57] [cursor=pointer]:
+                - /url: /assessment
+            - listitem [ref=f7e58]:
+              - link "Master flow" [ref=f7e59] [cursor=pointer]:
+                - /url: /flow
+            - listitem [ref=f7e60]:
+              - link "Master plan" [ref=f7e61] [cursor=pointer]:
+                - /url: /plan
+            - listitem [ref=f7e62]:
+              - link "Threat model" [ref=f7e63] [cursor=pointer]:
+                - /url: /safety
+        - generic [ref=f7e64]:
+          - paragraph [ref=f7e65]: Protocol
+          - list [ref=f7e66]:
+            - listitem [ref=f7e67]:
+              - link "Specification v0.1" [ref=f7e68] [cursor=pointer]:
+                - /url: /protocol
+            - listitem [ref=f7e69]:
+              - link "Status ledger" [ref=f7e70] [cursor=pointer]:
+                - /url: /status
+            - listitem [ref=f7e71]:
+              - link "Review log" [ref=f7e72] [cursor=pointer]:
+                - /url: /review
+            - listitem [ref=f7e73]:
+              - link "Sources" [ref=f7e74] [cursor=pointer]:
+                - /url: /sources
+        - generic [ref=f7e75]:
+          - paragraph [ref=f7e76]: Working
+          - list [ref=f7e77]:
+            - listitem [ref=f7e78]:
+              - link "Console" [ref=f7e79] [cursor=pointer]:
+                - /url: /console/login
+            - listitem [ref=f7e80]:
+              - link "Governance" [ref=f7e81] [cursor=pointer]:
+                - /url: /governance
+            - listitem [ref=f7e82]:
+              - link "Contributing" [ref=f7e83] [cursor=pointer]:
+                - /url: /contributing
+            - listitem [ref=f7e84]:
+              - link "Security" [ref=f7e85] [cursor=pointer]:
+                - /url: /security
+      - generic [ref=f7e86]:
+        - paragraph [aria-hidden] [ref=f7e87]: Phylax
+        - generic [ref=f7e88]:
+          - paragraph [ref=f7e89]: Lagos · London · the internet
+          - paragraph [ref=f7e90]: Text © the contributors, CC BY 4.0. Code Apache-2.0. Not a regulated financial service.
+  - button "Open Next.js Dev Tools" [ref=f7e96] [cursor=pointer]

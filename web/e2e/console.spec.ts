@@ -47,8 +47,19 @@ test("an analyst is blocked from recording an action", async ({ page }) => {
 
   const actionSection = page.getByText("Record an action decision");
   if (await actionSection.count()) {
-    await expect(page.getByText(/Your role cannot record an action/)).toBeVisible();
+    await expect(page.getByText(/Your role is read-only/)).toBeVisible();
   }
+
+  // UI hiding is not access control: hit the API directly with the analyst's
+  // own context cookies.
+  const blocked = await page.request.post(`/api/incidents/${href!.split("/").pop()}`, {
+    data: {
+      intent: "close",
+      reason: "analyst should not be able to close",
+    },
+  });
+  expect(blocked.status()).toBe(403);
+  expect((await blocked.json()).error.code).toBe("E_FORBIDDEN");
 });
 
 test("logout revokes the session cookie immediately", async ({ page }) => {

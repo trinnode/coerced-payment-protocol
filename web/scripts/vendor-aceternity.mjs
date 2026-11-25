@@ -11,7 +11,6 @@ const COMPONENTS = [
   "spotlight-new",
   "bento-grid",
   "3d-card",
-  "card-spotlight",
   "moving-border",
   "timeline",
   "infinite-moving-cards",
@@ -22,8 +21,6 @@ const COMPONENTS = [
   "hover-border-gradient",
   "stateful-button",
   "sidebar",
-  "tabs",
-  "vortex",
 ];
 
 const root = process.cwd();

@@ -20,8 +20,6 @@
     "audit:verify": "tsx --env-file-if-exists=.env scripts/verify-audit.ts"
   },
   "dependencies": {
-    "@radix-ui/react-tabs": "^1.2.1",
-    "@react-three/fiber": "^9.8.2",
     "@tabler/icons-react": "^3.53.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.4",
@@ -31,9 +29,7 @@
     "postgres": "^4.1.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.7.1",
-    "three": "^0.187.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -43,7 +39,6 @@
     "@types/node": "^26.6.7",
     "@types/react": "^19.3.1",
     "@types/react-dom": "^19.3.0",
-    "@types/three": "^0.187.0",
     "@vitejs/plugin-react": "^6.3.0",
     "dotenv": "^18.0.10",
     "drizzle-kit": "^0.31.11",

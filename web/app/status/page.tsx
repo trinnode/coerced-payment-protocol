@@ -21,7 +21,7 @@ export default async function StatusPage() {
 
   const items = [
     ["Design record", "Published — v2 after three independent reviews"],
-    ["Protocol", "v0.1 draft — no production implementation"],
+    ["Protocol", "v0.1 draft — no production deployment"],
     ["Console", "Working against seeded records; real auth, guards and audit chain"],
     ["Database", `${dbState} · ${counts.incidents} incidents · ${counts.episodes} episodes · ${counts.institutions} institutions`],
     ["Gate −1 · willingness to pay", "Untested — ten meetings not yet held"],

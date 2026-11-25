@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { eq, sql } from "drizzle-orm";
 import { db } from "../db/client";
 import { users } from "../db/schema";
+import { DomainError } from "../domain/errors";
 
 export const SESSION_COOKIE = "phylax_session";
 const MAX_AGE_SECONDS = 60 * 60 * 8;
@@ -129,13 +130,13 @@ const RANK: Record<Role, number> = { analyst: 1, supervisor: 2, compliance: 3 };
 
 export async function requireSession(): Promise<Session> {
   const s = await getSession();
-  if (!s) throw new Error("E_UNAUTHENTICATED");
+  if (!s) throw new DomainError("E_UNAUTHENTICATED", "Sign in required");
   return s;
 }
 
 export async function requireRole(min: Role): Promise<Session> {
   const s = await requireSession();
-  if (RANK[s.role] < RANK[min]) throw new Error("E_FORBIDDEN");
+  if (RANK[s.role] < RANK[min]) throw new DomainError("E_FORBIDDEN", "Insufficient role for this action");
   return s;
 }
 

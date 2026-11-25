@@ -66,7 +66,7 @@ Most proposed designs in this space build the third loop and call it the product
 |---|---|
 | Assessment | v2 — survived three adversarial reviews |
 | Threat model | Draft, internally reviewed not externally |
-| Event protocol | v0.1 draft, no implementation |
+| Event protocol | v0.1 draft, no production deployment |
 | Willingness to pay (Gate −1) | **Untested** |
 | Institutional partner | None |
 | Legal review | Not commissioned |

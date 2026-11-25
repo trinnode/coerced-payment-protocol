@@ -4,7 +4,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done and verified
 
 ## 0. Foundations
 - [x] Scaffold Next.js 16 + React 19 + TS 7 + Tailwind v4 in `web/`
-- [x] Download uncommon fonts as `.woff2` (Zodiak, Familjen Grotesk, Azeret Mono)
+- [x] Download uncommon fonts as `.woff2` (Gloock, Familjen Grotesk, Azeret Mono)
 - [x] Design tokens: colour, spacing, type scale, motion, reduced-motion path
 - [x] `lib/utils.ts`, design system in `globals.css`
 - [x] Postgres 17 via docker compose, Drizzle schema + migration applied

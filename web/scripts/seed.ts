@@ -27,7 +27,11 @@ import {
   users,
 } from "../lib/db/schema";
 
-const url = process.env.DATABASE_URL ?? "postgres://phylax:phylax@localhost:5433/phylax";
+const url = process.env.DATABASE_URL;
+if (!url) {
+  console.error("DATABASE_URL is required");
+  process.exit(1);
+}
 const sql = postgres(url, { max: 1 });
 const db = drizzle(sql);
 
@@ -39,6 +43,17 @@ function ed25519() {
 }
 
 async function main() {
+  const target = new URL(url as string);
+  const database = target.pathname.slice(1);
+  const isLocal = ["localhost", "127.0.0.1", "::1"].includes(target.hostname);
+  const forced = process.argv.includes("--force-i-mean-it");
+  const looksDisposable = /(seed|test|sandbox|dev)/i.test(database);
+  if ((process.env.NODE_ENV === "production" || (!looksDisposable && !isLocal)) && !forced) {
+    throw new Error(
+      `Refusing to seed '${database}'. Seed truncates every domain table. Use a seed/test/sandbox database or pass --force-i-mean-it.`,
+    );
+  }
+  console.log(`seeding ${database} — all domain tables will be truncated`);
   console.log("clearing");
   await sql`truncate table audit_events, analytics_events, web_vitals, challenges, actions, transactions, raw_events, incidents, episodes, institution_keys, users, institutions restart identity cascade`;
 

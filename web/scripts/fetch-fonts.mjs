@@ -2,7 +2,7 @@
 // app/fonts.css. Re-runnable; deterministic output.
 //
 // Typeface rationale (see docs/design.md):
-//   Zodiak           display / large statements — editorial serif, uncommon in fintech
+//   Gloock           display / large statements — high-contrast serif, uncommon in fintech
 //   Familjen Grotesk interface / body           — Swedish grotesk, distinctive a/g, variable
 //   Azeret Mono      protocol, refs, amounts    — wide mono, uncommon, high legibility
 import { mkdir, writeFile } from "node:fs/promises";
@@ -16,9 +16,9 @@ const UA =
 
 const targets = [
   {
-    family: "Zodiak",
-    slug: "zodiak",
-    css: "https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&display=swap",
+    family: "Gloock",
+    slug: "gloock",
+    css: "https://fonts.googleapis.com/css2?family=Gloock&display=swap",
   },
   {
     family: "Familjen Grotesk",

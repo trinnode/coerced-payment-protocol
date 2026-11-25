@@ -3,10 +3,27 @@ import Link from "next/link";
 import { getSession } from "@/lib/auth/session";
 import { incidentFor } from "@/lib/queries";
 import { IncidentActions } from "@/components/console/incident-actions";
+import { SlaClock } from "@/components/console/sla-clock";
 import { STATE_LABEL, type State } from "@/lib/domain/states";
-import { formatNaira, relativeTime } from "@/lib/utils";
+import { slaFor } from "@/lib/domain/incidents";
+import { formatNaira } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
+
+const TERMINAL = ["CLOSED", "REJECTED", "RESOLVED"];
+
+function nextAction(state: State, correlation: string, challenge: { status: string } | undefined) {
+  if (TERMINAL.includes(state)) return "No action — case closed";
+  if (correlation === "PENDING") return "Correlate the transfer";
+  if (state === "CORRELATED" || state === "REVIEW_PENDING") return "Notify the receiving institution";
+  if (state === "NOTIFIED" || state === "ACTION_REQUESTED") return "Record an action decision";
+  if (challenge?.status === "OPEN") return "Release the challenge with a reason";
+  if (challenge) return "Record what happened in a handover note";
+  if (["ACTION_ACCEPTED", "ACTION_DECLINED", "ACTION_NOT_PERMITTED", "INVESTIGATION"].includes(state)) {
+    return "Open a recipient challenge with a deferral";
+  }
+  return "Record what happened in a handover note";
+}
 
 export default async function IncidentPage({
   params,
@@ -19,8 +36,30 @@ export default async function IncidentPage({
   const data = await incidentFor(session, id);
   if (!data) notFound();
 
-  const { incident, episode, receiving, transactions: txns, actions, challenges, audit, staff, institutions } = data;
+  const {
+    incident, episode, receiving, transactions: txns, actions, challenges, notes, audit, staff, institutions,
+  } = data;
   const state = incident.state as State;
+  const sla = slaFor(incident.occurredAt, incident.notifiedAt);
+  const atRisk = sla.atRisk && !TERMINAL.includes(state);
+  const amount = txns.reduce((max, t) => Math.max(max, t.amountMinor), 0);
+  const challenge = challenges[0];
+  const contactOverride = Boolean(episode.contactOverrideBy && episode.contactOverrideReason?.trim());
+
+  const chronology = [
+    ...notes.map((n) => ({
+      key: n.note.id,
+      at: n.note.createdAt,
+      label: `NOTE · ${n.note.type} · ${n.note.reasonCode} · ${n.authorName}`,
+      detail: n.note.body,
+    })),
+    ...audit.map((a) => ({
+      key: String(a.id),
+      at: a.createdAt,
+      label: `${a.action} · ${a.actorLabel}`,
+      detail: a.reasonCode ?? "",
+    })),
+  ].sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime());
 
   return (
     <main id="main" className="mx-auto max-w-[110rem] px-5 py-10">
@@ -33,7 +72,7 @@ export default async function IncidentPage({
             {STATE_LABEL[state]}
           </h1>
           <p className="mt-2 font-mono text-xs text-faint">
-            {incident.id} · episode {episode.externalEpisodeId} · opened {relativeTime(incident.occurredAt)}
+            {incident.id} · episode {episode.externalEpisodeId} · opened {incident.occurredAt.toISOString().slice(0, 16).replace("T", " ")}
           </p>
         </div>
         <span className="rounded-sm border border-line-strong px-2 py-1 font-mono text-[0.6875rem] text-muted">
@@ -41,9 +80,43 @@ export default async function IncidentPage({
         </span>
       </div>
 
+      {/* One-sentence case brief: what is exposed, who has it, how long it has
+          taken, and the single next required action. */}
+      <p className="mt-6 border-l-2 border-guard/50 bg-surface px-4 py-3 text-sm leading-relaxed text-ink">
+        {amount ? formatNaira(amount) : "No amount correlated"} ·{" "}
+        <SlaClock
+          occurredAt={incident.occurredAt.toISOString()}
+          notifiedAt={incident.notifiedAt?.toISOString() ?? null}
+          initialMinutes={sla.elapsedMinutes}
+          atRisk={atRisk}
+          basis={sla.basis}
+        />{" "}
+        elapsed · receiving {receiving ?? "not identified"} · contact{" "}
+        <span
+          className={`font-mono ${
+            episode.contactState === "UNSAFE"
+              ? "text-critical"
+              : episode.contactState === "UNKNOWN"
+                ? "text-signal"
+                : "text-guard"
+          }`}
+        >
+          {episode.contactState}
+          {contactOverride ? " (override recorded)" : ""}
+        </span>{" "}
+        · next: <span className="font-mono text-guard">{nextAction(state, incident.correlation, challenge)}</span>.
+      </p>
+      {atRisk && (
+        <p className="mt-2 font-mono text-[0.6875rem] text-critical">
+          AT RISK — more than 15 minutes without notice. Escalate in the queue.
+        </p>
+      )}
+
       <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-16">
-        <div className="space-y-12">
+        {/* Mobile: the action panel comes first so controls are above the fold. */}
+        <div className="order-2 space-y-12 lg:order-1">
           <Section n="01" title="Signal">
+            <p className="mono-label mb-5">What happened</p>
             <Grid
               rows={[
                 ["Event type", incident.eventType],
@@ -52,6 +125,11 @@ export default async function IncidentPage({
                 ["Value band", incident.band ?? "—"],
                 ["Occurred", incident.occurredAt.toISOString()],
                 ["Received", incident.receivedAt.toISOString()],
+                ["Contact state", episode.contactState],
+                [
+                  "Contact override",
+                  contactOverride ? episode.contactOverrideReason ?? "recorded" : "none",
+                ],
                 ["Delayed delivery", incident.eventType === "SUSPECTED_DURESS" ? "see raw event" : "no"],
               ]}
             />
@@ -61,7 +139,7 @@ export default async function IncidentPage({
             </p>
           </Section>
 
-          <Section n="02" title="Correlation and transactions">
+          <Section n="02" title="Money exposed">
             <Grid
               rows={[
                 ["Correlation", incident.correlation],
@@ -97,7 +175,7 @@ export default async function IncidentPage({
             )}
           </Section>
 
-          <Section n="03" title="Actions and recipient rights">
+          <Section n="03" title="Actions taken">
             {actions.length ? (
               <ul className="space-y-3">
                 {actions.map((a) => (
@@ -115,36 +193,43 @@ export default async function IncidentPage({
             ) : (
               <p className="text-sm text-faint">No action recorded. A signal is not an instruction.</p>
             )}
-            {challenges.map((c) => (
-              <p key={c.id} className="mt-5 border-l-2 border-signal/50 pl-4 text-xs leading-relaxed text-muted">
-                Recipient challenge is {c.status.toLowerCase()}. Recipient notified: {c.recipientNotified ? "yes" : "no — deferred"}.
-                {c.deferredUntil ? ` Deferred until ${c.deferredUntil.toISOString()}.` : ""}
+            {challenge && (
+              <p className="mt-5 border-l-2 border-signal/50 pl-4 text-xs leading-relaxed text-muted">
+                Recipient challenge is {challenge.status.toLowerCase()}. Recipient notified: {challenge.recipientNotified ? "yes" : "no — deferred"}.
+                <br />
+                Deferred until: <span className="font-mono text-ink">{challenge.deferredUntil?.toISOString() ?? "no deferral (0 hours)"}</span>
+                {challenge.releasedAt && (
+                  <>
+                    <br />
+                    Released by <span className="font-mono text-ink">{staff.find((s) => s.id === challenge.releasedBy)?.name ?? challenge.releasedBy ?? "unrecorded"}</span> at {challenge.releasedAt.toISOString()}. Why: {challenge.resolutionNote ?? "unrecorded"}.
+                  </>
+                )}
               </p>
-            ))}
-          </Section>
+            )}
 
-          <Section n="04" title="Audit trail">
-            {audit.length ? (
-              <ol className="space-y-2">
-                {audit.map((a) => (
-                  <li key={a.id} className="grid gap-1 sm:grid-cols-[10rem_minmax(0,1fr)]">
+            <h3 className="mono-label mt-8">Chronology</h3>
+            {chronology.length ? (
+              <ol className="mt-4 space-y-2">
+                {chronology.map((entry) => (
+                  <li key={entry.key} className="grid gap-1 sm:grid-cols-[10rem_minmax(0,1fr)]">
                     <span className="font-mono text-[0.6875rem] text-faint">
-                      {new Date(a.createdAt).toISOString().slice(11, 19)}
+                      {new Date(entry.at).toISOString().slice(11, 19)}
                     </span>
                     <span className="font-mono text-[0.6875rem] text-muted">
-                      {a.action} · {a.actorLabel}
+                      {entry.label}
+                      {entry.detail && <span className="mt-1 block font-sans text-xs normal-case text-faint">{entry.detail}</span>}
                     </span>
                   </li>
                 ))}
               </ol>
             ) : (
-              <p className="text-sm text-faint">No audit entries for this case.</p>
+              <p className="mt-4 text-sm text-faint">No notes or audit entries for this case.</p>
             )}
           </Section>
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <p className="mono-label mb-5">Actions available to you</p>
+        <aside className="order-1 lg:order-2 lg:sticky lg:top-24 lg:self-start">
+          <p className="mono-label mb-5">What you can do</p>
           <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6">
             <IncidentActions
               id={incident.id}
@@ -153,6 +238,20 @@ export default async function IncidentPage({
               institutions={institutions.map((i) => ({ id: i.id, name: i.name }))}
               staff={staff.map((s) => ({ id: s.id, name: s.name, role: s.role }))}
               role={session.role}
+              contactState={episode.contactState}
+              contactOverride={contactOverride}
+              contactOverrideReason={episode.contactOverrideReason}
+              challenge={
+                challenge
+                  ? {
+                      status: challenge.status,
+                      deferredUntil: challenge.deferredUntil?.toISOString() ?? null,
+                      releasedBy: challenge.releasedBy,
+                      releasedAt: challenge.releasedAt?.toISOString() ?? null,
+                      resolutionNote: challenge.resolutionNote,
+                    }
+                  : null
+              }
             />
           </div>
         </aside>

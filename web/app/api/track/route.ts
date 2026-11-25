@@ -1,7 +1,7 @@
-import { sql } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db/client";
-import { analyticsEvents, rateLimits, webVitals } from "@/lib/db/schema";
+import { analyticsEvents, webVitals } from "@/lib/db/schema";
+import { allowRate } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -10,16 +10,7 @@ const ALLOWED_METRICS = new Set(["LCP", "INP", "CLS", "FCP", "TTFB"]);
 const MAX_PROPS_BYTES = 2048;
 
 async function allow(): Promise<boolean> {
-  const bucket = Math.floor(Date.now() / 60_000);
-  const rows = await db
-    .insert(rateLimits)
-    .values({ key: `telemetry:${bucket}`, count: 1 })
-    .onConflictDoUpdate({
-      target: rateLimits.key,
-      set: { count: sql`${rateLimits.count} + 1`, updatedAt: new Date() },
-    })
-    .returning({ count: rateLimits.count });
-  return (rows[0]?.count ?? 1) <= 300;
+  return allowRate("telemetry", 300, 60_000);
 }
 
 export async function POST(request: Request) {
@@ -70,8 +61,10 @@ export async function POST(request: Request) {
       props,
     });
     return NextResponse.json({ ok: true });
-  } catch {
-    // Telemetry must never break a page.
-    return NextResponse.json({ ok: false }, { status: 204 });
+  } catch (error) {
+    // Telemetry must never break a page. A 204 cannot carry a body — returning
+    // JSON with 204 throws and triggers a dev error-overlay reload loop.
+    console.error("[telemetry] failed", error instanceof Error ? error.message : "unknown");
+    return new NextResponse(null, { status: 204 });
   }
 }

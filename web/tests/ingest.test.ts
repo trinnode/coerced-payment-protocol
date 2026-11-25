@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { generateKeyPairSync, randomUUID, sign, type KeyObject } from "node:crypto";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db/client";
 import { incidents, institutionKeys } from "@/lib/db/schema";
 import { canonicalize } from "@/lib/domain/canonical";
@@ -31,6 +31,7 @@ describe("signed event ingestion (real database)", () => {
   let privateKey: KeyObject;
 
   beforeAll(async () => {
+    await db.execute(sql`delete from rate_limits`);
     const pair = generateKeyPairSync("ed25519");
     privateKey = pair.privateKey as KeyObject;
     await db.insert(institutionKeys).values({

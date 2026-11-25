@@ -13,6 +13,7 @@ describe("security regressions", () => {
   let incidentId: string;
 
   beforeAll(async () => {
+    await db.execute(sql`delete from rate_limits`);
     const [outsider] = await db
       .select({ id: users.id })
       .from(users)
@@ -79,7 +80,7 @@ describe("security regressions", () => {
     const res = await POST(
       new Request("http://localhost/api/v1/events", { method: "POST", body, duplex: "half" } as RequestInit),
     );
-    expect(res.status).toBe(429);
+    expect(res.status).toBe(413);
     expect((await res.json()).error.message).toBe("Body too large");
   });
 });

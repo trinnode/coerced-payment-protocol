@@ -1,10 +1,12 @@
 import { createHash, verify } from "node:crypto";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db/client";
-import { institutionKeys, institutions, rateLimits } from "@/lib/db/schema";
+import { institutionKeys, institutions } from "@/lib/db/schema";
 import { canonicalize } from "@/lib/domain/canonical";
 import { ERROR_HTTP, validateEnvelope } from "@/lib/domain/event";
+import { fail } from "@/lib/api";
+import { allowRate, allowRateBatch } from "@/lib/rate-limit";
 import { ingestEvent } from "@/lib/domain/incidents";
 
 export const runtime = "nodejs";
@@ -15,34 +17,22 @@ const BURST = 50;
 const RATE = 10;
 
 /**
- * Counters live in Postgres, not in process memory: a restart does not reset
- * them and two app instances share the same limit. The atomic upsert makes the
- * increment safe under concurrency.
+ * Counters live in Postgres, not process memory. A locked, dual-minute check
+ * means rejected requests consume nothing and a boundary burst cannot pass at
+ * twice the nominal rate.
  */
-async function hitBucket(key: string, windowMs: number): Promise<number> {
-  const bucket = Math.floor(Date.now() / windowMs);
-  const bucketKey = `${key}:${bucket}`;
-  const rows = await db
-    .insert(rateLimits)
-    .values({ key: bucketKey, count: 1 })
-    .onConflictDoUpdate({
-      target: rateLimits.key,
-      set: { count: sql`${rateLimits.count} + 1`, updatedAt: new Date() },
-    })
-    .returning({ count: rateLimits.count });
-  return rows[0]?.count ?? 1;
-}
-
-async function rateLimited(key: string): Promise<boolean> {
-  const [minute, burst] = await Promise.all([
-    hitBucket(key, WINDOW_MS),
-    hitBucket(key, 60 * WINDOW_MS),
+async function allowEvent(institutionId?: string): Promise<boolean> {
+  const preauth = await allowRate("preauth", 200, WINDOW_MS);
+  if (!preauth) return false;
+  if (!institutionId) return true;
+  const [allowed] = await allowRateBatch(institutionId, [
+    { limit: RATE, windowMs: WINDOW_MS },
+    { limit: BURST, windowMs: 10 * WINDOW_MS },
   ]);
-  return minute > RATE || burst > BURST;
+  return allowed;
 }
 
-/** Count bytes while reading. A chunked request has no Content-Length and must
- *  not be able to bypass the body cap. */
+/** Count bytes while reading. A chunked request has no Content-Length. */
 async function readLimitedBody(request: Request, limit: number): Promise<string | null> {
   if (!request.body) return null;
   const reader = request.body.getReader();
@@ -85,12 +75,12 @@ function verifyEd25519(publicKeyPem: string, payload: string, signatureBase64: s
 
 export async function POST(request: Request) {
   // One fixed pre-auth bucket: bounded cardinality, no attacker-controlled key.
-  if ((await hitBucket("preauth", WINDOW_MS)) > 200) {
+  if (!(await allowEvent())) {
     return error("E_RATE_LIMITED", "Request quota exceeded", undefined, { "Retry-After": "60" });
   }
 
   const raw = await readLimitedBody(request, BODY_LIMIT);
-  if (raw === null) return error("E_RATE_LIMITED", "Body too large");
+  if (raw === null) return error("E_BODY_TOO_LARGE", "Body too large");
 
   let body: unknown;
   try {
@@ -137,7 +127,7 @@ export async function POST(request: Request) {
   }
 
   // Only authenticated tenants create per-institution buckets.
-  if (await rateLimited(institutionId)) {
+  if (!(await allowEvent(institutionId))) {
     return error(
       "E_RATE_LIMITED",
       "Institution event quota exceeded",
@@ -161,7 +151,8 @@ export async function POST(request: Request) {
       { status: 202 },
     );
   } catch (e) {
-    const message = e instanceof Error ? e.message : "Ingestion failed";
-    return error("E_UNAVAILABLE", message);
+    // DomainError codes are mapped by the shared handler; driver errors are
+    // redacted there. Never echo internal messages to an institution.
+    return fail(e);
   }
 }

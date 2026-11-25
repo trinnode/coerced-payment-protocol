@@ -7,6 +7,7 @@ import {
   episodes,
   incidents,
   institutions,
+  caseNotes,
   transactions,
   users,
 } from "./db/schema";
@@ -21,6 +22,7 @@ export async function queueFor(session: Session) {
       state: incidents.state,
       band: incidents.band,
       occurredAt: incidents.occurredAt,
+      notifiedAt: incidents.notifiedAt,
       correlation: incidents.correlation,
       actionStatus: incidents.actionStatus,
       amount: sql<number>`coalesce(max(${transactions.amountMinor}), 0)`,
@@ -39,6 +41,7 @@ export async function queueFor(session: Session) {
       incidents.state,
       incidents.band,
       incidents.occurredAt,
+      incidents.notifiedAt,
       incidents.correlation,
       incidents.actionStatus,
       episodes.externalEpisodeId,
@@ -83,7 +86,17 @@ export async function incidentFor(session: Session, incidentId: string) {
     .orderBy(desc(auditEvents.id))
     .limit(200);
 
-  const incAudit = audit.filter((a) => a.objectId === incidentId);
+  // Handover notes are also audited; the notes themselves are rendered once,
+  // from their own table, so the chronology does not show them twice.
+  const incAudit = audit.filter((a) => a.objectId === incidentId && a.action !== "note.added");
+  const notes = await db
+    .select({ note: caseNotes, authorName: users.name })
+    .from(caseNotes)
+    .innerJoin(users, eq(caseNotes.authorId, users.id))
+    .where(
+      and(eq(caseNotes.incidentId, incidentId), eq(caseNotes.institutionId, session.institutionId)),
+    )
+    .orderBy(desc(caseNotes.createdAt));
   const acts = await db.select().from(actions).where(eq(actions.incidentId, incidentId));
   const chals = await db.select().from(challenges).where(eq(challenges.incidentId, incidentId));
   const staff = await db
@@ -101,6 +114,7 @@ export async function incidentFor(session: Session, incidentId: string) {
     transactions: txns,
     actions: acts,
     challenges: chals,
+    notes,
     audit: incAudit,
     staff,
     institutions: allInstitutions,

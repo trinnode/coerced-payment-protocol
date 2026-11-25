@@ -1,0 +1,79 @@
+[     235ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3006/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[     255ms] [LOG] [HMR] connected @ http://localhost:3006/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[     375ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectErrorBoundary router={{...}}>
+      <InnerLayoutRouter url="/console/i..." tree={[...]} params={{id:"1bf3dc..."}} renderTree={{...}} ...>
+        <SegmentViewNode type="page" pagePath="console/in...">
+          <SegmentTrieNode>
+          <IncidentPage>
+            <main id="main" className="mx-auto ma...">
+              <div>
+              <div className="mt-10 grid...">
+                <div>
+                <aside className="lg:sticky ...">
+                  <p>
+                  <div className="rounded-[v...">
+                    <IncidentActions id="1bf3dc9c-a..." state="ACTION_DEC..." correlation="PENDING" institutions={[...]} ...>
+                      <div className="space-y-6">
+                        <div>
+                        <p>
+                        <Block n="01" title="Correlate ...">
+                          <section className="border-t b...">
+                            <div>
+                            <div className="grid gap-3...">
+                              <label>
+                              <label className="mono-label...">
+                                <input
+                                  value=""
+                                  onChange={function onChange}
+                                  className="mt-1.5 w-full rounded-md border border-line-strong bg-base px-3 py-2 font..."
+                                  placeholder="NIP-8f3a…"
+-                                 style={{caret-color:"transparent"}}
+                                >
+                              <label className="mono-label...">
+                                <input
+                                  value=""
+                                  onChange={function onChange}
+                                  className="mt-1.5 w-full rounded-md border border-line-strong bg-base px-3 py-2 font..."
+                                  inputMode="numeric"
+                                  placeholder="48000"
+-                                 style={{caret-color:"transparent"}}
+                                >
+                            ...
+                        <Block>
+                        <Block n="05" title="Close the ...">
+                          <section className="border-t b...">
+                            <div>
+                            <label className="mono-label...">
+                              <input
+                                value=""
+                                onChange={function onChange}
+                                className="mt-1.5 w-full rounded-md border border-line-strong bg-base px-3 py-2 font-m..."
+                                placeholder="Customer confirmed safe"
+-                               style={{caret-color:"transparent"}}
+                              >
+                            ...
+                        ...
+        ...
+      ...
+ @ http://localhost:3006/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:1037
+[     382ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3006/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[     388ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3006/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[   53871ms] [ERROR] WebSocket connection to 'ws://localhost:3006/_next/hmr?id=Pehmw2YuFaN4Ds5Cs4uZ_' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3006/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[   54873ms] [ERROR] WebSocket connection to 'ws://localhost:3006/_next/hmr?id=Pehmw2YuFaN4Ds5Cs4uZ_' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3006/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[   55875ms] [ERROR] WebSocket connection to 'ws://localhost:3006/_next/hmr?id=Pehmw2YuFaN4Ds5Cs4uZ_' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3006/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[   56880ms] [ERROR] WebSocket connection to 'ws://localhost:3006/_next/hmr?id=Pehmw2YuFaN4Ds5Cs4uZ_' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3006/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[   57891ms] [ERROR] WebSocket connection to 'ws://localhost:3006/_next/hmr?id=Pehmw2YuFaN4Ds5Cs4uZ_' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3006/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[   62896ms] [ERROR] WebSocket connection to 'ws://localhost:3006/_next/hmr?id=Pehmw2YuFaN4Ds5Cs4uZ_' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3006/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257

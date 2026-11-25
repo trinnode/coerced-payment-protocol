@@ -1,0 +1,583 @@
+[     819ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[     888ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[    1330ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[    1352ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[    6061ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[    6282ms] [LOG] [Fast Refresh] done in 321ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[   59636ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[   59912ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:1037
+[   60172ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[   60208ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:1037
+[   60667ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:1037
+[   60868ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[   61398ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:1037
+[   61460ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:1037
+[   61661ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[   61885ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:1037
+[   61895ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3008/:1
+[   62010ms] [ERROR] Refused to execute script from 'http://localhost:3008/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3008/:1
+[   62060ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0its_react-dom_cjs_react-dom-client_development_20twiq09w9ur-.js:16703
+[   62149ms] Error: ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed
+
+
+    at Object.getCompilationErrors (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1566:37)
+    at DevBundlerService.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/lib/dev-bundler-service.js:66:55)
+    at DevServer.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:695:42)
+    at DevServer.findPageComponents (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:665:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/base-server.js:2068:26)
+[   62149ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:745
+[   62155ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   62252ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   62361ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3008/:1
+[   62413ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0its_react-dom_cjs_react-dom-client_development_20twiq09w9ur-.js:16703
+[   62441ms] Error: ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed
+
+
+    at Object.getCompilationErrors (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1566:37)
+    at DevBundlerService.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/lib/dev-bundler-service.js:66:55)
+    at DevServer.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:695:42)
+    at DevServer.findPageComponents (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:665:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/base-server.js:2068:26)
+[   62443ms] [ERROR] Refused to execute script from 'http://localhost:3008/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3008/:1
+[   62445ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:745
+[   62447ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   62481ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   62670ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3008/:1
+[   62714ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0its_react-dom_cjs_react-dom-client_development_20twiq09w9ur-.js:16703
+[   62727ms] Error: ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed
+
+
+    at Object.getCompilationErrors (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1566:37)
+    at DevBundlerService.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/lib/dev-bundler-service.js:66:55)
+    at DevServer.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:695:42)
+    at DevServer.findPageComponents (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:665:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/base-server.js:2068:26)
+[   62727ms] [ERROR] Refused to execute script from 'http://localhost:3008/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3008/:1
+[   62730ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:745
+[   62738ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   62771ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   62957ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3008/:1
+[   63015ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0its_react-dom_cjs_react-dom-client_development_20twiq09w9ur-.js:16703
+[   63028ms] Error: ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed
+
+
+    at Object.getCompilationErrors (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1566:37)
+    at DevBundlerService.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/lib/dev-bundler-service.js:66:55)
+    at DevServer.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:695:42)
+    at DevServer.findPageComponents (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:665:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/base-server.js:2068:26)
+[   63028ms] [ERROR] Refused to execute script from 'http://localhost:3008/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3008/:1
+[   63029ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:745
+[   63039ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   63070ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   63238ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3008/:1
+[   63276ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0its_react-dom_cjs_react-dom-client_development_20twiq09w9ur-.js:16703
+[   63289ms] [ERROR] Refused to execute script from 'http://localhost:3008/_next/static/development/_clientMiddlewareManifest.js' because its MIME type ('application/json') is not executable, and strict MIME type checking is enabled. @ http://localhost:3008/:1
+[   63290ms] Error: ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed
+
+
+    at Object.getCompilationErrors (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1566:37)
+    at DevBundlerService.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/lib/dev-bundler-service.js:66:55)
+    at DevServer.getCompilationError (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:695:42)
+    at DevServer.findPageComponents (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dev/next-dev-server.js:665:43)
+    at async DevServer.renderErrorToResponseImpl (file:///home/trinnex/Documents/CodeBase/personalProjects/phylax/web/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_@playwright+test@1.65.1_@types+node@26.6.7_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/base-server.js:2068:26)
+[   63292ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:745
+[   63294ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   63329ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   66705ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   70885ms] [ERROR] ./app/page.tsx:342:25
+Error: Expected '</', got 'jsx text'
+  340 |               ))}
+  341 |             </div>
+> 342 |           </TracingBeam>
+      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 343 |         </div>
+      | ^^^^^^^^
+  344 |       </div>
+  345 |     </section>
+  346 |   );
+
+Parsing ecmascript source code failed @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:1802
+[   74171ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:745
+[   74203ms] [LOG] [Fast Refresh] done in 131ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_1_jh6qzt14z61._.js:745
+[   74916ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[   74952ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[   75078ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[   75090ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  103960ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  103999ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  104065ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  110289ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  114974ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  118951ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  123338ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  126814ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  128672ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  133901ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  135350ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  139281ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  140631ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  143437ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  146323ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  150032ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  151423ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  154889ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  156759ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  159445ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  163150ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  171482ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  171521ms] [LOG] [Fast Refresh] done in 8ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  171855ms] [LOG] [Fast Refresh] done in 8ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  178499ms] [LOG] [Fast Refresh] done in 8ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  183013ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  183059ms] [LOG] [Fast Refresh] done in 50ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  188860ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  188972ms] [LOG] [Fast Refresh] done in 162ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  189519ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  189552ms] [LOG] [Fast Refresh] done in 27ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  195463ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  195496ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  200070ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  207196ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  208138ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  208179ms] [LOG] [Fast Refresh] done in 5ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  215731ms] [LOG] [Fast Refresh] done in 5ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  216100ms] [LOG] [Fast Refresh] done in 5ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  217634ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  217660ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  220485ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  220752ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  221029ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  221723ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  223291ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  223561ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  225808ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  225857ms] [LOG] [Fast Refresh] done in 7ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  227308ms] [LOG] [Fast Refresh] done in 7ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  230927ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  230961ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  231048ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  231456ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  233417ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  238514ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  240262ms] [LOG] [Fast Refresh] done in 9334ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  240320ms] [LOG] [Fast Refresh] done in 9334ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  245078ms] [LOG] [Fast Refresh] done in 9334ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  245280ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  245310ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  245477ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  247103ms] [LOG] [Fast Refresh] done in 1821ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  247137ms] [LOG] [Fast Refresh] done in 1821ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  247218ms] [LOG] [Fast Refresh] done in 1821ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  253172ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  253204ms] [LOG] [Fast Refresh] done in 31ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  253265ms] [LOG] [Fast Refresh] done in 31ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  258929ms] [LOG] [Fast Refresh] done in 31ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  260928ms] [LOG] [Fast Refresh] done in 31ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  261066ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  261091ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  261186ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  261191ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  268505ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  268528ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  268603ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  268608ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  279418ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  279443ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  279546ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  279553ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  280028ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  280063ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  280153ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  280157ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  280543ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  280562ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  280641ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  280648ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  296732ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  296755ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  296835ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  296840ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  324996ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  325054ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  325179ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  325187ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  326061ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  326173ms] [LOG] [Fast Refresh] done in 212ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  349996ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350023ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350155ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350234ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350326ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350524ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350593ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350663ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  350726ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  351092ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  351574ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  351610ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  351771ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  352270ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  352508ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  352640ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  352729ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  353219ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  353550ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  353760ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  353902ms] [LOG] [Fast Refresh] done in 243ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  357286ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  357354ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  357583ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  357602ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  366068ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  366095ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  370435ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  371131ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  371590ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  371745ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  371860ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  371920ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  371967ms] [LOG] [Fast Refresh] done in 4ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372168ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372205ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372366ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372429ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372647ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372716ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372779ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372839ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372888ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  372977ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  379622ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  379698ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  379880ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  379892ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  380711ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  380770ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  380867ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  380874ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  389678ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  389702ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  389780ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  389788ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  390948ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  390986ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  391071ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  391079ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  397615ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  397647ms] [LOG] [Fast Refresh] done in 2ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  409064ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  409097ms] [LOG] [Fast Refresh] done in 10ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  415673ms] [LOG] [Fast Refresh] done in 10ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  415805ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  415852ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  415976ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  415983ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  424998ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  425020ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  425094ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  425100ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  425457ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  425475ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  425550ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  425556ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  425886ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  425904ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  425982ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  425989ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  428248ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  428275ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  428355ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  428361ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  428821ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  428846ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  428945ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  428952ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  496082ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  496107ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  496160ms] [WARNING] You have Reduced Motion enabled on your device. Animations may not appear as expected.. For more information and steps for solving, visit https://motion.dev/troubleshooting/reduced-motion-disabled @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  496195ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  496203ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  496506ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ http://localhost:3008/console/login:1
+[  496529ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  496548ms] [LOG] [HMR] connected @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  496590ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  496594ms] [WARNING] The entry type 'web-vital' does not exist or isn't supported. @ http://localhost:3008/_next/static/chunks/_1y87vu7yv99w9._.js:56
+[  511739ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  512672ms] [LOG] [Fast Refresh] done in 1032ms @ http://localhost:3008/_next/static/chunks/0y75_next_dist_107zyksfpvq9r._.js:761
+[  517261ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  518263ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  519265ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  520267ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  521269ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  526271ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  531273ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  536274ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  541277ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  546279ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  551281ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257
+[  556283ms] [ERROR] WebSocket connection to 'ws://localhost:3008/_next/hmr?id=2nOK5glLJVN_EujPtkll1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3008/_next/static/chunks/0y75_next_dist_client_1o8wy_ej_i2mt._.js:16257

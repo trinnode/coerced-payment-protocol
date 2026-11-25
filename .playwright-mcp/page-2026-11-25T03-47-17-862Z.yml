@@ -1,0 +1,135 @@
+- generic [active] [ref=f11e1]:
+  - link "Skip to content" [ref=f11e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f11e3]:
+    - banner [ref=f11e4]:
+      - generic [ref=f11e5]:
+        - generic [ref=f11e6]:
+          - link "Phylax" [ref=f11e7] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f11e9]: Incident console
+        - generic [ref=f11e10]: LOCAL · SEEDED DATA
+    - main [ref=f11e476]:
+      - generic [ref=f11e477]:
+        - generic [ref=f11e478]:
+          - link "← Case queue" [ref=f11e479] [cursor=pointer]:
+            - /url: /console
+          - heading "Action declined" [level=1] [ref=f11e480]
+          - paragraph [ref=f11e481]: 1bf3dc9c-abac-4344-820c-318a099f0cf8 · episode robust-6d50d70b-5bdc-4b00-8375-8e606c17c39d · opened 36 seconds ago
+        - generic [ref=f11e482]: ACTION_DECLINED
+      - generic [ref=f11e483]:
+        - generic [ref=f11e484]:
+          - generic [ref=f11e485]:
+            - generic [ref=f11e486]:
+              - generic [ref=f11e487]: "01"
+              - heading "Signal" [level=2] [ref=f11e488]
+            - generic [ref=f11e489]:
+              - generic [ref=f11e490]:
+                - generic [ref=f11e491]:
+                  - term [ref=f11e492]: Event type
+                  - definition [ref=f11e493]: SUSPECTED_DURESS
+                - generic [ref=f11e494]:
+                  - term [ref=f11e495]: Activation
+                  - definition [ref=f11e496]: PIN_DURESS_ENTRY
+                - generic [ref=f11e497]:
+                  - term [ref=f11e498]: Confidence
+                  - definition [ref=f11e499]: BANK_AUTHENTICATED
+                - generic [ref=f11e500]:
+                  - term [ref=f11e501]: Value band
+                  - definition [ref=f11e502]: PIN_ONLY_TIER_1
+                - generic [ref=f11e503]:
+                  - term [ref=f11e504]: Occurred
+                  - definition [ref=f11e505]: 2026-11-25T03:46:40.893Z
+                - generic [ref=f11e506]:
+                  - term [ref=f11e507]: Received
+                  - definition [ref=f11e508]: 2026-11-25T03:46:40.893Z
+                - generic [ref=f11e509]:
+                  - term [ref=f11e510]: Delayed delivery
+                  - definition [ref=f11e511]: see raw event
+              - paragraph [ref=f11e512]: RECEIVED_NOT_VERIFIED is the first state. Authentication is not a verdict. UNKNOWN is a first-class terminal state and is never coerced into a decision.
+          - generic [ref=f11e513]:
+            - generic [ref=f11e514]:
+              - generic [ref=f11e515]: "02"
+              - heading "Correlation and transactions" [level=2] [ref=f11e516]
+            - generic [ref=f11e517]:
+              - generic [ref=f11e518]:
+                - generic [ref=f11e519]:
+                  - term [ref=f11e520]: Correlation
+                  - definition [ref=f11e521]: PENDING
+                - generic [ref=f11e522]:
+                  - term [ref=f11e523]: Receiving institution
+                  - definition [ref=f11e524]: —
+                - generic [ref=f11e525]:
+                  - term [ref=f11e526]: Note
+                  - definition [ref=f11e527]: —
+              - paragraph [ref=f11e528]: No transaction correlated yet.
+          - generic [ref=f11e529]:
+            - generic [ref=f11e530]:
+              - generic [ref=f11e531]: "03"
+              - heading "Actions and recipient rights" [level=2] [ref=f11e532]
+            - list [ref=f11e534]:
+              - listitem [ref=f11e535]:
+                - paragraph [ref=f11e536]: HOLD_REQUEST · DECLINED
+                - paragraph [ref=f11e537]: "Authority: CPRegs 2022 / standing rule"
+                - paragraph [ref=f11e538]: concurrency probe
+          - generic [ref=f11e539]:
+            - generic [ref=f11e540]:
+              - generic [ref=f11e541]: "04"
+              - heading "Audit trail" [level=2] [ref=f11e542]
+            - list [ref=f11e544]:
+              - listitem [ref=f11e545]:
+                - generic [ref=f11e546]: 03:46:40
+                - generic [ref=f11e547]: action.hold_request.declined · robust:test
+        - complementary [ref=f11e548]:
+          - paragraph [ref=f11e549]: Actions available to you
+          - generic [ref=f11e551]:
+            - paragraph [ref=f11e553]: Your role is read-only for case decisions. A supervisor or compliance officer must record actions, correlations, notifications and closure.
+            - generic [ref=f11e554]:
+              - generic [ref=f11e555]:
+                - generic [ref=f11e556]: "01"
+                - heading "Correlate a transfer" [level=3] [ref=f11e557]
+              - generic [ref=f11e558]:
+                - generic [ref=f11e559]:
+                  - text: Result
+                  - combobox "Result" [ref=f11e560]:
+                    - option "Correlated" [selected]
+                    - option "Not correlated"
+                    - option "Unknown"
+                - generic [ref=f11e561]:
+                  - text: NIP reference
+                  - textbox "NIP reference" [ref=f11e562]:
+                    - /placeholder: NIP-8f3a…
+                - generic [ref=f11e563]:
+                  - text: Amount (₦)
+                  - textbox "Amount (₦)" [ref=f11e564]:
+                    - /placeholder: "48000"
+              - button "Record correlation" [disabled] [ref=f11e565]
+            - generic [ref=f11e566]:
+              - generic [ref=f11e567]:
+                - generic [ref=f11e568]: "04"
+                - heading "Open a recipient challenge" [level=3] [ref=f11e569]
+              - button "Open deferred challenge" [disabled] [ref=f11e570]
+              - paragraph [ref=f11e571]: Notifies the receiving institution, not the recipient. Contact is deferred six hours and can be extended while the sender may be at risk.
+            - generic [ref=f11e572]:
+              - generic [ref=f11e573]:
+                - generic [ref=f11e574]: "05"
+                - heading "Close the case" [level=3] [ref=f11e575]
+              - generic [ref=f11e576]:
+                - text: Reason
+                - textbox "Reason" [ref=f11e577]:
+                  - /placeholder: Customer confirmed safe
+              - button "Close and delete incident detail" [disabled] [ref=f11e578]
+              - paragraph [ref=f11e579]: Closure destroys the incident narrative. Only the audit trail — actions, not the account of coercion — is retained.
+            - generic [ref=f11e580]:
+              - generic [ref=f11e581]:
+                - generic [ref=f11e582]: "06"
+                - heading "Assign" [level=3] [ref=f11e583]
+              - generic [ref=f11e584]:
+                - text: Analyst
+                - combobox "Analyst" [ref=f11e585]:
+                  - option "Tunde Bakare · supervisor" [selected]
+                  - option "Zainab Yusuf · compliance"
+                  - option "Ada Nwachukwu · analyst"
+              - button "Assign case" [disabled] [ref=f11e586]
+  - button "Open Next.js Dev Tools" [ref=f11e413] [cursor=pointer]
+  - alert [ref=f11e475]: Action declined

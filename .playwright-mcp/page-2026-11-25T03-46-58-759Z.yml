@@ -1,0 +1,43 @@
+- generic [active] [ref=f8e1]:
+  - link "Skip to content" [ref=f8e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f8e3]:
+    - banner [ref=f8e4]:
+      - generic [ref=f8e5]:
+        - link "Phylax" [ref=f8e7] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f8e8]: LOCAL · SEEDED DATA
+    - main [ref=f8e9]:
+      - generic [ref=f8e10]:
+        - paragraph [ref=f8e11]: Institution access
+        - heading "A case queue, not a verdict machine." [level=1] [ref=f8e12]
+        - paragraph [ref=f8e13]: Every action here is scoped to your institution. Corrections require an authority reference. Closure requires a reason. Nothing changes a balance, and nothing contacts the police.
+        - paragraph [ref=f8e14]: This is the working prototype against seeded records. The data is synthetic but the flows, guards and audit chain are the real ones.
+        - link "What is and is not built →" [ref=f8e15] [cursor=pointer]:
+          - /url: /status
+      - generic [ref=f8e16]:
+        - paragraph [ref=f8e17]: Sign in
+        - generic [ref=f8e18]:
+          - generic [ref=f8e19]:
+            - text: Email
+            - textbox "Email" [ref=f8e20]: ada.analyst@kite.example.ng
+          - generic [ref=f8e21]:
+            - text: Password
+            - textbox "Password" [ref=f8e22]
+          - button "Enter console" [ref=f8e23]
+        - generic [ref=f8e24]:
+          - paragraph [ref=f8e25]: Seeded roles · password below
+          - list [ref=f8e26]:
+            - listitem [ref=f8e27]:
+              - generic [ref=f8e28]: Analyst
+              - button "ada.analyst@kite.example.ng" [ref=f8e29]
+            - listitem [ref=f8e30]:
+              - generic [ref=f8e31]: Supervisor
+              - button "tunde.supervisor@kite.example.ng" [ref=f8e32]
+            - listitem [ref=f8e33]:
+              - generic [ref=f8e34]: Compliance
+              - button "zainab.compliance@kite.example.ng" [ref=f8e35]
+            - listitem [ref=f8e36]:
+              - generic [ref=f8e37]: MMO supervisor
+              - button "emeka.ops@adaeze.example.ng" [ref=f8e38]
+  - button "Open Next.js Dev Tools" [ref=f8e44] [cursor=pointer]

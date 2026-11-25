@@ -8,6 +8,8 @@ private/
 **/participant-data*
 **/*.pcap
 **/evidence/
+!docs/evidence/
+!docs/evidence/*.md
 
 # OS / editor
 .DS_Store

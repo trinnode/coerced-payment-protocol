@@ -1,0 +1,456 @@
+- generic [active] [ref=f6e1]:
+  - link "Skip to content" [ref=f6e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f6e3]:
+    - navigation "Primary" [ref=f6e4]:
+      - generic [ref=f6e7]:
+        - link "Phylax" [ref=f6e8] [cursor=pointer]:
+          - /url: /
+        - button "Open menu" [ref=f6e9]
+  - main [ref=f6e11]:
+    - article [ref=f6e13]:
+      - generic [ref=f6e14]:
+        - heading "Duress Event Protocol — v0.1 (draft for comment)" [level=1] [ref=f6e15]
+        - paragraph [ref=f6e16]:
+          - strong [ref=f6e17]: "Status:"
+          - text: draft. Not implemented by any institution. No security review yet.
+          - strong [ref=f6e18]: "Design goal:"
+          - text: move the minimum bytes necessary to start a human process, and nothing else.
+        - paragraph [ref=f6e19]: This document is published precisely so it can be attacked. If it is wrong, it is cheaper to be wrong in public now than in a bank's production environment later.
+        - separator [ref=f6e20]
+        - heading "1. Scope and non-goals" [level=2] [ref=f6e21]
+        - paragraph [ref=f6e22]:
+          - strong [ref=f6e23]: "In scope:"
+          - text: a signed, authenticated notification that a transaction
+          - emphasis [ref=f6e24]: may
+          - text: have occurred under coercion, from an institution that owns the transaction to a party that will coordinate a response.
+        - paragraph [ref=f6e25]:
+          - strong [ref=f6e26]: "Non-goals:"
+          - text: authorising a payment, freezing an account, proving coercion, identifying a criminal, moving evidence, or replacing a bank's own fraud systems.
+        - blockquote [ref=f6e27]:
+          - paragraph [ref=f6e28]:
+            - text: "The event asserts:"
+            - emphasis [ref=f6e29]: "\"an institution's own authentication layer observed a credential or interaction that its customer configured to mean 'I am not free to refuse'.\""
+            - text: It does
+            - strong [ref=f6e30]: not
+            - text: assert that coercion occurred, that a crime occurred, or that any recipient is culpable.
+        - separator [ref=f6e31]
+        - heading "2. Transport" [level=2] [ref=f6e32]
+        - list [ref=f6e33]:
+          - listitem [ref=f6e34]: HTTPS, TLS 1.2+ (1.3 preferred), mutual TLS between institution and processor.
+          - listitem [ref=f6e35]:
+            - code [ref=f6e36]: POST
+            - text: with
+            - code [ref=f6e37]: "Content-Type: application/json; charset=utf-8"
+            - text: .
+          - listitem [ref=f6e38]: Maximum body size 16 KiB. Larger payloads are rejected, not truncated.
+          - listitem [ref=f6e39]:
+            - strong [ref=f6e40]:
+              - text: De-duplication key is
+              - code [ref=f6e41]: (institution_id, event_id)
+              - text: .
+            - code [ref=f6e42]: event_id
+            - text: is immutable for the life of the event. A retry re-sends the
+            - emphasis [ref=f6e43]: same
+            - code [ref=f6e44]: event_id
+            - text: ; a durable queue must not mint a new one. Re-sending a different payload under a used
+            - code [ref=f6e45]: event_id
+            - text: is an integrity incident (
+            - code [ref=f6e46]: E_REPLAY
+            - text: ).
+          - listitem [ref=f6e47]:
+            - code [ref=f6e48]: Idempotency-Key
+            - text: is advisory only (transport-level retry suppression) and never the system of record for de-duplication.
+          - listitem [ref=f6e49]:
+            - text: "Clock skew tolerance: 120 s for the sender's own clock."
+            - strong [ref=f6e50]: Late events are accepted.
+            - text: A victim may report hours later because the phone was taken; a protocol that rejects the delayed case rejects the case that matters.
+          - listitem [ref=f6e51]:
+            - code [ref=f6e52]: delayed_delivery
+            - text: must be a signed field carrying
+            - code [ref=f6e53]: reason_code
+            - text: (enum) and
+            - code [ref=f6e54]: original_occurred_at
+            - text: ", and it changes the incident's SLA class, not its validity."
+        - separator [ref=f6e55]
+        - heading "3. Envelope" [level=2] [ref=f6e56]
+        - code [ref=f6e58]: "{ \"schema_version\": \"0.1\", \"event_id\": \"9f1c...uuid\", \"episode_id\": \"ep_7d20...uuid\", \"institution_id\": \"bank_a\", \"event_type\": \"SUSPECTED_DURESS\", \"occurred_at\": \"2026-11-25T14:03:11+01:00\", \"transaction\": { \"ref\": \"opaque-bank-reference\", \"status\": \"COMPLETED\", \"channel\": \"MOBILE_APP\" }, \"customer\": { \"ref\": \"tok_7f3a\" }, \"activation\": { \"method\": \"BANK_DEFINED_DURESS_AUTH\", \"confidence\": \"BANK_AUTHENTICATED\", \"band\": \"PIN_ONLY_UNDER_500K\" }, \"signature\": { \"alg\": \"Ed25519\", \"key_id\": \"bank_a-2026-11\", \"value\": \"base64...\" } }"
+        - heading "Field rules" [level=3] [ref=f6e59]
+        - table [ref=f6e60]:
+          - rowgroup [ref=f6e61]:
+            - row [ref=f6e62]:
+              - columnheader "Field" [ref=f6e63]
+              - columnheader "Required" [ref=f6e64]
+              - columnheader "Rule" [ref=f6e65]
+          - rowgroup [ref=f6e66]:
+            - row [ref=f6e67]:
+              - cell [ref=f6e68]:
+                - code [ref=f6e69]: schema_version
+              - cell "yes" [ref=f6e70]
+              - cell [ref=f6e71]:
+                - code [ref=f6e72]: major.minor
+                - text: ; receiver must reject unknown major
+            - row [ref=f6e73]:
+              - cell [ref=f6e74]:
+                - code [ref=f6e75]: event_id
+              - cell "yes" [ref=f6e76]
+              - cell [ref=f6e77]:
+                - text: UUIDv4, immutable, unique per institution forever; the de-dupe key with
+                - code [ref=f6e78]: institution_id
+            - row [ref=f6e79]:
+              - cell [ref=f6e80]:
+                - code [ref=f6e81]: episode_id
+              - cell "yes" [ref=f6e82]
+              - cell [ref=f6e83]:
+                - text: Groups all events from one coercion episode, including later transfers and re-reports. A six-transfer coercion is
+                - strong [ref=f6e84]: one episode, six events
+                - text: ", never six incidents"
+            - row [ref=f6e85]:
+              - cell [ref=f6e86]:
+                - code [ref=f6e87]: institution_id
+              - cell "yes" [ref=f6e88]
+              - cell "from the registry; must match the signing key owner" [ref=f6e89]
+            - row [ref=f6e90]:
+              - cell [ref=f6e91]:
+                - code [ref=f6e92]: event_type
+              - cell "yes" [ref=f6e93]
+              - cell [ref=f6e94]:
+                - text: enum; v0.1 defines
+                - code [ref=f6e95]: SUSPECTED_DURESS
+                - text: only
+            - row [ref=f6e96]:
+              - cell [ref=f6e97]:
+                - code [ref=f6e98]: occurred_at
+              - cell "yes" [ref=f6e99]
+              - cell "RFC 3339 with offset; receiver stores UTC + original offset" [ref=f6e100]
+            - row [ref=f6e101]:
+              - cell [ref=f6e102]:
+                - code [ref=f6e103]: transaction.ref
+              - cell "yes" [ref=f6e104]
+              - cell "opaque; never a guessable account number" [ref=f6e105]
+            - row [ref=f6e106]:
+              - cell [ref=f6e107]:
+                - code [ref=f6e108]: transaction.status
+              - cell "yes" [ref=f6e109]
+              - cell [ref=f6e110]:
+                - code [ref=f6e111]: PENDING
+                - text: "|"
+                - code [ref=f6e112]: COMPLETED
+                - text: "|"
+                - code [ref=f6e113]: FAILED
+                - text: "|"
+                - code [ref=f6e114]: REVERSED
+                - text: "|"
+                - code [ref=f6e115]: UNKNOWN
+            - row [ref=f6e116]:
+              - cell [ref=f6e117]:
+                - code [ref=f6e118]: customer.ref
+              - cell "yes" [ref=f6e119]
+              - cell "institution-issued token; stable per customer per institution" [ref=f6e120]
+            - row [ref=f6e121]:
+              - cell [ref=f6e122]:
+                - code [ref=f6e123]: activation.method
+              - cell "yes" [ref=f6e124]
+              - cell "institution-defined enum, namespaced" [ref=f6e125]
+            - row [ref=f6e126]:
+              - cell [ref=f6e127]:
+                - code [ref=f6e128]: activation.confidence
+              - cell "yes" [ref=f6e129]
+              - cell [ref=f6e130]:
+                - code [ref=f6e131]: BANK_AUTHENTICATED
+                - text: "|"
+                - code [ref=f6e132]: BANK_HEURISTIC
+            - row [ref=f6e133]:
+              - cell [ref=f6e134]:
+                - code [ref=f6e135]: activation.band
+              - cell "yes" [ref=f6e136]
+              - cell "the value band the event occurred in; makes band-scoped claims auditable" [ref=f6e137]
+            - row [ref=f6e138]:
+              - cell [ref=f6e139]:
+                - code [ref=f6e140]: signature
+              - cell "yes" [ref=f6e141]
+              - cell [ref=f6e142]:
+                - text: detached signature over the canonical body
+                - strong [ref=f6e143]:
+                  - text: excluding the
+                  - code [ref=f6e144]: signature
+                  - text: member
+                - text: (RFC 8785 JCS)
+        - heading "Deliberately absent" [level=3] [ref=f6e145]
+        - table [ref=f6e146]:
+          - rowgroup [ref=f6e147]:
+            - row [ref=f6e148]:
+              - columnheader "Removed" [ref=f6e149]
+              - columnheader "Why" [ref=f6e150]
+          - rowgroup [ref=f6e151]:
+            - row [ref=f6e152]:
+              - cell [ref=f6e153]:
+                - code [ref=f6e154]: correlation_hint
+                - text: (amount, beneficiary institution)
+              - cell "Creates a second, contradictory correlation path, and acts as a near-unique selector at the receiving side. Correlation is a bank-side act (§7)." [ref=f6e155]
+            - row [ref=f6e156]:
+              - cell [ref=f6e157]:
+                - code [ref=f6e158]: customer.safe_to_contact
+              - cell [ref=f6e159]:
+                - text: It would be
+                - code [ref=f6e160]: UNKNOWN
+                - text: at T0 — wrong at the only moment it matters — and transmitting it into a processor database creates risk with no benefit. Held at the sending institution; retrieved only on a bank-to-bank channel.
+            - row [ref=f6e161]:
+              - cell "Any risk score, severity, or \"likelihood of coercion\"" [ref=f6e162]
+              - cell "A score becomes a verdict the moment a human is busy." [ref=f6e163]
+        - heading "Canonicalisation" [level=3] [ref=f6e164]
+        - paragraph [ref=f6e165]:
+          - text: Sign the JCS canonicalisation of the envelope
+          - strong [ref=f6e166]:
+            - text: object with
+            - code [ref=f6e167]: signature
+            - text: removed
+          - text: . Two independent implementations must produce identical bytes for the fixtures in
+          - code [ref=f6e168]: /fixtures
+          - text: (to be added). An ambiguous signing surface is an interoperability failure and a forgery surface.
+        - heading "Forbidden fields (rejected, not ignored)" [level=3] [ref=f6e169]
+        - paragraph [ref=f6e170]: PIN, OTP, biometric template, BVN, full account number, card PAN, password, device secret, free-text victim narrative, GPS coordinates, and any field named in the institution's data-sharing agreement as excluded.
+        - paragraph [ref=f6e171]: "Rejection (not silent stripping) is deliberate: silent stripping hides a bank's mistake until it becomes an incident."
+        - separator [ref=f6e172]
+        - heading "4. Response" [level=2] [ref=f6e173]
+        - code [ref=f6e175]: "{ \"accepted\": true, \"event_id\": \"9f1c...uuid\", \"episode_id\": \"ep_7d20...uuid\", \"incident_id\": \"inc_01J...\", \"received_at\": \"2026-11-25T14:03:12Z\", \"meaning\": \"RECEIVED_NOT_VERIFIED\" }"
+        - paragraph [ref=f6e176]:
+          - code [ref=f6e177]: 202 Accepted
+          - text: means
+          - emphasis [ref=f6e178]: received and schema-valid
+          - text: . It does not mean the incident is verified, actionable, or that any funds will be held. Clients must not surface it as success to a customer.
+        - separator [ref=f6e179]
+        - heading "5. Error taxonomy" [level=2] [ref=f6e180]
+        - table [ref=f6e181]:
+          - rowgroup [ref=f6e182]:
+            - row [ref=f6e183]:
+              - columnheader "Code" [ref=f6e184]
+              - columnheader "HTTP" [ref=f6e185]
+              - columnheader "Meaning" [ref=f6e186]
+              - columnheader "Client action" [ref=f6e187]
+          - rowgroup [ref=f6e188]:
+            - row [ref=f6e189]:
+              - cell [ref=f6e190]:
+                - code [ref=f6e191]: E_SCHEMA
+              - cell "400" [ref=f6e192]
+              - cell "Invalid or missing field" [ref=f6e193]
+              - cell "Fix; do not retry" [ref=f6e194]
+            - row [ref=f6e195]:
+              - cell [ref=f6e196]:
+                - code [ref=f6e197]: E_FORBIDDEN_FIELD
+              - cell "400" [ref=f6e198]
+              - cell "Prohibited data present" [ref=f6e199]
+              - cell "Fix; log internally; investigate why" [ref=f6e200]
+            - row [ref=f6e201]:
+              - cell [ref=f6e202]:
+                - code [ref=f6e203]: E_BAD_SIGNATURE
+              - cell "401" [ref=f6e204]
+              - cell "Signature mismatch" [ref=f6e205]
+              - cell "Do not retry; rotate/investigate" [ref=f6e206]
+            - row [ref=f6e207]:
+              - cell [ref=f6e208]:
+                - code [ref=f6e209]: E_UNKNOWN_INSTITUTION
+              - cell "403" [ref=f6e210]
+              - cell "Institution not registered/active" [ref=f6e211]
+              - cell "Contact registry" [ref=f6e212]
+            - row [ref=f6e213]:
+              - cell [ref=f6e214]:
+                - code [ref=f6e215]: E_FUTURE_DATED
+              - cell "409" [ref=f6e216]
+              - cell [ref=f6e217]:
+                - code [ref=f6e218]: occurred_at
+                - text: more than 120 s ahead of receiver clock
+              - cell [ref=f6e219]:
+                - text: Correct the clock; this is the
+                - emphasis [ref=f6e220]: only
+                - text: temporal rejection
+            - row [ref=f6e221]:
+              - cell [ref=f6e222]:
+                - code [ref=f6e223]: E_REPLAY
+              - cell "409" [ref=f6e224]
+              - cell [ref=f6e225]:
+                - code [ref=f6e226]: event_id
+                - text: reused with a different payload
+              - cell "Treat as integrity incident" [ref=f6e227]
+            - row [ref=f6e228]:
+              - cell [ref=f6e229]:
+                - code [ref=f6e230]: E_RATE_LIMITED
+              - cell "429" [ref=f6e231]
+              - cell "Quota exceeded" [ref=f6e232]
+              - cell "Backoff with jitter; never drop silently" [ref=f6e233]
+            - row [ref=f6e234]:
+              - cell [ref=f6e235]:
+                - code [ref=f6e236]: E_UNAVAILABLE
+              - cell "503" [ref=f6e237]
+              - cell "Processor unavailable" [ref=f6e238]
+              - cell "Queue durably; retry with exponential backoff" [ref=f6e239]
+        - paragraph [ref=f6e240]:
+          - strong [ref=f6e241]:
+            - text: "No"
+            - code [ref=f6e242]: E_STALE_EVENT
+            - text: .
+          - text: Late events are valid events. The delayed-report case is the case the system exists for.
+        - paragraph [ref=f6e243]:
+          - strong [ref=f6e244]: "Quota (must be specified per institution, not left vague):"
+          - text: sustained 10 events/s, burst 50, per institution; a separate higher ceiling for
+          - code [ref=f6e245]: delayed_delivery
+          - text: batches. Values are contractual, published to the institution, and alertable at 80%.
+        - separator [ref=f6e246]
+        - heading "6. Delivery semantics" [level=2] [ref=f6e247]
+        - list [ref=f6e248]:
+          - listitem [ref=f6e249]:
+            - strong [ref=f6e250]: At-least-once in, exactly-once effect out
+            - text: ", keyed on"
+            - code [ref=f6e251]: (institution_id, event_id)
+            - text: .
+          - listitem [ref=f6e252]: Institution-side queue is durable and survives app termination; the transfer never waits on it.
+          - listitem [ref=f6e253]:
+            - text: Processor-side notification to a receiving institution reuses the envelope with
+            - code [ref=f6e254]: "notification_type: \"INCIDENT_NOTICE\""
+            - text: and a reduced field set (no
+            - code [ref=f6e255]: customer.ref
+            - text: ", no"
+            - code [ref=f6e256]: activation
+            - text: detail beyond the fact of the event).
+          - listitem [ref=f6e257]: Delivery receipts are required; an unacknowledged notice escalates on a clock, not on a hope.
+          - listitem [ref=f6e258]:
+            - strong [ref=f6e259]: Bounded retry, then dead-letter.
+            - text: Retry with exponential backoff and jitter for up to 24 hours, then move to a dead-letter queue with the failure reason. A poison message must not sit head-of-line in a bank queue during an incident. Dead-letter contents are alerted, never silently discarded.
+          - listitem [ref=f6e260]:
+            - strong [ref=f6e261]: Revocation freshness.
+            - text: Signing keys have a maximum lifetime of 90 days. A revocation is effective at first CRL publication; implementations must refresh at least every 15 minutes and must reject signatures from keys revoked more than 15 minutes previously even if the cache is stale. Key-rotation overlap is 7 days.
+          - listitem [ref=f6e262]:
+            - strong [ref=f6e263]: Notification SLA classes
+            - text: "are derived, not configured per request:"
+            - code [ref=f6e264]: LIVE
+            - text: (event ≤ 15 min old),
+            - code [ref=f6e265]: DELAYED
+            - text: (signed delayed delivery),
+            - code [ref=f6e266]: HISTORICAL
+            - text: (re-reported episode). Only
+            - code [ref=f6e267]: LIVE
+            - text: enters the minutes-level path.
+        - separator [ref=f6e268]
+        - heading "7. Correlation" [level=2] [ref=f6e269]
+        - paragraph [ref=f6e270]:
+          - text: Correlation is a
+          - strong [ref=f6e271]: bank-side
+          - text: act. The processor may
+          - emphasis [ref=f6e272]: ask
+          - text: ; it may not conclude, and it has no hint to seed a guess.
+        - code [ref=f6e274]: "processor → sending institution: \"does this ref exist, and what is its status?\" sending institution → processor: CORRELATED | NOT_CORRELATED | UNKNOWN"
+        - paragraph [ref=f6e275]:
+          - code [ref=f6e276]: UNKNOWN
+          - text: (timeout, rail ambiguity) is a valid terminal answer for a review cycle. Forcing a binary is how wrong-case harm happens.
+        - paragraph [ref=f6e277]:
+          - text: "Episode linkage is separate from transaction correlation: a new event with an existing"
+          - code [ref=f6e278]: episode_id
+          - text: extends the episode; a new
+          - code [ref=f6e279]: episode_id
+          - text: for the same customer inside a defined window is a
+          - strong [ref=f6e280]: signal for review
+          - text: ", never an automatic escalation."
+        - separator [ref=f6e281]
+        - heading "8. Versioning and change policy" [level=2] [ref=f6e282]
+        - list [ref=f6e283]:
+          - listitem [ref=f6e284]: "Additive fields: minor bump, receivers must ignore unknown fields."
+          - listitem [ref=f6e285]:
+            - text: "Enum additions: minor bump, receivers must handle"
+            - code [ref=f6e286]: UNKNOWN_*
+            - text: gracefully.
+          - listitem [ref=f6e287]: "Removals or semantic changes: major bump, parallel-run period of at least 6 months."
+          - listitem [ref=f6e288]:
+            - text: Any change touching
+            - code [ref=f6e289]: activation
+            - text: ","
+            - code [ref=f6e290]: event_type
+            - text: ", the forbidden-field list, or a previously removed field requires safety review sign-off."
+        - separator [ref=f6e291]
+        - heading "9. Open questions (invitation to critics)" [level=2] [ref=f6e292]
+        - list [ref=f6e293]:
+          - listitem [ref=f6e294]:
+            - text: Is a single
+            - code [ref=f6e295]: SUSPECTED_DURESS
+            - text: type too coarse? Should severity be institution-local and never transmitted?
+          - listitem [ref=f6e296]: Can the PIN-only band ever include the transactions most likely to be coerced? If not, the protocol covers a subset and must say so in every customer-facing document.
+          - listitem [ref=f6e297]: How does the protocol avoid becoming a de facto accusation channel when a receiving institution's only tool is a hold?
+          - listitem [ref=f6e298]: What is the minimum viable recipient-rights record, and where does it live — noting that notifying the recipient can endanger the sender?
+          - listitem [ref=f6e299]: What stops a compromised institution key from generating a mass-hold event, and is 15-minute revocation freshness fast enough? (Rate limits per institution are a blunt instrument against a legitimate-looking key.)
+          - listitem [ref=f6e300]:
+            - text: What are the
+            - code [ref=f6e301]: delayed_delivery.reason_code
+            - text: values, and can any of them be self-attested without becoming a bypass for the SLA class?
+          - listitem [ref=f6e302]:
+            - text: Should
+            - code [ref=f6e303]: episode_id
+            - text: be visible to a receiving institution at all, or is episode grouping a sending-institution-only fact?
+        - paragraph [ref=f6e304]:
+          - emphasis [ref=f6e305]:
+            - text: (The question "can
+            - code [ref=f6e306]: correlation_hint
+            - text: "be removed?\" is answered: yes, and it has been.)"
+        - separator [ref=f6e307]
+        - heading "10. Anti-goals restated, because they will be pressured" [level=2] [ref=f6e308]
+        - list [ref=f6e309]:
+          - listitem [ref=f6e310]: This protocol will never carry a risk score.
+          - listitem [ref=f6e311]: This protocol will never carry a beneficiary "flag".
+          - listitem [ref=f6e312]: This protocol will never be a freeze instruction.
+          - listitem [ref=f6e313]: This protocol will never be a police referral.
+        - paragraph [ref=f6e314]: If a future version needs any of those, it is a different protocol and must be argued for publicly from scratch.
+  - contentinfo [ref=f6e315]:
+    - generic [ref=f6e316]:
+      - generic [ref=f6e317]:
+        - generic [ref=f6e318]:
+          - paragraph [ref=f6e319]: A safer signalwhen consentis taken away.
+          - paragraph [ref=f6e320]: An open design record for coerced-payment signalling. Published so it can be argued with, not so it can be bought.
+        - generic [ref=f6e321]:
+          - paragraph [ref=f6e322]: Record
+          - list [ref=f6e323]:
+            - listitem [ref=f6e324]:
+              - link "Assessment" [ref=f6e325] [cursor=pointer]:
+                - /url: /assessment
+            - listitem [ref=f6e326]:
+              - link "Master flow" [ref=f6e327] [cursor=pointer]:
+                - /url: /flow
+            - listitem [ref=f6e328]:
+              - link "Master plan" [ref=f6e329] [cursor=pointer]:
+                - /url: /plan
+            - listitem [ref=f6e330]:
+              - link "Threat model" [ref=f6e331] [cursor=pointer]:
+                - /url: /safety
+        - generic [ref=f6e332]:
+          - paragraph [ref=f6e333]: Protocol
+          - list [ref=f6e334]:
+            - listitem [ref=f6e335]:
+              - link "Specification v0.1" [ref=f6e336] [cursor=pointer]:
+                - /url: /protocol
+            - listitem [ref=f6e337]:
+              - link "Status ledger" [ref=f6e338] [cursor=pointer]:
+                - /url: /status
+            - listitem [ref=f6e339]:
+              - link "Review log" [ref=f6e340] [cursor=pointer]:
+                - /url: /review
+            - listitem [ref=f6e341]:
+              - link "Sources" [ref=f6e342] [cursor=pointer]:
+                - /url: /sources
+        - generic [ref=f6e343]:
+          - paragraph [ref=f6e344]: Working
+          - list [ref=f6e345]:
+            - listitem [ref=f6e346]:
+              - link "Console" [ref=f6e347] [cursor=pointer]:
+                - /url: /console/login
+            - listitem [ref=f6e348]:
+              - link "Governance" [ref=f6e349] [cursor=pointer]:
+                - /url: /governance
+            - listitem [ref=f6e350]:
+              - link "Contributing" [ref=f6e351] [cursor=pointer]:
+                - /url: /contributing
+            - listitem [ref=f6e352]:
+              - link "Security" [ref=f6e353] [cursor=pointer]:
+                - /url: /security
+      - generic [ref=f6e354]:
+        - paragraph [aria-hidden] [ref=f6e355]: Phylax
+        - generic [ref=f6e356]:
+          - paragraph [ref=f6e357]: Lagos · London · the internet
+          - paragraph [ref=f6e358]: Text © the contributors, CC BY 4.0. Code Apache-2.0. Not a regulated financial service.
+  - button "Open Next.js Dev Tools" [ref=f6e364] [cursor=pointer]

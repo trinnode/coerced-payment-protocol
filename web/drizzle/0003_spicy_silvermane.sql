@@ -1,6 +1,7 @@
 DROP INDEX "raw_events_event_idx";--> statement-breakpoint
 -- Remove duplicate raw events created by retries before the uniqueness rule
--- existed. Keep the earliest row for each (institution, event) pair.
+-- existed. Keep the physically first row for each (institution, event) pair;
+-- all are retries of the same signed envelope.
 DELETE FROM "raw_events" a USING "raw_events" b
 WHERE a.institution_id = b.institution_id
   AND a.event_id = b.event_id

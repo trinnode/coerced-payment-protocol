@@ -1,0 +1,406 @@
+- generic [active] [ref=f12e1]:
+  - link "Skip to content" [ref=f12e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f12e3]:
+    - banner [ref=f12e4]:
+      - generic [ref=f12e5]:
+        - link "Phylax" [ref=f12e7] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f12e8]: LOCAL · SEEDED DATA
+    - main [ref=f12e9]:
+      - generic [ref=f12e10]:
+        - generic [ref=f12e11]:
+          - paragraph [ref=f12e12]: Kite Bank · fraud operations
+          - heading "Case queue" [level=1] [ref=f12e13]
+        - button "analyst" [ref=f12e15]
+      - generic [ref=f12e17]:
+        - generic [ref=f12e18]:
+          - paragraph [ref=f12e19]: Total cases
+          - paragraph [ref=f12e20]: "29"
+        - generic [ref=f12e21]:
+          - paragraph [ref=f12e22]: Still open
+          - paragraph [ref=f12e23]: "28"
+        - generic [ref=f12e24]:
+          - paragraph [ref=f12e25]: Median to notice
+          - paragraph [ref=f12e26]: 4 min
+        - generic [ref=f12e27]:
+          - paragraph [ref=f12e28]: Unsafe contact
+          - paragraph [ref=f12e29]: "3"
+      - generic [ref=f12e30]:
+        - heading "Incidents" [level=2] [ref=f12e31]
+        - paragraph [ref=f12e32]: Scoped to Kite Bank. Every open is audit-logged.
+      - generic [ref=f12e34]:
+        - generic [ref=f12e35]:
+          - button "all" [ref=f12e36]
+          - button "open · 28" [ref=f12e37]
+          - button "unknown · 1" [ref=f12e38]
+        - table [ref=f12e40]:
+          - rowgroup [ref=f12e41]:
+            - row [ref=f12e42]:
+              - columnheader "Case" [ref=f12e43]
+              - columnheader "State" [ref=f12e44]
+              - columnheader "Episode" [ref=f12e45]
+              - columnheader "Band" [ref=f12e46]
+              - columnheader "Amount" [ref=f12e47]
+              - columnheader "Receiving" [ref=f12e48]
+              - columnheader "Contact" [ref=f12e49]
+              - columnheader "Age" [ref=f12e50]
+          - rowgroup [ref=f12e51]:
+            - row [ref=f12e52]:
+              - cell [ref=f12e53]:
+                - link "1bf3dc9c" [ref=f12e54] [cursor=pointer]:
+                  - /url: /console/incidents/1bf3dc9c-abac-4344-820c-318a099f0cf8
+                - paragraph [ref=f12e55]: cust_robust
+              - cell "ACTION DECLINED" [ref=f12e56]
+              - cell "robust-6d50d70b-5bdc-4b00-8375-8e606c17c39d" [ref=f12e58]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e59]
+              - cell "—" [ref=f12e60]
+              - cell "—" [ref=f12e61]
+              - cell "UNKNOWN" [ref=f12e62]
+              - cell "2026-11-25 03:46" [ref=f12e63]
+            - row [ref=f12e64]:
+              - cell [ref=f12e65]:
+                - link "8cc661b0" [ref=f12e66] [cursor=pointer]:
+                  - /url: /console/incidents/8cc661b0-dd10-447a-9157-1811e41745a9
+                - paragraph [ref=f12e67]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e68]
+              - cell "cba55027-fe8f-4077-9b2b-6b403773d709" [ref=f12e70]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e71]
+              - cell "—" [ref=f12e72]
+              - cell "—" [ref=f12e73]
+              - cell "UNKNOWN" [ref=f12e74]
+              - cell "2026-11-25 03:46" [ref=f12e75]
+            - row [ref=f12e76]:
+              - cell [ref=f12e77]:
+                - link "039bf756" [ref=f12e78] [cursor=pointer]:
+                  - /url: /console/incidents/039bf756-5533-48e5-97cc-43b729a21044
+                - paragraph [ref=f12e79]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e80]
+              - cell "590080dc-0ff9-4df8-b03f-c9442f7e8f6e" [ref=f12e82]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e83]
+              - cell "—" [ref=f12e84]
+              - cell "—" [ref=f12e85]
+              - cell "UNKNOWN" [ref=f12e86]
+              - cell "2026-11-25 03:46" [ref=f12e87]
+            - row [ref=f12e88]:
+              - cell [ref=f12e89]:
+                - link "8b4aad27" [ref=f12e90] [cursor=pointer]:
+                  - /url: /console/incidents/8b4aad27-a5e6-4c94-a9dc-4863a5ee3e3a
+                - paragraph [ref=f12e91]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e92]
+              - cell "90afa5e0-cdb9-46fd-8ea2-74cb6855afd4" [ref=f12e94]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e95]
+              - cell "—" [ref=f12e96]
+              - cell "—" [ref=f12e97]
+              - cell "UNKNOWN" [ref=f12e98]
+              - cell "2026-11-25 03:46" [ref=f12e99]
+            - row [ref=f12e100]:
+              - cell [ref=f12e101]:
+                - link "20532167" [ref=f12e102] [cursor=pointer]:
+                  - /url: /console/incidents/20532167-5295-4e40-9b17-8a98d92168ac
+                - paragraph [ref=f12e103]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e104]
+              - cell "e84604d5-db23-40ba-849f-d70adc110cca" [ref=f12e106]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e107]
+              - cell "—" [ref=f12e108]
+              - cell "—" [ref=f12e109]
+              - cell "UNKNOWN" [ref=f12e110]
+              - cell "2026-11-25 03:46" [ref=f12e111]
+            - row [ref=f12e112]:
+              - cell [ref=f12e113]:
+                - link "a1f5bfb3" [ref=f12e114] [cursor=pointer]:
+                  - /url: /console/incidents/a1f5bfb3-e655-4fdd-959e-bfebdfd878e0
+                - paragraph [ref=f12e115]: cust_robust
+              - cell "ACTION ACCEPTED" [ref=f12e116]
+              - cell "robust-3df29063-4dbf-4f7c-9e2b-c2e4f9bec6cf" [ref=f12e118]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e119]
+              - cell "—" [ref=f12e120]
+              - cell "—" [ref=f12e121]
+              - cell "UNKNOWN" [ref=f12e122]
+              - cell "2026-11-25 03:45" [ref=f12e123]
+            - row [ref=f12e124]:
+              - cell [ref=f12e125]:
+                - link "d156a8d5" [ref=f12e126] [cursor=pointer]:
+                  - /url: /console/incidents/d156a8d5-f287-4a4c-b1fb-808eeefb8c51
+                - paragraph [ref=f12e127]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e128]
+              - cell "452266f5-fa6e-4a75-a058-bba78813cc0d" [ref=f12e130]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e131]
+              - cell "—" [ref=f12e132]
+              - cell "—" [ref=f12e133]
+              - cell "UNKNOWN" [ref=f12e134]
+              - cell "2026-11-25 03:44" [ref=f12e135]
+            - row [ref=f12e136]:
+              - cell [ref=f12e137]:
+                - link "6866f23b" [ref=f12e138] [cursor=pointer]:
+                  - /url: /console/incidents/6866f23b-e525-402a-becf-bd561c63b971
+                - paragraph [ref=f12e139]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e140]
+              - cell "43ccc2b4-bbb6-4f50-b9e4-40b55d7d7b2f" [ref=f12e142]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e143]
+              - cell "—" [ref=f12e144]
+              - cell "—" [ref=f12e145]
+              - cell "UNKNOWN" [ref=f12e146]
+              - cell "2026-11-25 03:44" [ref=f12e147]
+            - row [ref=f12e148]:
+              - cell [ref=f12e149]:
+                - link "32cb8950" [ref=f12e150] [cursor=pointer]:
+                  - /url: /console/incidents/32cb8950-c5ad-4001-98b7-bb2d9298f444
+                - paragraph [ref=f12e151]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e152]
+              - cell "4c4d7fed-6282-4e31-a2fe-94f106c99c94" [ref=f12e154]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e155]
+              - cell "—" [ref=f12e156]
+              - cell "—" [ref=f12e157]
+              - cell "UNKNOWN" [ref=f12e158]
+              - cell "2026-11-25 03:44" [ref=f12e159]
+            - row [ref=f12e160]:
+              - cell [ref=f12e161]:
+                - link "f3f2cfd4" [ref=f12e162] [cursor=pointer]:
+                  - /url: /console/incidents/f3f2cfd4-69e5-4c48-8325-e38cba2e1c92
+                - paragraph [ref=f12e163]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e164]
+              - cell "81d08948-fd34-4eb9-8e64-0f998afd6b59" [ref=f12e166]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e167]
+              - cell "—" [ref=f12e168]
+              - cell "—" [ref=f12e169]
+              - cell "UNKNOWN" [ref=f12e170]
+              - cell "2026-11-25 03:44" [ref=f12e171]
+            - row [ref=f12e172]:
+              - cell [ref=f12e173]:
+                - link "ed7b2bca" [ref=f12e174] [cursor=pointer]:
+                  - /url: /console/incidents/ed7b2bca-8b1c-462e-82cf-e8c8bebdf756
+                - paragraph [ref=f12e175]: cust_robust
+              - cell "NOTIFIED" [ref=f12e176]
+              - cell "robust-a6bf509e-1f28-4e6b-9275-b0d8075f7e5d" [ref=f12e178]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e179]
+              - cell "—" [ref=f12e180]
+              - cell "—" [ref=f12e181]
+              - cell "UNKNOWN" [ref=f12e182]
+              - cell "2026-11-25 03:44" [ref=f12e183]
+            - row [ref=f12e184]:
+              - cell [ref=f12e185]:
+                - link "36a15f72" [ref=f12e186] [cursor=pointer]:
+                  - /url: /console/incidents/36a15f72-0869-4ab6-b75a-7ce742a4c301
+                - paragraph [ref=f12e187]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e188]
+              - cell "02fb010c-0a41-4446-8b2d-235d376208a3" [ref=f12e190]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e191]
+              - cell "—" [ref=f12e192]
+              - cell "—" [ref=f12e193]
+              - cell "UNKNOWN" [ref=f12e194]
+              - cell "2026-11-25 03:44" [ref=f12e195]
+            - row [ref=f12e196]:
+              - cell [ref=f12e197]:
+                - link "734daa19" [ref=f12e198] [cursor=pointer]:
+                  - /url: /console/incidents/734daa19-203d-4a8e-858d-9ae8484141c6
+                - paragraph [ref=f12e199]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e200]
+              - cell "4f90b861-0377-416a-b52d-40715ba03698" [ref=f12e202]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e203]
+              - cell "—" [ref=f12e204]
+              - cell "—" [ref=f12e205]
+              - cell "UNKNOWN" [ref=f12e206]
+              - cell "2026-11-25 03:44" [ref=f12e207]
+            - row [ref=f12e208]:
+              - cell [ref=f12e209]:
+                - link "3d6229ee" [ref=f12e210] [cursor=pointer]:
+                  - /url: /console/incidents/3d6229ee-45a5-40be-b1cf-b9a5bdb67261
+                - paragraph [ref=f12e211]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e212]
+              - cell "5751d462-f2dd-43f8-9cbd-3da67a2e16a0" [ref=f12e214]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e215]
+              - cell "—" [ref=f12e216]
+              - cell "—" [ref=f12e217]
+              - cell "UNKNOWN" [ref=f12e218]
+              - cell "2026-11-25 03:44" [ref=f12e219]
+            - row [ref=f12e220]:
+              - cell [ref=f12e221]:
+                - link "766c455d" [ref=f12e222] [cursor=pointer]:
+                  - /url: /console/incidents/766c455d-2f92-4ff0-ade3-92035a62384d
+                - paragraph [ref=f12e223]: cust_robust
+              - cell "NOTIFIED" [ref=f12e224]
+              - cell "robust-0d4ba918-3c4a-456b-b2ab-aeaed8b05c5f" [ref=f12e226]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e227]
+              - cell "—" [ref=f12e228]
+              - cell "—" [ref=f12e229]
+              - cell "UNKNOWN" [ref=f12e230]
+              - cell "2026-11-25 03:44" [ref=f12e231]
+            - row [ref=f12e232]:
+              - cell [ref=f12e233]:
+                - link "9825a175" [ref=f12e234] [cursor=pointer]:
+                  - /url: /console/incidents/9825a175-3175-4395-9e64-c952b2a7fa95
+                - paragraph [ref=f12e235]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e236]
+              - cell "f67c38c3-e167-490c-ae54-0280bfa41f6c" [ref=f12e238]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e239]
+              - cell "—" [ref=f12e240]
+              - cell "—" [ref=f12e241]
+              - cell "UNKNOWN" [ref=f12e242]
+              - cell "2026-11-25 03:44" [ref=f12e243]
+            - row [ref=f12e244]:
+              - cell [ref=f12e245]:
+                - link "6a8d7800" [ref=f12e246] [cursor=pointer]:
+                  - /url: /console/incidents/6a8d7800-0385-4fc6-b75e-c3f05cb8e4a8
+                - paragraph [ref=f12e247]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e248]
+              - cell "adce24cd-cf91-4d94-b59d-ba91eec16dd6" [ref=f12e250]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e251]
+              - cell "—" [ref=f12e252]
+              - cell "—" [ref=f12e253]
+              - cell "UNKNOWN" [ref=f12e254]
+              - cell "2026-11-25 03:44" [ref=f12e255]
+            - row [ref=f12e256]:
+              - cell [ref=f12e257]:
+                - link "ad6ce100" [ref=f12e258] [cursor=pointer]:
+                  - /url: /console/incidents/ad6ce100-72ad-4415-ae09-5ea1a58cd0fc
+                - paragraph [ref=f12e259]: cust_robust
+              - cell "CORRELATION PENDING" [ref=f12e260]
+              - cell "f47b6136-f399-486f-8277-93f778f4f642" [ref=f12e262]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e263]
+              - cell "—" [ref=f12e264]
+              - cell "—" [ref=f12e265]
+              - cell "UNKNOWN" [ref=f12e266]
+              - cell "2026-11-25 03:44" [ref=f12e267]
+            - row [ref=f12e268]:
+              - cell [ref=f12e269]:
+                - link "9be95363" [ref=f12e270] [cursor=pointer]:
+                  - /url: /console/incidents/9be95363-9358-4d82-80f8-7f2d272e40f5
+                - paragraph [ref=f12e271]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e272]
+              - cell "7ef2c426-a650-4750-bffc-06e83152bf5c" [ref=f12e274]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e275]
+              - cell "—" [ref=f12e276]
+              - cell "—" [ref=f12e277]
+              - cell "UNKNOWN" [ref=f12e278]
+              - cell "2026-11-25 03:44" [ref=f12e279]
+            - row [ref=f12e280]:
+              - cell [ref=f12e281]:
+                - link "24f3e2a7" [ref=f12e282] [cursor=pointer]:
+                  - /url: /console/incidents/24f3e2a7-4837-4f88-a105-d1b9f7953d9b
+                - paragraph [ref=f12e283]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e284]
+              - cell "edf37d22-e84e-4123-bd15-4f8610fd981f" [ref=f12e286]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e287]
+              - cell "—" [ref=f12e288]
+              - cell "—" [ref=f12e289]
+              - cell "UNKNOWN" [ref=f12e290]
+              - cell "2026-11-25 03:44" [ref=f12e291]
+            - row [ref=f12e292]:
+              - cell [ref=f12e293]:
+                - link "876fc362" [ref=f12e294] [cursor=pointer]:
+                  - /url: /console/incidents/876fc362-67e4-46eb-9ecf-c5b3ef86bfa4
+                - paragraph [ref=f12e295]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e296]
+              - cell "a1926481-4c1e-48be-803f-cb9bd2ca4cc3" [ref=f12e298]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e299]
+              - cell "—" [ref=f12e300]
+              - cell "—" [ref=f12e301]
+              - cell "UNKNOWN" [ref=f12e302]
+              - cell "2026-11-25 03:43" [ref=f12e303]
+            - row [ref=f12e304]:
+              - cell [ref=f12e305]:
+                - link "7b73beec" [ref=f12e306] [cursor=pointer]:
+                  - /url: /console/incidents/7b73beec-3a54-49e6-88eb-406341c7d7eb
+                - paragraph [ref=f12e307]: cust_test
+              - cell "CORRELATION PENDING" [ref=f12e308]
+              - cell "0eb60bb2-fa60-4a32-be31-271086dcb360" [ref=f12e310]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e311]
+              - cell "—" [ref=f12e312]
+              - cell "—" [ref=f12e313]
+              - cell "UNKNOWN" [ref=f12e314]
+              - cell "2026-11-25 03:43" [ref=f12e315]
+            - row [ref=f12e316]:
+              - cell [ref=f12e317]:
+                - link "6ab81068" [ref=f12e318] [cursor=pointer]:
+                  - /url: /console/incidents/6ab81068-2f5f-40de-8fec-510c06f02d22
+                - paragraph [ref=f12e319]: cust_7b03
+              - cell "CORRELATION PENDING" [ref=f12e320]
+              - cell "ep-8844" [ref=f12e322]
+              - cell "PIN_ONLY_TIER_2" [ref=f12e323]
+              - cell "—" [ref=f12e324]
+              - cell "—" [ref=f12e325]
+              - cell "UNSAFE" [ref=f12e326]
+              - cell "2026-11-25 03:39" [ref=f12e327]
+            - row [ref=f12e328]:
+              - cell [ref=f12e329]:
+                - link "9dac1b91" [ref=f12e330] [cursor=pointer]:
+                  - /url: /console/incidents/9dac1b91-0d1b-450a-9715-226365f84f90
+                - paragraph [ref=f12e331]: cust_2c77
+              - cell "REVIEW PENDING" [ref=f12e332]
+              - cell "ep-8842" [ref=f12e334]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e335]
+              - cell "₦25,000" [ref=f12e336]
+              - cell "Oreva MFB" [ref=f12e337]
+              - cell "UNKNOWN" [ref=f12e338]
+              - cell "2026-11-25 03:34" [ref=f12e339]
+            - row [ref=f12e340]:
+              - cell [ref=f12e341]:
+                - link "2b8f8ceb" [ref=f12e342] [cursor=pointer]:
+                  - /url: /console/incidents/2b8f8ceb-92ad-4697-9dfa-4ab6ac0a912e
+                - paragraph [ref=f12e343]: cust_9f21
+              - cell "CORRELATED" [ref=f12e344]
+              - cell "ep-8841" [ref=f12e346]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e347]
+              - cell "₦50,000" [ref=f12e348]
+              - cell "Adaeze Money" [ref=f12e349]
+              - cell "UNSAFE" [ref=f12e350]
+              - cell "2026-11-25 03:31" [ref=f12e351]
+            - row [ref=f12e352]:
+              - cell [ref=f12e353]:
+                - link "ab0e9687" [ref=f12e354] [cursor=pointer]:
+                  - /url: /console/incidents/ab0e9687-5273-4368-9dfe-5e95ef407d1a
+                - paragraph [ref=f12e355]: cust_9f21
+              - cell "NOTIFIED" [ref=f12e356]
+              - cell "ep-8841" [ref=f12e358]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e359]
+              - cell "₦48,000" [ref=f12e360]
+              - cell "Adaeze Money" [ref=f12e361]
+              - cell "UNSAFE" [ref=f12e362]
+              - cell "2026-11-25 03:09" [ref=f12e363]
+            - row [ref=f12e364]:
+              - cell [ref=f12e365]:
+                - link "4c38ab80" [ref=f12e366] [cursor=pointer]:
+                  - /url: /console/incidents/4c38ab80-b6b7-4ba8-8a92-0c05d8117e2e
+                - paragraph [ref=f12e367]: cust_5510
+              - cell "ACTION DECLINED" [ref=f12e368]
+              - cell "ep-8843" [ref=f12e370]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e371]
+              - cell "₦96,500" [ref=f12e372]
+              - cell "Adaeze Money" [ref=f12e373]
+              - cell "SAFE" [ref=f12e374]
+              - cell "2026-11-25 00:33" [ref=f12e375]
+            - row [ref=f12e376]:
+              - cell [ref=f12e377]:
+                - link "017b1b93" [ref=f12e378] [cursor=pointer]:
+                  - /url: /console/incidents/017b1b93-4f1c-482c-9883-fb5cdc41873b
+                - paragraph [ref=f12e379]: cust_0a19
+              - cell "UNKNOWN" [ref=f12e380]
+              - cell "ep-8845" [ref=f12e382]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e383]
+              - cell "₦18,000" [ref=f12e384]
+              - cell "Adaeze Money" [ref=f12e385]
+              - cell "UNKNOWN" [ref=f12e386]
+              - cell "2026-11-24 20:43" [ref=f12e387]
+            - row [ref=f12e388]:
+              - cell [ref=f12e389]:
+                - link "9150282d" [ref=f12e390] [cursor=pointer]:
+                  - /url: /console/incidents/9150282d-19d7-4109-8bc0-48477acc0d13
+                - paragraph [ref=f12e391]: cust_44de
+              - cell "CLOSED" [ref=f12e392]
+              - cell "ep-8846" [ref=f12e394]
+              - cell "PIN_ONLY_TIER_1" [ref=f12e395]
+              - cell "—" [ref=f12e396]
+              - cell "—" [ref=f12e397]
+              - cell "SAFE" [ref=f12e398]
+              - cell "2026-11-24 04:23" [ref=f12e399]
+      - generic [ref=f12e400]:
+        - link "Protocol v0.1" [ref=f12e401] [cursor=pointer]:
+          - /url: /protocol
+        - link "Safety invariants" [ref=f12e402] [cursor=pointer]:
+          - /url: /safety
+        - link "Assessment" [ref=f12e403] [cursor=pointer]:
+          - /url: /assessment
+        - link "Public record" [ref=f12e404] [cursor=pointer]:
+          - /url: /
+  - button "Open Next.js Dev Tools" [ref=f12e410] [cursor=pointer]

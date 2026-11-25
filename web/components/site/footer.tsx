@@ -9,17 +9,17 @@ import Link from "next/link";
 export function SiteFooter() {
   return (
     <footer className="relative mt-32 border-t border-line">
-      <div className="container-page py-16">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="container-page py-16 lg:py-20">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12">
           <div>
-            <p className="font-display text-2xl leading-tight text-ink">
+            <p className="font-display text-title leading-tight tracking-[-0.03em] text-ink">
               A safer signal
               <br />
               when consent
               <br />
               is taken away.
             </p>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
+            <p className="mt-5 max-w-xs text-body leading-relaxed text-muted">
               An open design record for coerced-payment signalling. Published so
               it can be argued with, not so it can be bought.
             </p>
@@ -55,15 +55,24 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-end md:justify-between">
-          <p
-            aria-hidden
-            className="select-none font-display text-[clamp(3rem,11vw,9rem)] leading-[0.8] tracking-[-0.04em] text-line-strong"
-          >
-            Phylax
-          </p>
+          <div className="flex flex-col gap-4">
+            <p className="flex items-center gap-2.5">
+              <span aria-hidden className="brand-rule" />
+              <span className="font-display text-lead leading-none tracking-[-0.03em] text-ink">
+                Phylax
+              </span>
+              <span className="mono-label">design record</span>
+            </p>
+            <p
+              aria-hidden
+              className="select-none font-display text-[clamp(3rem,11vw,9rem)] leading-[0.85] tracking-[-0.04em] text-line-strong"
+            >
+              Phylax
+            </p>
+          </div>
           <div className="flex flex-col gap-1 md:items-end">
             <p className="mono-label">Lagos · London · the internet</p>
-            <p className="text-xs text-faint">
+            <p className="text-label leading-relaxed text-faint">
               Text © the contributors, CC BY 4.0. Code Apache-2.0. Not a regulated
               financial service.
             </p>
@@ -83,7 +92,7 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
           <li key={href}>
             <Link
               href={href}
-              className="text-sm text-muted underline-offset-4 transition-colors hover:text-ink hover:underline"
+              className="text-body text-muted underline-offset-4 transition-colors hover:text-ink hover:underline"
             >
               {label}
             </Link>

@@ -67,6 +67,7 @@ async function freshNotifiedIncident() {
 
 describe("robustness regressions", () => {
   beforeAll(async () => {
+    await db.execute(sql`delete from rate_limits`);
     const pair = generateKeyPairSync("ed25519");
     privateKey = pair.privateKey;
     await db.insert(institutionKeys).values({

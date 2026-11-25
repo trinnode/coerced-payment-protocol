@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Telemetry } from "@/components/site/telemetry";
 import "./globals.css";
 
+/* Kept in step with --color-base in app/globals.css. */
+const BASE_COLOUR = "#050807";
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
@@ -33,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050807",
+  themeColor: BASE_COLOUR,
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -41,11 +44,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-NG" suppressHydrationWarning>
+    <html lang="en-NG" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className="min-h-dvh bg-base text-ink antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:border focus:border-guard focus:bg-base focus:px-4 focus:py-2 focus:text-sm focus:text-guard"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:border focus:border-guard focus:bg-base focus:px-4 focus:py-2 focus:text-body focus:text-guard"
         >
           Skip to content
         </a>

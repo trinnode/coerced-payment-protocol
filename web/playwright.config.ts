@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const port = Number(process.env.E2E_PORT ?? 3000);
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -7,13 +9,13 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"]],
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: `http://localhost:${port}`,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "pnpm dev",
-    url: "http://localhost:3000/api/health",
+    command: `pnpm exec next dev -p ${port}`,
+    url: `http://localhost:${port}/api/health`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

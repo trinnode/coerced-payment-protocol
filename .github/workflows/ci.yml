@@ -58,6 +58,14 @@ jobs:
           pnpm test
           pnpm audit:verify
 
+      - name: Forbidden capability scan
+        working-directory: web
+        run: |
+          if grep -rniE 'police|nfiu|law[ -]?enforcement|fetch\(["'"'"']https?://' lib app/api --include='*.ts'; then
+            echo "Forbidden referral or outbound capability found in application code" >&2
+            exit 1
+          fi
+
       - name: Build
         working-directory: web
         run: pnpm build

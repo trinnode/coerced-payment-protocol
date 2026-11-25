@@ -142,6 +142,11 @@ export const episodes = pgTable(
     externalEpisodeId: text("external_episode_id").notNull(),
     customerRef: text("customer_ref").notNull(),
     contactState: contactState("contact_state").notNull().default("UNKNOWN"),
+    // UNSAFE contact blocks notification unless a supervisor/compliance officer
+    // records an explicit override. UNKNOWN is never coerced into SAFE.
+    contactOverrideBy: uuid("contact_override_by").references(() => users.id),
+    contactOverrideReason: text("contact_override_reason"),
+    contactOverrideAt: timestamp("contact_override_at", { withTimezone: true }),
     openedAt: timestamp("opened_at", { withTimezone: true }).defaultNow().notNull(),
     closedAt: timestamp("closed_at", { withTimezone: true }),
   },
@@ -271,8 +276,37 @@ export const challenges = pgTable(
     openedAt: timestamp("opened_at", { withTimezone: true }).defaultNow().notNull(),
     resolvedAt: timestamp("resolved_at", { withTimezone: true }),
     resolutionNote: text("resolution_note"),
+    // A release is an accountable act: who released, when, and why.
+    releasedBy: uuid("released_by").references(() => users.id),
+    releasedAt: timestamp("released_at", { withTimezone: true }),
   },
   (t) => [index("challenges_incident_idx").on(t.incidentId)],
+);
+
+/** Handover notes are append-only accountability records. No unique key: two
+ *  officers may legitimately file a note in the same second. */
+export const caseNotes = pgTable(
+  "case_notes",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    incidentId: uuid("incident_id")
+      .notNull()
+      .references(() => incidents.id, { onDelete: "cascade" }),
+    institutionId: text("institution_id")
+      .notNull()
+      .references(() => institutions.id, { onDelete: "cascade" }),
+    authorId: uuid("author_id")
+      .notNull()
+      .references(() => users.id),
+    body: text("body").notNull(),
+    reasonCode: text("reason_code").notNull(),
+    type: text("type").notNull().default("HANDOVER"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [
+    index("case_notes_incident_idx").on(t.incidentId, t.createdAt),
+    index("case_notes_inst_idx").on(t.institutionId),
+  ],
 );
 
 /* ── Audit and telemetry ─────────────────────────────────────────────────── */

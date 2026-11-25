@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { Spotlight } from "@/components/ui/spotlight-new";
-import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Timeline } from "@/components/ui/timeline";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { SiteNav } from "@/components/site/nav";
@@ -30,13 +28,7 @@ export default function Home() {
 function Opening() {
   return (
     <section className="relative overflow-hidden border-b border-line">
-      <Spotlight
-        gradientFirst="radial-gradient(60% 60% at 70% 20%, rgba(127,227,192,.10) 0, rgba(127,227,192,.02) 45%, transparent 75%)"
-        gradientSecond="radial-gradient(45% 45% at 20% 60%, rgba(239,180,92,.055) 0, transparent 80%)"
-        gradientThird="radial-gradient(40% 40% at 60% 90%, rgba(127,227,192,.035) 0, transparent 80%)"
-      />
-
-      <div className="container-page relative z-10 grid min-h-[86svh] items-end gap-12 pb-16 pt-36 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-20 lg:pb-24">
+      <div className="container-page relative z-10 min-h-[72svh] pb-14 pt-32 lg:pb-20">
         <div>
           <p className="mono-label">Open design record · v0.1 · 25 Nov 2026</p>
 
@@ -57,7 +49,7 @@ function Opening() {
               This is the gap we are working on. Not better authentication —
               authentication already works. A way to say, in the few seconds
               that matter, that the PIN was given under threat. And a way for
-              the receiving institution to learn it before the cash leaves.
+              the receiving institution to learn it while there may still be time to act.
             </p>
           </div>
 
@@ -77,18 +69,6 @@ function Opening() {
             </Link>
           </div>
         </div>
-
-        <div className="border-l border-line pl-6 lg:mb-2">
-          <p className="mono-label mb-5">One sentence</p>
-          <p className="font-display text-[1.35rem] leading-snug text-ink">
-            The design aims to tell the receiving bank that a PIN may have been given under threat. It cannot say who was at fault — and no institution has implemented it yet.
-          </p>
-          <p className="mt-5 text-sm leading-relaxed text-faint">
-            The platform cannot hold money, freeze an account, start a transfer,
-            or refer anyone to the police. That is not a limitation we will fix
-            later. It is the design.
-          </p>
-        </div>
       </div>
     </section>
   );
@@ -98,7 +78,7 @@ function Opening() {
 
 const STATUS = [
   ["Assessment", "v2 · survived three reviews"],
-  ["Protocol", "v0.1 · draft, no implementation"],
+  ["Protocol", "v0.1 · draft, no production deployment"],
   ["Institutional partner", "none signed"],
   ["Willingness to pay", "untested"],
   ["Legal review", "not commissioned"],
@@ -119,8 +99,30 @@ function Ledger() {
               key={k}
               className="flex items-baseline justify-between gap-4 border-t border-line py-3"
             >
-              <dt className="text-sm text-muted">{k}</dt>
-              <dd className="text-right font-mono text-[0.75rem] text-ink">{v}</dd>
+              <dt className="flex items-center gap-2.5 text-sm text-ink">
+                <span
+                  aria-hidden
+                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                    v.startsWith("v2") || v.startsWith("v0")
+                      ? "bg-guard"
+                      : v.startsWith("untested") || v.startsWith("not")
+                        ? "bg-signal"
+                        : "bg-critical"
+                  }`}
+                />
+                {k}
+              </dt>
+              <dd
+                className={`text-right font-mono text-[0.75rem] ${
+                  v.startsWith("v2") || v.startsWith("v0")
+                    ? "text-guard"
+                    : v.startsWith("untested") || v.startsWith("not")
+                      ? "text-signal"
+                      : "text-critical"
+                }`}
+              >
+                {v}
+              </dd>
             </div>
           ))}
         </dl>
@@ -234,7 +236,7 @@ function Problem() {
               So the work is not to invent a new rail. It is to make the first
               sixty seconds count: get a minimal, signed signal from the
               sending institution to the receiving one, and give a human there
-              something they can lawfully act on.
+              something they could act on — if a lawful power exists. That power is not yet agreed with any institution.
             </p>
           </div>
         </div>
@@ -310,7 +312,6 @@ function Design() {
         </p>
 
         <div className="mt-20">
-          <TracingBeam>
             <div className="space-y-24">
               {LOOPS.map((l) => (
                 <article
@@ -319,7 +320,9 @@ function Design() {
                 >
                   <div>
                     <p className="font-mono text-sm text-guard">{l.n}</p>
-                    <p className="mono-label mt-2">{l.speed}</p>
+                    <p className="mt-3 font-display text-2xl uppercase leading-none tracking-[-0.02em] text-guard sm:text-3xl">
+                      {l.speed}
+                    </p>
                   </div>
                   <div className="max-w-[70ch]">
                     <h3 className="font-display text-3xl leading-tight text-ink">
@@ -336,7 +339,6 @@ function Design() {
                 </article>
               ))}
             </div>
-          </TracingBeam>
         </div>
       </div>
     </section>
@@ -461,7 +463,7 @@ function HardCases() {
 
 const GATES = [
   {
-    title: "Gate −1 · Will anyone pay?",
+    title: "Gate −1 · Will anyone pay? · NOT STARTED",
     content: (
       <div>
         <p className="font-mono text-xs text-guard">30 days · ~£2.5k · not started</p>
@@ -475,7 +477,7 @@ const GATES = [
     ),
   },
   {
-    title: "Gate 0 · Buildable and lawful?",
+    title: "Gate 0 · Buildable and lawful? · NOT STARTED",
     content: (
       <div>
         <p className="font-mono text-xs text-guard">90 days · ~£6k</p>
@@ -490,7 +492,7 @@ const GATES = [
     ),
   },
   {
-    title: "Pilot · One institution",
+    title: "Pilot · One institution · NOT STARTED",
     content: (
       <div>
         <p className="font-mono text-xs text-guard">6 months · £150–300k</p>
@@ -505,7 +507,7 @@ const GATES = [
     ),
   },
   {
-    title: "Phase 2 · Second institution",
+    title: "Phase 2 · Second institution · NOT STARTED",
     content: (
       <div>
         <p className="font-mono text-xs text-guard">months 10–18</p>

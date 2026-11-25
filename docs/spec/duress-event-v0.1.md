@@ -156,7 +156,7 @@ processor → sending institution: "does this ref exist, and what is its status?
 sending institution → processor: CORRELATED | NOT_CORRELATED | UNKNOWN
 ```
 
-`UNKNOWN` (timeout, rail ambiguity) is a valid terminal answer for a review cycle. Forcing a binary is how wrong-case harm happens.
+`UNKNOWN` (timeout, rail ambiguity) is a first-class answer for a review cycle. It is never coerced into a decision; explicit follow-up transitions are allowed, but only with a recorded reason. Forcing a binary is how wrong-case harm happens.
 
 Episode linkage is separate from transaction correlation: a new event with an existing `episode_id` extends the episode; a new `episode_id` for the same customer inside a defined window is a **signal for review**, never an automatic escalation.
 

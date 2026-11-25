@@ -51,9 +51,9 @@ Each invariant must have an automated or procedural test. An invariant without a
 |---|---|---|
 | S1 | Within the configured PIN-only band, a duress transfer produces **no observable channel that a normal transfer does not** — same request shape, same (absent) step-up, same alert, same balance, same statement line | Paired-trial study on the bank's **staging replica**, ≥20 motivated participants repeating trials, pre-registered kill at >20% detection |
 | S2 | No customer-facing message is suppressed or fabricated. The transfer is always visible as a transfer | Integration test on every outbound channel; balance reconciliation test |
-| S3 | No **discretionary** referral to any law-enforcement endpoint exists in the default configuration; statutory reporting is a separate, disclosed, institution-owned path | Static analysis + config assertion in CI + enrolment-copy test |
+| S3 | No **discretionary** referral to any law-enforcement endpoint exists in the default configuration; statutory reporting is a separate, disclosed, institution-owned path | Source scan in CI for referral endpoints + code review against the forbidden-capability list + enrolment-copy test |
 | S4 | Platform cannot change transaction state, hold, or balance | Contract tests; no privileged rail credentials exist |
-| S5 | Every action state change carries an institutional authority reference (standing rule ID or named legal power) | Schema validation rejects null authority |
+| S5 | Every action state change carries an institutional authority reference (standing rule ID or named legal power) | Domain rejection of an empty `authority_ref` in `decideAction`; a database CHECK is proposed, not yet in place |
 | S6 | Recipient can challenge and obtain a recorded outcome, **without** the notification endangering the sender | End-to-end test of the deferred-challenge path |
 | S7 | A platform outage cannot delay a payment | Chaos test: kill platform, complete transfers |
 | S8 | No cross-tenant read is possible, including by admin | Tenant-isolation test suite |
