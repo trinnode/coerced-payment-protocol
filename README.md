@@ -1,3 +1,5 @@
+<img src="./web/public/brand/phylax-mark.svg" alt="" width="48" height="48" />
+
 # Phylax
 
 **A safer signal when consent is taken away.**

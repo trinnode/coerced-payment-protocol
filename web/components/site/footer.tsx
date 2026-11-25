@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Wordmark } from "@/components/site/brand";
 
 /**
  * Footer in the Aceternity idiom: an oversized wordmark that anchors the page,
@@ -57,11 +58,7 @@ export function SiteFooter() {
         <div className="mt-16 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col gap-4">
             <p className="flex items-center gap-2.5">
-              <span aria-hidden className="brand-rule" />
-              <span className="font-display text-lead leading-none tracking-[-0.03em] text-ink">
-                Phylax
-              </span>
-              <span className="mono-label">design record</span>
+              <Wordmark />
             </p>
             <p
               aria-hidden

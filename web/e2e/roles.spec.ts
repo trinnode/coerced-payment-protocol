@@ -215,7 +215,7 @@ test("MMO supervisor cannot read or write a Kite case, with no shape leak", asyn
   const getBody = await get.text();
   // The 404 page echoes the requested URL (including the id); that is not a
   // data leak. None of the case's own fields may appear.
-  expect(getBody).toContain("This page could not be found");
+  expect(getBody).toMatch(/NEXT_HTTP_ERROR_FALLBACK;404|This page is not in the record/);
   for (const secret of ["cust_roles", "CORRELATED", "SUSPECTED_DURESS", "PIN_DURESS_ENTRY"]) {
     expect(getBody).not.toContain(secret);
   }

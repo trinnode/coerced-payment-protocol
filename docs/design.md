@@ -127,11 +127,25 @@ Placeholders are text, so a global rule now resolves them to `--color-muted`
 
 ### Brand mark and navigation
 
-The mark is typographic, not an image: a 2 px guard hairline (`.brand-rule`),
-the display face at 24 px in the nav and 18 px on mobile / in the footer, with
-`-0.03em` tracking, followed by the `design record` mono label where there is
-room. The footer repeats the same lockup above its oversized aria-hidden echo,
-so the two ends of the page state the same identity.
+The mark is an SVG, not a typographic substitute. It is a shield broken at bowl
+height: guard green draws the boundary and an interior stem with an open bowl,
+then an amber signal crosses the gap and leaves. Protection without concealment,
+in one glyph. The concept is visible in the geometry — it does not need the
+paragraph beside it.
+
+Source of truth: `web/public/brand/phylax-mark.svg`. The React component
+`web/components/site/brand.tsx` and the favicon `web/app/icon.svg` are derived
+from the same path data; change all three together. The standalone files hardcode
+`--color-guard` (#7fe3c0) and `--color-signal` (#efb45c) because a file cannot
+read a CSS variable; the React component uses `currentColor` and
+`var(--color-signal, #efb45c)`. When the tokens change, sync the SVGs by hand.
+
+`Wordmark` pairs the mark with Gloock at 1.35rem and the `design record` mono
+label where there is room. The footer repeats the lockup above its oversized
+aria-hidden echo, so the two ends of the page state the same identity. The mark
+is `aria-hidden` beside the text name; it carries no duplicate accessible label.
+The same mark appears in the console header, the README, the web manifest and the
+generated OpenGraph image.
 
 The vendored `NavItems` owns its own anchors, so `SiteNav` applies
 `aria-current` to the matching anchor after render (`page` for routes,

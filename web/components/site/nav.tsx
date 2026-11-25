@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Wordmark } from "@/components/site/brand";
 import { usePathname } from "next/navigation";
 import {
   Navbar,
@@ -79,13 +80,7 @@ export function SiteNav() {
             aria-label="Phylax — home"
             className="group flex items-center gap-2.5 pl-1"
           >
-            <span aria-hidden className="brand-rule" />
-            <span className="font-display text-title leading-none tracking-[-0.03em] text-ink">
-              Phylax
-            </span>
-            <span className="mono-label hidden translate-y-[1px] sm:inline">
-              design record
-            </span>
+            <Wordmark />
           </Link>
 
           <div ref={itemsRef} className="contents" data-nav-items>
@@ -118,10 +113,7 @@ export function SiteNav() {
                 aria-label="Phylax — home"
                 className="flex items-center gap-2.5"
               >
-                <span aria-hidden className="brand-rule" />
-                <span className="font-display text-lead leading-none tracking-[-0.03em] text-ink">
-                  Phylax
-                </span>
+                <Wordmark compact />
               </Link>
               <MobileNavToggle isOpen={open} onClick={() => setOpen(!open)} />
             </MobileNavHeader>
