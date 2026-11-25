@@ -66,7 +66,7 @@ then move on. Do not start Phase D with an open Phase A/B/C finding.
 - [ ] Failure runbook written: DB down, key compromised, victim-data breach
 - [ ] Breach protocol rehearsed against the documented life-safety procedure
 - [ ] Rollback procedure: previous image + migration backwards
-- [ ] First-party analytics retention and deletion defined
+- [x] First-party analytics retention and deletion implemented (`pnpm analytics:prune`, scheduled workflow)
 - [ ] A staging environment exists and is visibly labelled
 
 ## Phase E — The thing that actually matters

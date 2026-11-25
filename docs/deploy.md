@@ -83,8 +83,9 @@ not a substitute for it.
 
 First-party telemetry writes to `analytics_events` and `web_vitals`. It stores
 page paths and event names, not incident content and not cross-site identifiers.
-Retention: **90 days**, then hard delete. The deletion job must be verified
-before the first public launch, not added later.
+Retention: **90 days**, then hard delete via `pnpm analytics:prune`. A scheduled
+GitHub Actions workflow runs it daily and requires `DATABASE_URL` as a secret.
+It was run locally against the seeded database before this document was written.
 
 ## Release gate
 
@@ -94,5 +95,5 @@ before the first public launch, not added later.
 - [ ] Backup restored successfully into a fresh database
 - [ ] Rollback rehearsed with the previous artifact
 - [ ] Logs inspected for secrets and incident content
-- [ ] Analytics deletion verified
+- [x] Analytics deletion verified (`pnpm analytics:prune`, 90-day window)
 - [ ] Phase A/B/C findings from `TODO-2.md` all closed

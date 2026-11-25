@@ -37,6 +37,7 @@ pnpm typecheck
 pnpm build
 pnpm test        # 26 unit/integration tests, needs the database
 pnpm e2e         # 16 browser tests, desktop + mobile
+pnpm analytics:prune  # hard-delete telemetry older than 90 days
 ```
 
 ## Routes
