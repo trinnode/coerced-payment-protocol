@@ -16,9 +16,9 @@ type SpotlightProps = {
 };
 
 export const Spotlight = ({
-  gradientFirst = "radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%)",
-  gradientSecond = "radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%)",
-  gradientThird = "radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .04) 0, hsla(210, 100%, 45%, .02) 80%, transparent 100%)",
+  gradientFirst = "radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(158, 65%, 66%, .08) 0, hsla(158, 60%, 45%, .02) 50%, hsla(158, 60%, 35%, 0) 80%)",
+  gradientSecond = "radial-gradient(50% 50% at 50% 50%, hsla(39, 85%, 64%, .06) 0, hsla(39, 70%, 50%, .02) 80%, transparent 100%)",
+  gradientThird = "radial-gradient(50% 50% at 50% 50%, hsla(158, 65%, 66%, .04) 0, hsla(158, 60%, 45%, .02) 80%, transparent 100%)",
   translateY = -350,
   width = 560,
   height = 1380,
@@ -37,7 +37,7 @@ export const Spotlight = ({
       transition={{
         duration: 1.5,
       }}
-      className="pointer-events-none absolute inset-0 h-full w-full"
+      className="pointer-events-none absolute inset-0 h-full w-full motion-reduce:hidden" aria-hidden="true"
     >
       <motion.div
         animate={{

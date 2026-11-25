@@ -14,7 +14,7 @@ export default async function ConsolePage() {
   const [rows, stats] = await Promise.all([queueFor(session), queueStats(session)]);
 
   return (
-    <main className="mx-auto max-w-[110rem] px-5 py-10">
+    <main id="main" className="mx-auto max-w-[110rem] px-5 py-10">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="mono-label">{session.institutionName} · fraud operations</p>

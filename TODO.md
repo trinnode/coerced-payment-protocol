@@ -29,7 +29,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done and verified
 - [x] JCS-style canonical JSON with fixtures
 - [x] `POST /api/v1/events`: schema, forbidden fields, future-dated check, dedupe on
       `(institution_id, event_id)`, 202 `RECEIVED_NOT_VERIFIED`
-- [x] Rate limits (10/min + 50 burst), 64kB body cap, key expiry and revocation
+- [x] Postgres-backed rate limits (10/min + 50 burst), 64kB body cap, key expiry and revocation
 - [x] Incident mutation API with role gates and mandatory authority references
 - [x] First-party telemetry (`/api/track`) and health endpoint
 
@@ -50,13 +50,13 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done and verified
 ## 6. Tracking + QA
 - [x] Vitest: 26 tests — canonicalisation, envelope, state machine, tenant isolation,
       signed ingestion, idempotency, key revocation
-- [x] Playwright: 14 tests across desktop and mobile — public pages, docs, login,
+- [x] Playwright: 16 tests across desktop and mobile — includes keyboard-enter login — public pages, docs, login,
       cross-tenant denial, role gate, protocol rejection
 - [x] `pnpm build`, `pnpm typecheck`, `pnpm test`, `pnpm e2e` all pass
-- [~] Phase B QA agent: full functional + content-voice + visual review
+- [x] Phase B QA agent: all 10 must-fix findings applied and re-verified
 
 ## 7. Ship
-- [ ] `web/README.md` run/deploy instructions
-- [ ] Record design rationale (typefaces, why not a template)
-- [ ] Commit and push to GitHub (token inline only, never written to disk)
-- [ ] Re-run Gate −1 question with ten named institutions
+- [x] `web/README.md` run/deploy instructions
+- [x] Record design rationale (`docs/design.md`)
+- [x] Published to github.com/trinnode/coerced-payment-protocol
+- [ ] Re-run Gate −1 question with ten named institutions (not software work)

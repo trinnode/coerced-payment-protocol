@@ -290,6 +290,15 @@ export const auditEvents = pgTable(
   (t) => [index("audit_inst_idx").on(t.institutionId, t.createdAt)],
 );
 
+export const rateLimits = pgTable(
+  "rate_limits",
+  {
+    key: text("key").primaryKey(), // "<institution>:<bucket>"
+    count: integer("count").notNull().default(0),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+);
+
 export const analyticsEvents = pgTable(
   "analytics_events",
   {

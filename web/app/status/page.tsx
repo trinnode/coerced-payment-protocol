@@ -34,7 +34,7 @@ export default async function StatusPage() {
   return (
     <>
       <SiteNav />
-      <main className="container-page min-h-[70svh] pt-36">
+      <main id="main" className="container-page min-h-[70svh] pt-36">
         <p className="mono-label">Status ledger</p>
         <h1 className="mt-6 max-w-[22ch] font-display text-[clamp(2.4rem,5vw,4rem)] leading-[1.05] tracking-[-0.03em]">
           What exists, and what does not.

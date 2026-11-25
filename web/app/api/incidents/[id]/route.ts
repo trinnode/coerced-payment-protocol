@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { fail, withSession } from "@/lib/api";
+import { DomainError } from "@/lib/domain/incidents";
 import {
   assignIncident,
   closeIncident,
@@ -17,12 +18,12 @@ async function parse(request: Request): Promise<Body> {
   try {
     return (await request.json()) as Body;
   } catch {
-    throw new Error("Invalid JSON");
+    throw new DomainError("E_SCHEMA", "Request body is not valid JSON");
   }
 }
 
 const str = (v: unknown, field: string): string => {
-  if (typeof v !== "string" || !v.trim()) throw new Error(`${field} is required`);
+  if (typeof v !== "string" || !v.trim()) throw new DomainError("E_SCHEMA", `${field} is required`);
   return v.trim();
 };
 
@@ -49,7 +50,7 @@ export async function POST(
         case "correlate": {
           const status = str(body.status, "status") as "CORRELATED" | "NOT_CORRELATED" | "UNKNOWN";
           if (!["CORRELATED", "NOT_CORRELATED", "UNKNOWN"].includes(status)) {
-            throw new Error("Invalid correlation status");
+            throw new DomainError("E_SCHEMA", "Invalid correlation status");
           }
           const txn = body.transaction as Record<string, unknown> | undefined;
           return NextResponse.json(

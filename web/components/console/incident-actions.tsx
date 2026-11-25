@@ -53,7 +53,7 @@ export function IncidentActions({
   }
 
   const field =
-    "mt-1.5 w-full rounded-md border border-line-strong bg-base px-3 py-2 font-mono text-xs text-ink outline-none focus:border-guard";
+    "mt-1.5 w-full rounded-md border border-line-strong bg-base px-3 py-2 font-mono text-xs text-ink focus:border-guard";
   const label = "mono-label block normal-case tracking-normal";
 
   return (

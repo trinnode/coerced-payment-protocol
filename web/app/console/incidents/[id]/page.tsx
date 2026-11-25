@@ -23,7 +23,7 @@ export default async function IncidentPage({
   const state = incident.state as State;
 
   return (
-    <main className="mx-auto max-w-[110rem] px-5 py-10">
+    <main id="main" className="mx-auto max-w-[110rem] px-5 py-10">
       <div className="flex flex-wrap items-baseline justify-between gap-4">
         <div>
           <Link href="/console" className="mono-label hover:text-ink">

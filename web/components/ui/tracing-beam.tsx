@@ -52,7 +52,7 @@ export const TracingBeam = ({
       ref={ref}
       className={cn("relative mx-auto h-full w-full max-w-4xl", className)}
     >
-      <div className="absolute top-3 -left-4 md:-left-20">
+      <div className="absolute top-3 -left-4 md:-left-20 motion-reduce:hidden" aria-hidden="true">
         <motion.div
           transition={{
             duration: 0.2,
@@ -64,7 +64,7 @@ export const TracingBeam = ({
                 ? "none"
                 : "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
-          className="border-netural-200 ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
+          className="border-line-strong ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
         >
           <motion.div
             transition={{
@@ -72,8 +72,8 @@ export const TracingBeam = ({
               delay: 0.5,
             }}
             animate={{
-              backgroundColor: scrollYProgress.get() > 0 ? "white" : "#10b981",
-              borderColor: scrollYProgress.get() > 0 ? "white" : "#059669",
+              backgroundColor: scrollYProgress.get() > 0 ? "#7fe3c0" : "#5f7069",
+              borderColor: scrollYProgress.get() > 0 ? "#7fe3c0" : "#2a3a33",
             }}
             className="h-2 w-2 rounded-full border border-line-strong bg-base"
           />
@@ -88,7 +88,7 @@ export const TracingBeam = ({
           <motion.path
             d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
             fill="none"
-            stroke="#9091A0"
+            stroke="#2a3a33"
             strokeOpacity="0.16"
             transition={{
               duration: 10,
@@ -113,10 +113,10 @@ export const TracingBeam = ({
               y1={y1} // set y1 for gradient
               y2={y2} // set y2 for gradient
             >
-              <stop stopColor="#18CCFC" stopOpacity="0"></stop>
-              <stop stopColor="#18CCFC"></stop>
-              <stop offset="0.325" stopColor="#6344F5"></stop>
-              <stop offset="1" stopColor="#AE48FF" stopOpacity="0"></stop>
+              <stop stopColor="#7fe3c0" stopOpacity="0"></stop>
+              <stop stopColor="#7fe3c0"></stop>
+              <stop offset="0.325" stopColor="#efb45c"></stop>
+              <stop offset="1" stopColor="#7fe3c0" stopOpacity="0"></stop>
             </motion.linearGradient>
           </defs>
         </svg>

@@ -1,44 +1,24 @@
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { SeedAccounts } from "@/components/console/seed-accounts";
 
-const DEMO = [
+export const dynamic = "force-dynamic";
+
+const DEMO: [string, string][] = [
   ["Analyst", "ada.analyst@kite.example.ng"],
   ["Supervisor", "tunde.supervisor@kite.example.ng"],
   ["Compliance", "zainab.compliance@kite.example.ng"],
   ["MMO supervisor", "emeka.ops@adaeze.example.ng"],
 ];
 
-export default function LoginPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState("ada.analyst@kite.example.ng");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [busy, setBusy] = useState(false);
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setBusy(true);
-    setError(null);
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const json = await res.json();
-    setBusy(false);
-    if (!res.ok) {
-      setError(json.error?.message ?? "Sign-in failed");
-      return;
-    }
-    router.push(json.redirect ?? "/console");
-    router.refresh();
-  }
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
 
   return (
-    <main className="mx-auto grid min-h-[calc(100dvh-3.5rem)] max-w-6xl gap-16 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-center">
+    <main id="main" className="mx-auto grid min-h-[calc(100dvh-3.5rem)] max-w-6xl gap-16 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-center">
       <div>
         <p className="mono-label">Institution access</p>
         <h1 className="mt-6 max-w-[20ch] font-display text-[clamp(2.4rem,5vw,4rem)] leading-[1.05] tracking-[-0.03em]">
@@ -58,71 +38,47 @@ export default function LoginPage() {
         </Link>
       </div>
 
-      <form
-        onSubmit={submit}
-        className="rounded-[var(--radius-card)] border border-line bg-surface p-7"
-      >
+      <div className="rounded-[var(--radius-card)] border border-line bg-surface p-7">
         <p className="mono-label mb-7">Sign in</p>
 
-        <label className="block">
-          <span className="text-xs text-muted">Email</span>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-2 w-full rounded-md border border-line-strong bg-base px-3 py-2.5 font-mono text-xs text-ink outline-none transition-colors focus:border-guard"
-          />
-        </label>
+        <form action="/api/auth/login-form" method="post">
+          <label className="block">
+            <span className="text-xs text-muted">Email</span>
+            <input
+              type="email"
+              name="email"
+              required
+              defaultValue="ada.analyst@kite.example.ng"
+              className="mt-2 w-full rounded-md border border-line-strong bg-base px-3 py-2.5 font-mono text-xs text-ink focus:border-guard"
+            />
+          </label>
 
-        <label className="mt-5 block">
-          <span className="text-xs text-muted">Password</span>
-          <input
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="phylax-demo-2026"
-            className="mt-2 w-full rounded-md border border-line-strong bg-base px-3 py-2.5 font-mono text-xs text-ink outline-none transition-colors focus:border-guard placeholder:text-faint/60"
-          />
-        </label>
+          <label className="mt-5 block">
+            <span className="text-xs text-muted">Password</span>
+            <input
+              type="password"
+              name="password"
+              required
+              className="mt-2 w-full rounded-md border border-line-strong bg-base px-3 py-2.5 font-mono text-xs text-ink placeholder:text-faint/60 focus:border-guard"
+            />
+          </label>
 
-        {error && (
-          <p role="alert" className="mt-4 border-l-2 border-critical pl-3 text-xs text-critical">
-            {error}
-          </p>
-        )}
+          {error && (
+            <p role="alert" className="mt-4 border-l-2 border-critical pl-3 text-xs text-critical">
+              Invalid credentials.
+            </p>
+          )}
 
-        <button
-          type="button"
-          onClick={submit}
-          disabled={busy}
-          className="mt-7 w-full rounded-full bg-guard px-4 py-2.5 text-sm font-medium text-base transition-opacity hover:opacity-90 disabled:opacity-50"
-        >
-          {busy ? "Signing in…" : "Enter console"}
-        </button>
+          <button
+            type="submit"
+            className="mt-7 w-full rounded-full bg-guard px-4 py-2.5 text-sm font-medium text-base transition-opacity hover:opacity-90"
+          >
+            Enter console
+          </button>
+        </form>
 
-        <div className="mt-8 border-t border-line pt-6">
-          <p className="mono-label mb-3">Seeded roles · password below</p>
-          <ul className="space-y-1.5">
-            {DEMO.map(([role, addr]) => (
-              <li key={addr} className="flex flex-col gap-0.5">
-                <span className="text-[0.7rem] text-ink">{role}</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail(addr);
-                    setPassword("phylax-demo-2026");
-                  }}
-                  className="text-left font-mono text-[0.65rem] text-faint hover:text-guard"
-                >
-                  {addr}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </form>
+        <SeedAccounts accounts={DEMO} password="phylax-demo-2026" />
+      </div>
     </main>
   );
 }

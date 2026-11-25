@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { loadDocument, DOCUMENTS } from "@/lib/docs";
+import { SiteNav } from "@/components/site/nav";
+import { SiteFooter } from "@/components/site/footer";
 
 export function generateStaticParams() {
   return Object.keys(DOCUMENTS).map((slug) => ({ slug }));
@@ -23,7 +25,9 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
   if (!doc) notFound();
 
   return (
-    <main className="pt-28">
+    <>
+      <SiteNav />
+      <main id="main" className="pt-28">
       <div className="container-page grid gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_16rem]">
         <article className="doc-prose min-w-0">
           <div dangerouslySetInnerHTML={{ __html: doc.html }} />
@@ -55,6 +59,8 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
           </div>
         </aside>
       </div>
-    </main>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

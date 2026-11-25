@@ -10,14 +10,13 @@ export default function Home() {
   return (
     <>
       <SiteNav />
-      <main>
+      <main id="main">
         <Opening />
         <Ledger />
         <Envelope />
         <Problem />
         <Design />
-        <Refusals />
-        <Limits />
+        <HardCases />
         <Gates />
         <Closing />
       </main>
@@ -82,7 +81,7 @@ function Opening() {
         <div className="border-l border-line pl-6 lg:mb-2">
           <p className="mono-label mb-5">One sentence</p>
           <p className="font-display text-[1.35rem] leading-snug text-ink">
-            A signal, not an accusation. A record, not a verdict.
+            We can tell the receiving bank a PIN was given under threat. We cannot tell them who was at fault.
           </p>
           <p className="mt-5 text-sm leading-relaxed text-faint">
             The platform cannot hold money, freeze an account, start a transfer,
@@ -160,13 +159,13 @@ function Envelope() {
             — that note could be read by someone standing over the phone.
           </p>
           <p className="mt-5 max-w-[62ch] text-[1rem] leading-[1.85] text-muted">
-            What crosses is an institution, an episode, a bank-authenticated
+            What crosses is an institution, an episode, an event type, a bank-authenticated
             confidence, a value band, and a signature. Six fields, one of which
             is proof that the others came from a bank. Everything else stays
             where the victim is.
           </p>
           <p className="mt-7 font-mono text-[0.7rem] text-faint">
-            Specimen only. The signatures in the console are real.
+            Specimen only. Events posted to /api/v1/events are signature-verified.
           </p>
         </div>
 
@@ -291,7 +290,7 @@ const LOOPS = [
     speed: "hours to weeks",
     title: "Accountability",
     where: "inside each institution, then between them",
-    body: "Episodes group the transfers of one coercion. Events link to transactions. Actions carry an authority reference. Recipients can challenge without the notification endangering the sender. The record is destroyed at closure unless a named statute requires retention — a history of ‘this person was coerced’ is a standing target, not an asset.",
+    body: "One coercion can produce several transfers. We group them in one episode, attach each signed event, and write the authority reference beside every decision. Recipients can challenge without the notification endangering the sender. The record is destroyed at closure unless a named statute requires retention — a history of ‘this person was coerced’ is a standing target, not an asset.",
     no: "It does not decide who was at fault. The platform holds facts and states; it never holds a verdict.",
   },
 ];
@@ -344,8 +343,6 @@ function Design() {
   );
 }
 
-/* ── Refusals ─────────────────────────────────────────────────────────────── */
-
 const REFUSALS = [
   {
     t: "We will not fake a receipt or a balance.",
@@ -365,56 +362,11 @@ const REFUSALS = [
   },
   {
     t: "We will not claim it works before it has been tried.",
-    b: "The decisive test is not a simulator. It is one bank&apos;s staging replica, paired normal and duress trials, and people paid to tell the difference. If more than one in five can, the claim dies.",
+    b: "The decisive test is not a simulator. It is one bank's staging replica, paired normal and duress trials, and people paid to tell the difference. If more than one in five can, the claim dies.",
   },
 ];
 
-function Refusals() {
-  return (
-    <section className="container-page py-28 lg:py-36">
-      <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-24">
-        <div>
-          <p className="mono-label">§ 04 · Refusals</p>
-          <h2 className="mt-6 max-w-[24ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
-            Things we will not build, even if they demo better.
-          </h2>
-
-          <ol className="mt-14 border-t border-line">
-            {REFUSALS.map((r, i) => (
-              <li key={r.t} className="grid gap-4 border-b border-line py-7 sm:grid-cols-[3rem_minmax(0,1fr)]">
-                <span className="font-mono text-xs text-faint">{String(i + 1).padStart(2, "0")}</span>
-                <div className="max-w-[64ch]">
-                  <h3 className="text-lg font-medium text-ink">{r.t}</h3>
-                  <p className="mt-3 text-[0.9375rem] leading-[1.8] text-muted">{r.b}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <aside className="lg:pt-24">
-          <p className="mono-label mb-5">Why this section exists</p>
-          <p className="text-sm leading-[1.8] text-faint">
-            Every one of these was proposed, taken seriously, and removed after
-            an independent review. The review log is public. If you think one
-            of these refusals is wrong, that is exactly the argument we want to
-            have.
-          </p>
-          <Link
-            href="/review"
-            className="mt-6 inline-block border-b border-guard/50 pb-1 text-xs text-guard hover:border-guard"
-          >
-            Read the review log →
-          </Link>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-/* ── Limits ───────────────────────────────────────────────────────────────── */
-
-const LIMITS = [
+const LIMITS: [string, string][] = [
   ["USSD users", "A large share of the people most exposed to checkpoint and agent coercion cannot use this at all."],
   ["ATM · POS · agent cash-out", "The fastest loss path is untouched."],
   ["Feature phones", "No coverage."],
@@ -424,38 +376,81 @@ const LIMITS = [
   ["Shared devices", "Mitigated at enrolment. Not solved."],
 ];
 
-function Limits() {
-  return (
-    <section className="border-y border-line bg-critical-deep/20 py-28 lg:py-36">
-      <div className="container-page">
-        <p className="mono-label text-critical">§ 05 · Known exclusions</p>
-        <h2 className="mt-6 max-w-[26ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
-          A safety feature that protects the least exposed is a marketing artefact.
-        </h2>
-        <p className="mt-6 max-w-[62ch] text-[1rem] leading-[1.8] text-muted">
-          This is a feature for smartphone banking customers in a defined value
-          band. It does not protect everyone, and the people it does not protect
-          are often the most exposed. Any page implying otherwise would be a harm
-          in itself.
-        </p>
+/* ── Hard cases: refusals and exclusions, in one spread ──────────────────── */
 
-        <div className="mt-14 overflow-x-auto">
-          <table className="w-full min-w-[42rem] border-collapse text-left">
-            <thead>
-              <tr className="border-b border-line-strong">
-                <th className="mono-label w-56 pb-4 pr-6">Excluded</th>
-                <th className="mono-label pb-4">Consequence</th>
-              </tr>
-            </thead>
-            <tbody>
-              {LIMITS.map(([k, v]) => (
-                <tr key={k} className="border-b border-line align-top">
-                  <td className="py-4 pr-6 font-mono text-xs text-ink">{k}</td>
-                  <td className="max-w-[64ch] py-4 text-sm leading-relaxed text-muted">{v}</td>
-                </tr>
+function HardCases() {
+  return (
+    <section className="border-y border-line bg-critical-deep/20">
+      <div className="container-page py-28 lg:py-32">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-20">
+          <div>
+            <p className="mono-label text-critical">§ 04 · Hard cases</p>
+            <h2 className="mt-6 max-w-[26ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
+              A safety feature that protects the least exposed is a marketing artefact.
+            </h2>
+            <p className="mt-6 max-w-[62ch] text-[1rem] leading-[1.8] text-muted">
+              Every refusal below was proposed, taken seriously, and removed after
+              an independent review. Every exclusion below is someone we do not
+              reach. Both are printed before any invitation to work with us.
+            </p>
+          </div>
+          <div className="lg:pt-20">
+            <p className="mono-label mb-4">In the record</p>
+            <p className="text-sm leading-[1.8] text-faint">
+              The review log is public. If you think one of these refusals is
+              wrong, that is exactly the argument we want to have.
+            </p>
+            <Link
+              href="/review"
+              className="mt-5 inline-block border-b border-guard/50 pb-1 text-xs text-guard hover:border-guard"
+            >
+              Read the review log →
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-16 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
+          <div>
+            <p className="mono-label mb-5">Things we will not build</p>
+            <ol className="border-t border-line">
+              {REFUSALS.map((r, i) => (
+                <li key={r.t} className="grid gap-3 border-b border-line py-6 sm:grid-cols-[2.5rem_minmax(0,1fr)]">
+                  <span className="font-mono text-xs text-faint">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="max-w-[56ch]">
+                    <h3 className="text-base font-medium text-ink">{r.t}</h3>
+                    <p className="mt-2 text-sm leading-[1.75] text-muted">{r.b}</p>
+                  </div>
+                </li>
               ))}
-            </tbody>
-          </table>
+            </ol>
+          </div>
+
+          <div>
+            <p className="mono-label mb-5">Known exclusions</p>
+            <p className="mb-6 max-w-[52ch] text-sm leading-relaxed text-faint">
+              This is a feature for smartphone banking customers in a defined
+              value band. It does not protect everyone, and the people it does
+              not protect are often the most exposed.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[30rem] border-collapse text-left">
+                <thead>
+                  <tr className="border-b border-line-strong">
+                    <th className="mono-label w-40 pb-4 pr-5">Excluded</th>
+                    <th className="mono-label pb-4">Consequence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {LIMITS.map(([k, v]) => (
+                    <tr key={k} className="border-b border-line align-top">
+                      <td className="py-3.5 pr-5 font-mono text-[0.6875rem] text-ink">{k}</td>
+                      <td className="py-3.5 text-[0.8125rem] leading-relaxed text-muted">{v}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </section>

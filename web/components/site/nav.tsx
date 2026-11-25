@@ -27,7 +27,8 @@ export function SiteNav() {
   const onConsole = pathname?.startsWith("/console");
 
   return (
-    <Navbar className="top-0">
+    <header>
+      <Navbar className="top-0">
       <NavBody>
         <Link href="/" className="group flex items-baseline gap-2.5 pl-1">
           <span className="font-display text-[1.35rem] leading-none tracking-tight text-ink">
@@ -84,6 +85,7 @@ export function SiteNav() {
           </NavbarButton>
         </MobileNavMenu>
       </MobileNav>
-    </Navbar>
+      </Navbar>
+    </header>
   );
 }

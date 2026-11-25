@@ -1,8 +1,8 @@
 import { createHash, verify } from "node:crypto";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db/client";
-import { institutionKeys, institutions } from "@/lib/db/schema";
+import { institutionKeys, institutions, rateLimits } from "@/lib/db/schema";
 import { canonicalize } from "@/lib/domain/canonical";
 import { ERROR_HTTP, validateEnvelope } from "@/lib/domain/event";
 import { ingestEvent } from "@/lib/domain/incidents";
@@ -14,19 +14,31 @@ const WINDOW_MS = 60_000;
 const BURST = 50;
 const RATE = 10;
 
-const buckets = new Map<string, { count: number; burst: number; reset: number }>();
+/**
+ * Counters live in Postgres, not in process memory: a restart does not reset
+ * them and two app instances share the same limit. The atomic upsert makes the
+ * increment safe under concurrency.
+ */
+async function hitBucket(key: string, windowMs: number): Promise<number> {
+  const bucket = Math.floor(Date.now() / windowMs);
+  const bucketKey = `${key}:${bucket}`;
+  const rows = await db
+    .insert(rateLimits)
+    .values({ key: bucketKey, count: 1 })
+    .onConflictDoUpdate({
+      target: rateLimits.key,
+      set: { count: sql`${rateLimits.count} + 1`, updatedAt: new Date() },
+    })
+    .returning({ count: rateLimits.count });
+  return rows[0]?.count ?? 1;
+}
 
-function rateLimited(key: string): boolean {
-  const now = Date.now();
-  let b = buckets.get(key);
-  if (!b || now > b.reset) {
-    b = { count: 0, burst: 0, reset: now + WINDOW_MS };
-    buckets.set(key, b);
-  }
-  b.count++;
-  b.burst++;
-  if (b.count > RATE || b.burst > BURST) return true;
-  return false;
+async function rateLimited(key: string): Promise<boolean> {
+  const [minute, burst] = await Promise.all([
+    hitBucket(key, WINDOW_MS),
+    hitBucket(key, 60 * WINDOW_MS),
+  ]);
+  return minute > RATE || burst > BURST;
 }
 
 function error(code: string, message: string, details?: unknown, extra?: Record<string, string>) {
@@ -66,7 +78,7 @@ export async function POST(request: Request) {
   const envelope = validated.envelope;
 
   const institutionId = envelope.institution_id;
-  if (rateLimited(institutionId)) {
+  if (await rateLimited(institutionId)) {
     return error(
       "E_RATE_LIMITED",
       "Institution event quota exceeded",
