@@ -27,7 +27,7 @@ describe("event envelope", () => {
   it("accepts an event delivered hours late — that is the point of the system", () => {
     const e = valid();
     e.occurred_at = new Date(Date.now() - 6 * 3600_000).toISOString();
-    e.transaction.status = "UNKNOWN";
+    (e.transaction as Record<string, unknown>).status = "UNKNOWN";
     expect(validateEnvelope(e).ok).toBe(true);
   });
 

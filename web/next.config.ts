@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   allowedDevOrigins: ["127.0.0.1", "localhost"],
+  turbopack: { root: process.cwd() },
   experimental: {
     optimizePackageImports: ["@tabler/icons-react", "motion"],
   },

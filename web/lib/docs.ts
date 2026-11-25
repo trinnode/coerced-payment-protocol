@@ -43,7 +43,7 @@ export async function loadDocument(slug: string) {
   if (!entry) return null;
 
   // Resolve inside the repository only. No traversal from the URL.
-  const filePath = path.resolve(ROOT, "..", entry.file);
+  const filePath = path.resolve(/* turbopackIgnore: true */ ROOT, "..", entry.file);
   const repoRoot = path.resolve(ROOT, "..");
   if (!filePath.startsWith(repoRoot + path.sep)) return null;
 

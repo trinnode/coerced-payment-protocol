@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: phylax
+          POSTGRES_PASSWORD: phylax
+          POSTGRES_DB: phylax
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U phylax -d phylax"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgres://phylax:phylax@localhost:5433/phylax
+      AUTH_SECRET: ci-only-secret-that-is-not-used-in-production-12345
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+
+      - name: Install
+        working-directory: web
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        working-directory: web
+        run: pnpm typecheck
+
+      - name: Unit and integration tests
+        working-directory: web
+        run: |
+          pnpm db:migrate
+          pnpm db:seed
+          pnpm test
+
+      - name: Build
+        working-directory: web
+        run: pnpm build
+
+      - name: Install browser
+        working-directory: web
+        run: pnpm exec playwright install chromium
+
+      - name: Browser tests
+        working-directory: web
+        run: pnpm e2e

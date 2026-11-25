@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Timeline } from "@/components/ui/timeline";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <main>
         <Opening />
         <Ledger />
+        <Envelope />
         <Problem />
         <Design />
         <Refusals />
@@ -133,6 +135,75 @@ function Ledger() {
   );
 }
 
+/* ── The envelope ─────────────────────────────────────────────────────────── */
+
+const ENVELOPE = [
+  ['"institution_id"', '"bank_kite"'],
+  ['"episode_id"', '"…4f2a"'],
+  ['"event_type"', '"SUSPECTED_DURESS"'],
+  ['"activation.confidence"', '"BANK_AUTHENTICATED"'],
+  ['"activation.band"', '"PIN_ONLY_TIER_1"'],
+  ['"signature"', '"Ed25519 · key_id …"'],
+];
+
+function Envelope() {
+  return (
+    <section className="container-page border-b border-line py-24 lg:py-32">
+      <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-24">
+        <div>
+          <p className="mono-label">§ 01 · What crosses</p>
+          <h2 className="mt-6 max-w-[24ch] font-display text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] tracking-[-0.025em]">
+            The signal is smaller than you think.
+          </h2>
+          <p className="mt-8 max-w-[62ch] text-[1rem] leading-[1.85] text-muted">
+            No name. No account number. No location. No note about what happened
+            — that note could be read by someone standing over the phone.
+          </p>
+          <p className="mt-5 max-w-[62ch] text-[1rem] leading-[1.85] text-muted">
+            What crosses is an institution, an episode, a bank-authenticated
+            confidence, a value band, and a signature. Six fields, one of which
+            is proof that the others came from a bank. Everything else stays
+            where the victim is.
+          </p>
+          <p className="mt-7 font-mono text-[0.7rem] text-faint">
+            Specimen only. The signatures in the console are real.
+          </p>
+        </div>
+
+        <CardContainer
+          containerClassName="py-0 w-full"
+          className="w-full max-w-md"
+        >
+          <CardBody className="h-auto w-full">
+            <CardItem
+              translateZ={40}
+              className="w-full overflow-hidden rounded-[var(--radius-card)] border border-line-strong bg-surface shadow-[0_30px_80px_-40px_rgba(0,0,0,.9)]"
+            >
+              <div className="flex items-center justify-between border-b border-line px-5 py-4">
+                <span className="mono-label">Signed envelope</span>
+                <span className="font-mono text-[0.625rem] text-guard">v0.1</span>
+              </div>
+              <dl className="divide-y divide-line/70">
+                {ENVELOPE.map(([k, v]) => (
+                  <div key={k} className="grid gap-1 px-5 py-3 sm:grid-cols-[11rem_minmax(0,1fr)]">
+                    <dt className="font-mono text-[0.6875rem] text-faint">{k}</dt>
+                    <dd className="break-all font-mono text-[0.6875rem] text-ink">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="border-t border-line px-5 py-4">
+                <p className="text-[0.7rem] leading-relaxed text-faint">
+                  Canonical bytes, signed with the institution&apos;s key. No free text.
+                </p>
+              </div>
+            </CardItem>
+          </CardBody>
+        </CardContainer>
+      </div>
+    </section>
+  );
+}
+
 /* ── Problem ──────────────────────────────────────────────────────────────── */
 
 function Problem() {
@@ -140,7 +211,7 @@ function Problem() {
     <section id="problem" className="container-page scroll-mt-24 py-28 lg:py-36">
       <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-24">
         <div>
-          <p className="mono-label">§ 01 · The problem</p>
+          <p className="mono-label">§ 02 · The problem</p>
           <h2 className="mt-6 max-w-[22ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
             The money moves in seconds. The process moves in weeks.
           </h2>
@@ -229,7 +300,7 @@ function Design() {
   return (
     <section id="design" className="scroll-mt-24 border-y border-line bg-surface/30">
       <div className="container-page py-28 lg:py-36">
-        <p className="mono-label">§ 02 · The design</p>
+        <p className="mono-label">§ 03 · The design</p>
         <h2 className="mt-6 max-w-[24ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
           Three loops, at three speeds.
         </h2>
@@ -303,7 +374,7 @@ function Refusals() {
     <section className="container-page py-28 lg:py-36">
       <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-24">
         <div>
-          <p className="mono-label">§ 03 · Refusals</p>
+          <p className="mono-label">§ 04 · Refusals</p>
           <h2 className="mt-6 max-w-[24ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
             Things we will not build, even if they demo better.
           </h2>
@@ -357,7 +428,7 @@ function Limits() {
   return (
     <section className="border-y border-line bg-critical-deep/20 py-28 lg:py-36">
       <div className="container-page">
-        <p className="mono-label text-critical">§ 04 · Known exclusions</p>
+        <p className="mono-label text-critical">§ 05 · Known exclusions</p>
         <h2 className="mt-6 max-w-[26ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
           A safety feature that protects the least exposed is a marketing artefact.
         </h2>
@@ -457,7 +528,7 @@ const GATES = [
 function Gates() {
   return (
     <section className="container-page py-28 lg:py-36">
-      <p className="mono-label">§ 05 · The sequence</p>
+      <p className="mono-label">§ 06 · The sequence</p>
       <h2 className="mt-6 max-w-[24ch] font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-[-0.025em]">
         Four gates. The default at each one is no.
       </h2>
@@ -479,7 +550,7 @@ function Closing() {
   return (
     <section className="border-t border-line bg-surface/40">
       <div className="container-page py-28 lg:py-32">
-        <p className="mono-label">§ 06 · An invitation</p>
+        <p className="mono-label">§ 07 · An invitation</p>
         <p className="mt-8 max-w-[30ch] font-display text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.02em] text-balance">
           Nothing here is proven. Tell us where it is wrong.
         </p>

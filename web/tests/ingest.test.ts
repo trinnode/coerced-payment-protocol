@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { generateKeyPairSync, randomUUID, sign } from "node:crypto";
+import { generateKeyPairSync, randomUUID, sign, type KeyObject } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db/client";
 import { incidents, institutionKeys } from "@/lib/db/schema";
@@ -28,11 +28,11 @@ function envelope(unsigned: Record<string, unknown>, signature?: string) {
 }
 
 describe("signed event ingestion (real database)", () => {
-  let privateKey: ReturnType<typeof generateKeyPairSync>["privateKey"];
+  let privateKey: KeyObject;
 
   beforeAll(async () => {
     const pair = generateKeyPairSync("ed25519");
-    privateKey = pair.privateKey;
+    privateKey = pair.privateKey as KeyObject;
     await db.insert(institutionKeys).values({
       institutionId: "bank_kite",
       keyId: KEY_ID,
@@ -110,7 +110,7 @@ describe("signed event ingestion (real database)", () => {
       revokedAt: new Date(),
     });
     const unsigned = base();
-    const signature = sign(null, Buffer.from(canonicalize(unsigned), "utf8"), pair.privateKey).toString("base64");
+    const signature = sign(null, Buffer.from(canonicalize(unsigned), "utf8"), pair.privateKey as KeyObject).toString("base64");
     const res = await POST(
       request({
         ...unsigned,
