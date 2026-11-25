@@ -1,0 +1,272 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  /* Surface ladder — deep, slightly green-black, not neutral grey */
+  --color-base: #050807;
+  --color-surface: #0a100e;
+  --color-raised: #0f1714;
+  --color-line: #1c2823;
+  --color-line-strong: #2a3a33;
+
+  /* Ink */
+  --color-ink: #e7eeea;
+  --color-muted: #94a49d;
+  --color-faint: #7a8c85;
+
+  /* Semantics: guard = protective, signal = attention, critical = harm */
+  --color-guard: #7fe3c0;
+  --color-guard-deep: #123f34;
+  --color-signal: #efb45c;
+  --color-signal-deep: #3d2c12;
+  --color-critical: #ef7259;
+  --color-critical-deep: #3d1a14;
+
+  --font-sans: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Zodiak", ui-serif, Georgia, serif;
+  --font-mono: "Azeret Mono", ui-monospace, monospace;
+
+  --radius-card: 14px;
+
+  --ease-guard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-base);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01" 1, "cv01" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-guard);
+    color: #04120d;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-guard);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+
+  /* Scrollbars that do not shout */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 78rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+@utility mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+@utility hairline {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-line-strong),
+    transparent
+  );
+  height: 1px;
+}
+
+/* A subtle paper grain that keeps large dark areas from looking like vinyl */
+@utility grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+}
+
+/* ── Document typography ──────────────────────────────────────────────────── */
+/* These are the actual repository documents, not marketing copy. They should
+   look like a document: generous measure, visible structure, quiet tables. */
+.doc-prose {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.78;
+}
+.doc-prose > :first-child {
+  margin-top: 0;
+}
+.doc-prose h1 {
+  margin-bottom: 1.25rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.doc-prose h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
+  border-top: 1px solid var(--color-line);
+  padding-top: 1.25rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+.doc-prose h3 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-ink);
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+.doc-prose p {
+  margin-block: 1.1rem;
+  max-width: 68ch;
+}
+.doc-prose a {
+  color: var(--color-guard);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.doc-prose strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.doc-prose ul,
+.doc-prose ol {
+  margin-block: 1.1rem;
+  padding-left: 1.4rem;
+  max-width: 68ch;
+}
+.doc-prose li {
+  margin-block: 0.35rem;
+  padding-left: 0.2rem;
+}
+.doc-prose ul {
+  list-style: disc;
+}
+.doc-prose ol {
+  list-style: decimal;
+}
+.doc-prose li::marker {
+  color: var(--color-faint);
+}
+.doc-prose blockquote {
+  margin-block: 1.75rem;
+  border-left: 2px solid var(--color-guard);
+  padding: 0.15rem 0 0.15rem 1.25rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.doc-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  color: var(--color-guard);
+}
+.doc-prose :not(pre) > code {
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  background: var(--color-surface);
+}
+.doc-prose pre {
+  margin-block: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  padding: 1.1rem 1.25rem;
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+.doc-prose pre code {
+  color: var(--color-muted);
+}
+.doc-prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  margin-block: 1.75rem;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+.doc-prose th {
+  border-bottom: 1px solid var(--color-line-strong);
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.doc-prose td {
+  border-bottom: 1px solid var(--color-line);
+  padding: 0.7rem 0.85rem;
+  vertical-align: top;
+}
+.doc-prose hr {
+  margin-block: 3rem;
+  border: 0;
+  height: 1px;
+  background: var(--color-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

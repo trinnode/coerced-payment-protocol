@@ -1,0 +1,24 @@
+# Private working material — never published
+private/
+*.local.md
+*.private.md
+
+# Victim / participant data must never enter this repository, but belt and braces
+**/victim-notes*
+**/participant-data*
+**/*.pcap
+**/evidence/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Secrets and env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
